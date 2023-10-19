@@ -5,6 +5,7 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import Favorites from '../../pages/favorites/favorites';
 import Login from '../../pages/login/login';
 import PrivateRoute from '../private-route/private-route';
+import Offer from '../offer/offer';
 
 type AppScreenProps = {
   cardCount: number;
@@ -31,6 +32,10 @@ function App({ cardCount }: AppScreenProps): JSX.Element {
         <Route
           path={AppRoute.Login}
           element={<Login />}
+        />
+        <Route
+          path={AppRoute.Offer}
+          element={<Offer />}
         />
         <Route
           path="*"
