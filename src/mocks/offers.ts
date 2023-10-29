@@ -1,5 +1,7 @@
 import { Offer } from '../types/offers';
 
+const AVATAR_URL = 'https://i.pravatar.cc/128';
+
 const offers: Offer[] = [
   {
     bedrooms: 3,
@@ -16,14 +18,14 @@ const offers: Offer[] = [
       'Heating'
     ],
     host: {
-      avatarUrl: 'img/1.png',
+      avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
       id: 3,
       isPro: true,
       name: 'Angelina'
     },
     id: 1,
     images: [
-      'img/1.png'
+      `${AVATAR_URL}?rnd=${Math.random()}`
     ],
     isFavorite: true,
     isPremium: false,
@@ -54,14 +56,14 @@ const offers: Offer[] = [
       'Heating'
     ],
     host: {
-      avatarUrl: 'img/1.png',
+      avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
       id: 3,
       isPro: true,
       name: 'Angelina'
     },
     id: 2,
     images: [
-      'img/1.png'
+      `${AVATAR_URL}?rnd=${Math.random()}`
     ],
     isFavorite: false,
     isPremium: true,
@@ -92,14 +94,14 @@ const offers: Offer[] = [
       'Heating'
     ],
     host: {
-      avatarUrl: 'img/1.png',
+      avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
       id: 3,
       isPro: true,
       name: 'Angelina'
     },
     id: 3,
     images: [
-      'img/1.png'
+      `${AVATAR_URL}?rnd=${Math.random()}`
     ],
     isFavorite: false,
     isPremium: false,
@@ -130,14 +132,14 @@ const offers: Offer[] = [
       'Heating'
     ],
     host: {
-      avatarUrl: 'img/1.png',
+      avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
       id: 3,
       isPro: true,
       name: 'Angelina'
     },
     id: 4,
     images: [
-      'img/1.png'
+      `${AVATAR_URL}?rnd=${Math.random()}`
     ],
     isFavorite: true,
     isPremium: false,
@@ -168,14 +170,14 @@ const offers: Offer[] = [
       'Heating'
     ],
     host: {
-      avatarUrl: 'img/1.png',
+      avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
       id: 3,
       isPro: true,
       name: 'Angelina'
     },
     id: 5,
     images: [
-      'img/1.png'
+      `${AVATAR_URL}?rnd=${Math.random()}`
     ],
     isFavorite: true,
     isPremium: true,
