@@ -1,15 +1,12 @@
-import Card from '../../components/card/card';
+import { Offer as OfferType } from '../../types/offers';
+import { CardsList } from '../../components/cards-list/cards-list';
 
 type MainPageProps = {
   cardCount: number;
+  offers: OfferType[];
 }
 
-function MainPage({ cardCount }: MainPageProps): JSX.Element {
-  const cards: JSX.Element[] = [];
-
-  for (let i = 1; i <= cardCount; i++) {
-    cards.push(<Card />);
-  }
+function MainPage({ cardCount, offers }: MainPageProps): JSX.Element {
 
   return (
     <div className="page page--gray page--main">
@@ -84,7 +81,7 @@ function MainPage({ cardCount }: MainPageProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{cards.length} places to stay in Amsterdam</b>
+              <b className="places__found">{cardCount} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -101,7 +98,7 @@ function MainPage({ cardCount }: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {...cards}
+                <CardsList cardCount={cardCount} offers={offers}></CardsList>
               </div>
             </section>
             <div className="cities__right-section">
