@@ -6,11 +6,11 @@ import Favorites from '../../pages/favorites/favorites';
 import Login from '../../pages/login/login';
 import PrivateRoute from '../private-route/private-route';
 import Offer from '../../pages/offer/offer';
-import { Offer as OfferType } from '../../types/offers';
+import { Offers } from '../../types/offers';
 
 type AppScreenProps = {
   cardCount: number;
-  offers: OfferType[];
+  offers: Offers;
 }
 
 function App({ cardCount, offers }: AppScreenProps): JSX.Element {
