@@ -5,27 +5,36 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import Favorites from '../../pages/favorites/favorites';
 import Login from '../../pages/login/login';
 import PrivateRoute from '../private-route/private-route';
-import Offer from '../offer/offer';
+import Offer from '../../pages/offer/offer';
+import { Offer as OfferType } from '../../types/offers';
 
 type AppScreenProps = {
   cardCount: number;
+  offers: OfferType[];
 }
 
-function App({ cardCount }: AppScreenProps): JSX.Element {
+function App({ cardCount, offers }: AppScreenProps): JSX.Element {
+
+  function getFavoriteOffers() {
+    return offers.filter((offer) => offer.isFavorite === true);
+  }
+
+  const favoriteOffers = getFavoriteOffers();
+
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainPage cardCount={cardCount} />}
+          element={<MainPage cardCount={cardCount} offers={offers} />}
         />
         <Route
           path={AppRoute.Favorites}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
+              authorizationStatus={AuthorizationStatus.Auth}
             >
-              <Favorites />
+              <Favorites favoriteOffers={favoriteOffers} />
             </PrivateRoute>
           }
         />
@@ -35,7 +44,7 @@ function App({ cardCount }: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Offer}
-          element={<Offer />}
+          element={<Offer offers={offers}/>}
         />
         <Route
           path="*"
