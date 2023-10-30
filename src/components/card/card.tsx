@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom';
 import { RATING_MAX } from '../../const';
 import { AppRoute } from '../../const';
 
-type CardProps = Offer & {
+type CardProps = {
+  offer: Offer;
   handleOfferMouseEnter: () => void;
   handleOfferMouseLeave: () => void;
 }
 
-function Card(props: CardProps): JSX.Element {
+function Card({ offer, handleOfferMouseEnter, handleOfferMouseLeave }: CardProps): JSX.Element {
 
-  const { price, title, rating, previewImage, isPremium, isFavorite, type, id, handleOfferMouseEnter, handleOfferMouseLeave } = props;
+  const { price, title, rating, previewImage, isPremium, isFavorite, type, id } = offer;
 
   const ratingValue = (rating * 100) / RATING_MAX;
 

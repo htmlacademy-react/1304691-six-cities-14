@@ -7,6 +7,7 @@ type CardsListProps = {
 }
 
 function CardsList({ offers }: CardsListProps): JSX.Element {
+  // как здесь указать null?
   const [activeOffer, setActiveOffer] = useState(0);
 
   function handleOfferMouseEnter(id: number) {
@@ -22,7 +23,7 @@ function CardsList({ offers }: CardsListProps): JSX.Element {
       {offers.map((offer) => (
         <Card
           key={offer.id}
-          {...offer}
+          offer={offer}
           handleOfferMouseEnter={() => handleOfferMouseEnter(offer.id)}
           handleOfferMouseLeave={handleOfferMouseLeave}
         />)
