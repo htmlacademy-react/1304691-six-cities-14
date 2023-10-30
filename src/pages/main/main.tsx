@@ -1,10 +1,10 @@
-import { Offer as OfferType } from '../../types/offers';
+import { Offers } from '../../types/offers';
 import { CardsList } from '../../components/cards-list/cards-list';
 import { Helmet } from 'react-helmet-async';
 
 type MainPageProps = {
   cardCount: number;
-  offers: OfferType[];
+  offers: Offers;
 }
 
 function MainPage({ cardCount, offers }: MainPageProps): JSX.Element {
@@ -102,7 +102,7 @@ function MainPage({ cardCount, offers }: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <CardsList cardCount={cardCount} offers={offers}></CardsList>
+                <CardsList offers={offers}></CardsList>
               </div>
             </section>
             <div className="cities__right-section">

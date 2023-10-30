@@ -1,24 +1,28 @@
 import { Offer } from '../../types/offers';
+import { Link } from 'react-router-dom';
 import { RATING_MAX } from '../../const';
+import { AppRoute } from '../../const';
 
-type CardProps = {
-  offerInfo: Offer;
-  onMouseOver: React.MouseEventHandler;
+type CardProps = Offer & {
+  handleOfferMouseEnter: () => void;
+  handleOfferMouseLeave: () => void;
 }
 
-function Card({ offerInfo, onMouseOver }: CardProps): JSX.Element {
+function Card(props: CardProps): JSX.Element {
 
-  const { price, title, rating, previewImage, isPremium, isFavorite, type, id } = offerInfo;
+  const { price, title, rating, previewImage, isPremium, isFavorite, type, id, handleOfferMouseEnter, handleOfferMouseLeave } = props;
 
   const ratingValue = (rating * 100) / RATING_MAX;
 
   return (
-    <article className="cities__card place-card" data-id={id} onMouseOver={onMouseOver}>
+    <article className="cities__card place-card" data-id={id} onMouseEnter={handleOfferMouseEnter}
+      onMouseLeave={handleOfferMouseLeave}
+    >
       {isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ''}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={`${AppRoute.Offer}${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"></img>
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -40,7 +44,7 @@ function Card({ offerInfo, onMouseOver }: CardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`${AppRoute.Offer}${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
