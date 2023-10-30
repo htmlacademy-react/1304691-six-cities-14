@@ -14,7 +14,7 @@ function CardsList({ offers }: CardsListProps): JSX.Element {
   }
 
   function handleOfferMouseLeave() {
-    setActiveOffer(0);
+    setActiveOffer(activeOffer);
   }
 
   return (
