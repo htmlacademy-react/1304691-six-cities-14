@@ -1,6 +1,7 @@
 import Logo from '../../components/logo/logo';
 import { Offer } from '../../types/offers';
 import { RATING_MAX } from '../../const';
+import { Helmet } from 'react-helmet-async';
 
 type FavoritesProps = {
   favoriteOffers: Offer[];
@@ -90,6 +91,9 @@ function Favorites({ favoriteOffers }: FavoritesProps): JSX.Element {
 
   return (
     <div className="page">
+      <Helmet>
+        <title>{'6 cities - Favorites'}</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">

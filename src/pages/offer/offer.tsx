@@ -1,13 +1,17 @@
 import Logo from '../../components/logo/logo';
-import { Offer as OfferType } from '../../types/offers';
+import { Offers } from '../../types/offers';
+import { Helmet } from 'react-helmet-async';
 
 type OfferProps = {
-  offers: OfferType[];
+  offers: Offers;
 }
 
 function Offer({ offers }: OfferProps): JSX.Element {
   return (
     <div className="page">
+      <Helmet>
+        <title>{'6 cities - Offer'}</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
