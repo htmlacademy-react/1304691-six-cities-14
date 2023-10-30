@@ -2,6 +2,8 @@ import Logo from '../../components/logo/logo';
 import { Offer } from '../../types/offers';
 import { RATING_MAX } from '../../const';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 type FavoritesProps = {
   favoriteOffers: Offer[];
@@ -128,6 +130,11 @@ function Favorites({ favoriteOffers }: FavoritesProps): JSX.Element {
           </section>
         </div>
       </main>
+      <footer className="footer container">
+        <Link to={AppRoute.Root} className="footer__logo-link">
+          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
+        </Link>
+      </footer>
     </div>
   );
 }
