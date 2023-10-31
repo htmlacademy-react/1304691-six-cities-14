@@ -3,12 +3,11 @@ import { Offers } from '../../types/offers';
 import { useState } from 'react';
 
 type CardsListProps = {
-  offers: Offers;
+ offers: Offers;
 }
 
 function CardsList({ offers }: CardsListProps): JSX.Element {
-  // как здесь указать null?
-  const [activeOffer, setActiveOffer] = useState(0);
+  const [activeOffer, setActiveOffer] = useState<null | number>(null);
 
   function handleOfferMouseEnter(id: number) {
     setActiveOffer(id);

@@ -16,11 +16,11 @@ type AppScreenProps = {
 
 function App({ cardCount, offers }: AppScreenProps): JSX.Element {
 
-  function getFavoriteOffers() {
+  function getFavoritesOffers() {
     return offers.filter((offer) => offer.isFavorite === true);
   }
 
-  const favoriteOffers = getFavoriteOffers();
+  const favoritesOffers = getFavoritesOffers();
 
   return (
     <HelmetProvider>
@@ -36,7 +36,7 @@ function App({ cardCount, offers }: AppScreenProps): JSX.Element {
               <PrivateRoute
                 authorizationStatus={AuthorizationStatus.Auth}
               >
-                <Favorites favoriteOffers={favoriteOffers} />
+                <Favorites favoritesOffers={favoritesOffers} />
               </PrivateRoute>
             }
           />

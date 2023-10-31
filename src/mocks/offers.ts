@@ -1,9 +1,10 @@
-import { Offer } from '../types/offers';
+import { Offers } from '../types/offers';
 
 const AVATAR_URL = 'https://i.pravatar.cc/128';
 
-const offers: Offer[] = [
+const offers: Offers = [
   {
+    id: 1,
     bedrooms: 3,
     city: {
       location: {
@@ -23,7 +24,6 @@ const offers: Offer[] = [
       isPro: true,
       name: 'Angelina'
     },
-    id: 1,
     images: [
       `${AVATAR_URL}?rnd=${Math.random()}`
     ],
@@ -42,6 +42,7 @@ const offers: Offer[] = [
     type: 'room'
   },
   {
+    id: 2,
     bedrooms: 1,
     city: {
       location: {
@@ -61,7 +62,6 @@ const offers: Offer[] = [
       isPro: true,
       name: 'Angelina'
     },
-    id: 2,
     images: [
       `${AVATAR_URL}?rnd=${Math.random()}`
     ],
@@ -80,6 +80,7 @@ const offers: Offer[] = [
     type: 'apartment'
   },
   {
+    id: 3,
     bedrooms: 2,
     city: {
       location: {
@@ -99,7 +100,6 @@ const offers: Offer[] = [
       isPro: true,
       name: 'Angelina'
     },
-    id: 3,
     images: [
       `${AVATAR_URL}?rnd=${Math.random()}`
     ],
@@ -118,6 +118,7 @@ const offers: Offer[] = [
     type: 'room'
   },
   {
+    id: 4,
     bedrooms: 1,
     city: {
       location: {
@@ -137,7 +138,6 @@ const offers: Offer[] = [
       isPro: true,
       name: 'Angelina'
     },
-    id: 4,
     images: [
       `${AVATAR_URL}?rnd=${Math.random()}`
     ],
@@ -156,6 +156,7 @@ const offers: Offer[] = [
     type: 'apartment'
   },
   {
+    id: 5,
     bedrooms: 1,
     city: {
       location: {
@@ -175,7 +176,6 @@ const offers: Offer[] = [
       isPro: true,
       name: 'Angelina'
     },
-    id: 5,
     images: [
       `${AVATAR_URL}?rnd=${Math.random()}`
     ],
