@@ -1,12 +1,8 @@
 import Logo from '../../components/logo/logo';
-import { Offers } from '../../types/offers';
 import { Helmet } from 'react-helmet-async';
+import FormReview from '../../components/form-review/form-review';
 
-type OfferProps = {
-  offers: Offers;
-}
-
-function Offer({ offers }: OfferProps): JSX.Element {
+function Offer(): JSX.Element {
   return (
     <div className="page">
       <Helmet>
@@ -178,6 +174,7 @@ function Offer({ offers }: OfferProps): JSX.Element {
                     </div>
                   </li>
                 </ul>
+                <FormReview></FormReview>
               </section>
             </div>
           </div>
