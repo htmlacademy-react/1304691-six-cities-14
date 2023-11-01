@@ -23,8 +23,8 @@ function CardsList({ offers }: CardsListProps): JSX.Element {
         <Card
           key={offer.id}
           offer={offer}
-          handleOfferMouseEnter={() => handleOfferMouseEnter(offer.id)}
-          handleOfferMouseLeave={handleOfferMouseLeave}
+          onOfferMouseEnter={() => handleOfferMouseEnter(offer.id)}
+          onOfferMouseLeave={handleOfferMouseLeave}
         />)
       )}
     </div>
