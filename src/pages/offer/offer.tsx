@@ -1,8 +1,13 @@
 import Logo from '../../components/logo/logo';
+import { Helmet } from 'react-helmet-async';
+import FormReview from '../../components/form-review/form-review';
 
 function Offer(): JSX.Element {
   return (
     <div className="page">
+      <Helmet>
+        <title>{'6 cities - Offer'}</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -29,22 +34,22 @@ function Offer(): JSX.Element {
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
               <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/room.jpg" alt="Photo studio"/>
+                <img className="offer__image" src="img/room.jpg" alt="Photo studio" />
               </div>
               <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio"/>
+                <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio" />
               </div>
               <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-02.jpg" alt="Photo studio"/>
+                <img className="offer__image" src="img/apartment-02.jpg" alt="Photo studio" />
               </div>
               <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-03.jpg" alt="Photo studio"/>
+                <img className="offer__image" src="img/apartment-03.jpg" alt="Photo studio" />
               </div>
               <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/studio-01.jpg" alt="Photo studio"/>
+                <img className="offer__image" src="img/studio-01.jpg" alt="Photo studio" />
               </div>
               <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio"/>
+                <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio" />
               </div>
             </div>
           </div>
@@ -66,7 +71,7 @@ function Offer(): JSX.Element {
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{width: '80%'}}></span>
+                  <span style={{ width: '80%' }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="offer__rating-value rating__value">4.8</span>
@@ -125,7 +130,7 @@ function Offer(): JSX.Element {
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
                   <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="offer__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar"/>
+                    <img className="offer__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="offer__user-name">
                     Angelina
@@ -149,7 +154,7 @@ function Offer(): JSX.Element {
                   <li className="reviews__item">
                     <div className="reviews__user user">
                       <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar"/>
+                        <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
                       </div>
                       <span className="reviews__user-name">
                         Max
@@ -158,7 +163,7 @@ function Offer(): JSX.Element {
                     <div className="reviews__info">
                       <div className="reviews__rating rating">
                         <div className="reviews__stars rating__stars">
-                          <span style={{width: '80%'}}></span>
+                          <span style={{ width: '80%' }}></span>
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
@@ -169,6 +174,7 @@ function Offer(): JSX.Element {
                     </div>
                   </li>
                 </ul>
+                <FormReview></FormReview>
               </section>
             </div>
           </div>
@@ -181,7 +187,7 @@ function Offer(): JSX.Element {
               <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
                   <a href="#">
-                    <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place image"/>
+                    <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place image" />
                   </a>
                 </div>
                 <div className="place-card__info">
@@ -199,7 +205,7 @@ function Offer(): JSX.Element {
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={{width: '80%'}}></span>
+                      <span style={{ width: '80%' }}></span>
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
@@ -213,7 +219,7 @@ function Offer(): JSX.Element {
               <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
                   <a href="#">
-                    <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place image"/>
+                    <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place image" />
                   </a>
                 </div>
                 <div className="place-card__info">
@@ -231,7 +237,7 @@ function Offer(): JSX.Element {
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={{width: '80%'}}></span>
+                      <span style={{ width: '80%' }}></span>
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
@@ -248,7 +254,7 @@ function Offer(): JSX.Element {
                 </div>
                 <div className="near-places__image-wrapper place-card__image-wrapper">
                   <a href="#">
-                    <img className="place-card__image" src="img/apartment-03.jpg" width="260" height="200" alt="Place image"/>
+                    <img className="place-card__image" src="img/apartment-03.jpg" width="260" height="200" alt="Place image" />
                   </a>
                 </div>
                 <div className="place-card__info">

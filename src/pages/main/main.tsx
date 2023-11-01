@@ -1,35 +1,37 @@
-import Card from '../../components/card/card';
+import { Offers } from '../../types/offers';
+import { CardsList } from '../../components/cards-list/cards-list';
+import { Helmet } from 'react-helmet-async';
+import Logo from '../../components/logo/logo';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 type MainPageProps = {
   cardCount: number;
+  offers: Offers;
 }
 
-function MainPage({ cardCount }: MainPageProps): JSX.Element {
-  const cards: JSX.Element[] = [];
-
-  for (let i = 1; i <= cardCount; i++) {
-    cards.push(<Card />);
-  }
+function MainPage({ cardCount, offers }: MainPageProps): JSX.Element {
 
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>{'6 cities'}</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link header__logo-link--active">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"></img>
-              </a>
+              <Logo/>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
+                  <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile" >
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                     <span className="header__favorite-count">3</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="header__nav-item">
                   <a className="header__nav-link" href="#">
@@ -84,7 +86,7 @@ function MainPage({ cardCount }: MainPageProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{cards.length} places to stay in Amsterdam</b>
+              <b className="places__found">{cardCount} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -101,7 +103,7 @@ function MainPage({ cardCount }: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {...cards}
+                <CardsList offers={offers}></CardsList>
               </div>
             </section>
             <div className="cities__right-section">

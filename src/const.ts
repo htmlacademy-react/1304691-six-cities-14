@@ -1,11 +1,13 @@
 const CARD_COUNT: number = 5;
 
+const RATING_MAX = 5;
+
 enum AppRoute {
   Root = '/',
   Login = '/login',
   NotFound = '/404',
   Favorites = '/favorites',
-  Offer = '/offer/:id'
+  Offer = '/offer/'
 }
 
 enum AuthorizationStatus {
@@ -17,5 +19,6 @@ enum AuthorizationStatus {
 export {
   CARD_COUNT,
   AppRoute,
-  AuthorizationStatus
+  AuthorizationStatus,
+  RATING_MAX
 };

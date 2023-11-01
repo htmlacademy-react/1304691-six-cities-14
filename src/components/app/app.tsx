@@ -5,44 +5,56 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import Favorites from '../../pages/favorites/favorites';
 import Login from '../../pages/login/login';
 import PrivateRoute from '../private-route/private-route';
-import Offer from '../offer/offer';
+import Offer from '../../pages/offer/offer';
+import { Offers } from '../../types/offers';
+import { HelmetProvider } from 'react-helmet-async';
 
 type AppScreenProps = {
   cardCount: number;
+  offers: Offers;
 }
 
-function App({ cardCount }: AppScreenProps): JSX.Element {
+function App({ cardCount, offers }: AppScreenProps): JSX.Element {
+
+  function getFavoritesOffers() {
+    return offers.filter((offer) => offer.isFavorite === true);
+  }
+
+  const favoritesOffers = getFavoritesOffers();
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path={AppRoute.Root}
-          element={<MainPage cardCount={cardCount} />}
-        />
-        <Route
-          path={AppRoute.Favorites}
-          element={
-            <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
-            >
-              <Favorites />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={AppRoute.Login}
-          element={<Login />}
-        />
-        <Route
-          path={AppRoute.Offer}
-          element={<Offer />}
-        />
-        <Route
-          path="*"
-          element={<NotFound />}
-        />
-      </Routes>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path={AppRoute.Root}
+            element={<MainPage cardCount={cardCount} offers={offers} />}
+          />
+          <Route
+            path={AppRoute.Favorites}
+            element={
+              <PrivateRoute
+                authorizationStatus={AuthorizationStatus.Auth}
+              >
+                <Favorites favoritesOffers={favoritesOffers} />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={AppRoute.Login}
+            element={<Login />}
+          />
+          <Route
+            path={`${AppRoute.Offer}:id`}
+            element={<Offer />}
+          />
+          <Route
+            path="*"
+            element={<NotFound />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }
 
