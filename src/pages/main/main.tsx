@@ -1,16 +1,20 @@
-import { Offers } from '../../types/offers';
 import { CardsList } from '../../components/cards-list/cards-list';
 import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import Map from '../../components/map/map';
+import { Offers, City, Offer } from '../../types/types';
 
 type MainPageProps = {
-  cardCount: number;
-  offers: Offers;
+  city: City;
+  selectedPoint: Offer | undefined;
+  onListItemHover: (listItemName: number) => void;
+  onListItemLeave: () => void;
+  offersByCity: Offers;
 }
 
-function MainPage({ cardCount, offers }: MainPageProps): JSX.Element {
+function MainPage({ city, selectedPoint, onListItemHover, onListItemLeave, offersByCity }: MainPageProps): JSX.Element {
 
   return (
     <div className="page page--gray page--main">
@@ -86,7 +90,7 @@ function MainPage({ cardCount, offers }: MainPageProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{cardCount} places to stay in Amsterdam</b>
+              <b className="places__found">{offersByCity.length} places to stay in {city.name}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -103,11 +107,13 @@ function MainPage({ cardCount, offers }: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <CardsList offers={offers}></CardsList>
+                <CardsList offers={offersByCity} onListItemHover={onListItemHover} onListItemLeave={onListItemLeave}></CardsList>
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map city={city} offers={offersByCity} selectedPoint={selectedPoint}></Map>
+              </section>
             </div>
           </div>
         </div >
