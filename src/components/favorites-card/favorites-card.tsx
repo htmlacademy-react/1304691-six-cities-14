@@ -1,5 +1,5 @@
 
-import { Offer } from '../../types/offers';
+import { Offer } from '../../types/types';
 import { RATING_MAX } from '../../const';
 
 type FavoritesCardProps = {
