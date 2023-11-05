@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, Fragment } from 'react';
 
 function FormReview() {
   const [formData, setFormData] = useState({
@@ -18,14 +18,14 @@ function FormReview() {
         {Array.from({ length: 5 }, (_, index: number) => ++index)
           .reverse()
           .map((item) => (
-            <>
-              <input className="form__rating-input visually-hidden" name="rating" value={item} id={`${item}-stars`} type="radio" onChange={handleFormChange} checked={formData.rating === String(item)} />
+            <Fragment key={`${item}-stars`}>
+              <input className="form__rating-input visually-hidden" name="rating" value={item} id={`${item}-stars`} type="radio" onChange={handleFormChange} checked={formData.rating === String(item)}/>
               <label htmlFor={`${item}-stars`} className="reviews__rating-label form__rating-label" title="good">
                 <svg className="form__star-image" width="37" height="33">
                   <use xlinkHref="#icon-star"></use>
                 </svg>
               </label>
-            </>
+            </Fragment>
           ))}
       </div>
       <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={handleFormChange} value={formData.review}></textarea>
