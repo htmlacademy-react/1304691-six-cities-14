@@ -2,13 +2,27 @@ import Logo from '../../components/logo/logo';
 import { Helmet } from 'react-helmet-async';
 import FormReview from '../../components/form-review/form-review';
 import ReviewsList from '../../components/reviews-list/reviews-list';
-import { Reviews } from '../../types/types';
+import { Reviews, Offers } from '../../types/types';
+import OfferMap from '../../components/map/offer-map';
+import { useParams } from 'react-router-dom';
 
 type OfferProps = {
   reviews: Reviews;
+  offers: Offers;
+  offersAroundHere: Offers;
 }
 
-function Offer({ reviews }: OfferProps): JSX.Element {
+function Offer({ reviews, offers, offersAroundHere }: OfferProps): JSX.Element {
+  const params = useParams();
+
+  const paramsId = Number(params.id);
+
+  function getOfferByParams() {
+    return offers.find((item) => item.id === paramsId) ;
+  }
+
+  const offer = getOfferByParams();
+
   return (
     <div className="page">
       <Helmet>
@@ -161,7 +175,9 @@ function Offer({ reviews }: OfferProps): JSX.Element {
               </section>
             </div>
           </div>
-          <section className="offer__map map"></section>
+          <section className="offer__map map">
+            <OfferMap offer={offer} offersAroundHere={offersAroundHere}></OfferMap>
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
