@@ -1,7 +1,7 @@
 import { Offer } from '../../types/types';
 import { Link } from 'react-router-dom';
-import { RATING_MAX } from '../../const';
 import { AppRoute } from '../../const';
+import { getRatingValue } from '../../utils/utils';
 
 type CardProps = {
   offer: Offer;
@@ -12,8 +12,6 @@ type CardProps = {
 function Card({ offer, onOfferMouseEnter, onOfferMouseLeave }: CardProps): JSX.Element {
 
   const { price, title, rating, previewImage, isPremium, isFavorite, type, id } = offer;
-
-  const ratingValue = (rating * 100) / RATING_MAX;
 
   return (
     <article className="cities__card place-card" data-id={id} onMouseEnter={onOfferMouseEnter}
@@ -40,7 +38,7 @@ function Card({ offer, onOfferMouseEnter, onOfferMouseLeave }: CardProps): JSX.E
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${ratingValue}%` }}></span>
+            <span style={{ width: `${getRatingValue(rating)}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
