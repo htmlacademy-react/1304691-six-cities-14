@@ -6,6 +6,8 @@ const URL_MARKER_DEFAULT = '../markup/img/pin.svg';
 
 const URL_MARKER_CURRENT = '../markup/img/pin-active.svg';
 
+const REVIEW_DATE_FORMAT = 'MMMM YYYY';
+
 enum AppRoute {
   Root = '/',
   Login = '/login',
@@ -27,4 +29,5 @@ export {
   RATING_MAX,
   URL_MARKER_DEFAULT,
   URL_MARKER_CURRENT,
+  REVIEW_DATE_FORMAT
 };
