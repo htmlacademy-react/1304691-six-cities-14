@@ -10,13 +10,15 @@ import { Offers } from '../../types/types';
 import { HelmetProvider } from 'react-helmet-async';
 import { City, Offer as OfferType } from '../../types/types';
 import { useState } from 'react';
+import { Reviews } from '../../types/types';
 
 type AppScreenProps = {
   offers: Offers;
   city: City;
+  reviews: Reviews;
 }
 
-function App({ offers, city }: AppScreenProps): JSX.Element {
+function App({ offers, city, reviews }: AppScreenProps): JSX.Element {
 
   function getFavoritesOffers() {
     return offers.filter((offer) => offer.isFavorite === true);
@@ -50,7 +52,15 @@ function App({ offers, city }: AppScreenProps): JSX.Element {
         <Routes>
           <Route
             path={AppRoute.Root}
-            element={<MainPage city={city} selectedPoint={selectedPoint} onListItemHover={handleListItemHover} onListItemLeave={handleListItemLeave} offersByCity={offersByCity}/>}
+            element={
+              <MainPage
+                city={city}
+                selectedPoint={selectedPoint}
+                onListItemHover={handleListItemHover}
+                onListItemLeave={handleListItemLeave}
+                offersByCity={offersByCity}
+              />
+            }
           />
           <Route
             path={AppRoute.Favorites}
@@ -68,7 +78,7 @@ function App({ offers, city }: AppScreenProps): JSX.Element {
           />
           <Route
             path={`${AppRoute.Offer}:id`}
-            element={<Offer />}
+            element={<Offer reviews={reviews} />}
           />
           <Route
             path="*"
