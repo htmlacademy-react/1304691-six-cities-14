@@ -42,7 +42,7 @@ const reviews: Reviews = [
   , {
     comment: 'I didn’t like the breakfast, the meat either had to be looked for or it wasn’t there at all. We don’t eat sausages at all, and we don’t eat sausage either.',
     date: 'Sun Oct 29 2023 15:06:43 GMT+0300 (Москва, стандартное время)',
-    id: 1,
+    id: 4,
     rating: 2,
     user: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,

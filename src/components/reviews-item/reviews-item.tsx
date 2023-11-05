@@ -1,25 +1,35 @@
-function ReviewsItem():JSX.Element {
+import { Review } from '../../types/types';
+import { getRatingValue } from '../../utils/utils';
+import dayjs from 'dayjs';
+import { REVIEW_DATE_FORMAT } from '../../const';
+
+type ReviewsItemProps = {
+  review: Review;
+}
+
+function ReviewsItem({ review }: ReviewsItemProps):JSX.Element {
+
+  const { comment, date, rating, user } = review;
+
+  const dateValue = dayjs(date).format(REVIEW_DATE_FORMAT);
+
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
+          <img className="reviews__avatar user__avatar" src={user.avatarUrl} width="54" height="54" alt={user.name} />
         </div>
-        <span className="reviews__user-name">
-          Max
-        </span>
+        <span className="reviews__user-name">{user.name}</span>
       </div>
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{ width: '80%' }}></span>
+            <span style={{ width: `${getRatingValue(rating)}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <p className="reviews__text">
-          A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-        </p>
-        <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
+        <p className="reviews__text">{comment}</p>
+        <time className="reviews__time" dateTime={date}>{dateValue}</time>
       </div>
     </li>
   );
