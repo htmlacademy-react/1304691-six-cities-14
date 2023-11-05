@@ -4,17 +4,17 @@ import Logo from '../../components/logo/logo';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import Map from '../../components/map/map';
-import { Offers, City, Offer } from '../../types/types';
+import { Offers, Offer } from '../../types/types';
+import { CITY } from '../../mocks/map';
 
 type MainPageProps = {
-  city: City;
   selectedPoint: Offer | undefined;
   onListItemHover: (listItemName: number) => void;
   onListItemLeave: () => void;
   offersByCity: Offers;
 }
 
-function MainPage({ city, selectedPoint, onListItemHover, onListItemLeave, offersByCity }: MainPageProps): JSX.Element {
+function MainPage({ selectedPoint, onListItemHover, onListItemLeave, offersByCity }: MainPageProps): JSX.Element {
 
   return (
     <div className="page page--gray page--main">
@@ -90,7 +90,7 @@ function MainPage({ city, selectedPoint, onListItemHover, onListItemLeave, offer
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersByCity.length} places to stay in {city.name}</b>
+              <b className="places__found">{offersByCity.length} places to stay in {CITY.name}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -112,7 +112,7 @@ function MainPage({ city, selectedPoint, onListItemHover, onListItemLeave, offer
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={city} offers={offersByCity} selectedPoint={selectedPoint}></Map>
+                <Map offersByCity={offersByCity} selectedPoint={selectedPoint}></Map>
               </section>
             </div>
           </div>
