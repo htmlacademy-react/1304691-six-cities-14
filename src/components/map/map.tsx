@@ -1,13 +1,12 @@
 import 'leaflet/dist/leaflet.css';
 import { Icon, Marker, layerGroup } from 'leaflet';
-import { City, Offers, Offer } from '../../types/types';
+import { Offers, Offer } from '../../types/types';
 import { useRef, useEffect } from 'react';
 import useMap from '../../hooks/use-map';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
 
 type MapProps = {
-  city: City;
-  offers: Offers;
+  offersByCity: Offers;
   selectedPoint: Offer | undefined;
 }
 
@@ -23,15 +22,15 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map({ city, offers, selectedPoint }: MapProps): JSX.Element {
+function Map({ offersByCity, selectedPoint }: MapProps): JSX.Element {
   const mapRef = useRef(null);
 
-  const map = useMap({ mapRef, city });
+  const map = useMap({ mapRef, city: offersByCity[0].city });
 
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
-      offers.forEach((offer) => {
+      offersByCity.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
           lng: offer.location.longitude
@@ -50,7 +49,7 @@ function Map({ city, offers, selectedPoint }: MapProps): JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, selectedPoint]);
+  }, [map, offersByCity, selectedPoint]);
 
   return (
     <div
