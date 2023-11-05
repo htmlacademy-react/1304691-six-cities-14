@@ -2,6 +2,10 @@ const CARD_COUNT: number = 5;
 
 const RATING_MAX = 5;
 
+const URL_MARKER_DEFAULT = '../markup/img/pin.svg';
+
+const URL_MARKER_CURRENT = '../markup/img/pin-active.svg';
+
 enum AppRoute {
   Root = '/',
   Login = '/login',
@@ -20,5 +24,7 @@ export {
   CARD_COUNT,
   AppRoute,
   AuthorizationStatus,
-  RATING_MAX
+  RATING_MAX,
+  URL_MARKER_DEFAULT,
+  URL_MARKER_CURRENT,
 };

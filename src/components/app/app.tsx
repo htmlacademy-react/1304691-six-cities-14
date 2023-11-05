@@ -6,15 +6,17 @@ import Favorites from '../../pages/favorites/favorites';
 import Login from '../../pages/login/login';
 import PrivateRoute from '../private-route/private-route';
 import Offer from '../../pages/offer/offer';
-import { Offers } from '../../types/offers';
+import { Offers } from '../../types/types';
 import { HelmetProvider } from 'react-helmet-async';
+import { City, Offer as OfferType } from '../../types/types';
+import { useState } from 'react';
 
 type AppScreenProps = {
-  cardCount: number;
   offers: Offers;
+  city: City;
 }
 
-function App({ cardCount, offers }: AppScreenProps): JSX.Element {
+function App({ offers, city }: AppScreenProps): JSX.Element {
 
   function getFavoritesOffers() {
     return offers.filter((offer) => offer.isFavorite === true);
@@ -22,13 +24,33 @@ function App({ cardCount, offers }: AppScreenProps): JSX.Element {
 
   const favoritesOffers = getFavoritesOffers();
 
+  const [selectedPoint, setSelectedPoint] = useState<OfferType | undefined>(
+    undefined
+  );
+
+  function handleListItemHover(id: number) {
+    const currentOffer = offers.find((offer) => offer.id === id);
+
+    setSelectedPoint(currentOffer);
+  }
+
+  function handleListItemLeave() {
+    setSelectedPoint(undefined);
+  }
+
+  function getOffersByCity() {
+    return offers.filter((offer) => offer.city.name === city.name);
+  }
+
+  const offersByCity = getOffersByCity();
+
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Root}
-            element={<MainPage cardCount={cardCount} offers={offers} />}
+            element={<MainPage city={city} selectedPoint={selectedPoint} onListItemHover={handleListItemHover} onListItemLeave={handleListItemLeave} offersByCity={offersByCity}/>}
           />
           <Route
             path={AppRoute.Favorites}

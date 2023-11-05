@@ -5,7 +5,7 @@ type Host = {
   name: string;
 }
 
-type City = {
+export type City = {
   location: {
     latitude: number;
     longitude: number;

@@ -1,4 +1,4 @@
-import { Offer } from '../../types/offers';
+import { Offer } from '../../types/types';
 import { Link } from 'react-router-dom';
 import { RATING_MAX } from '../../const';
 import { AppRoute } from '../../const';
