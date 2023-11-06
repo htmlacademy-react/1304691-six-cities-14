@@ -306,6 +306,44 @@ const offers: Offers = [
     rating: 1,
     title: 'CONCERT at Elektrozavodskaya KONCERT.RU™ HOTEL',
     type: 'room'
+  },
+  {
+    id: 8,
+    bedrooms: 1,
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: 'Amsterdam'
+    },
+    description: 'На последние выходные августам нам нужна была ночёвка в Дюссельдорфе, но мы тянули с бронированием отеля до последнего и поэтому в начале недели на букинге в интересующем нас районе всё было распродано или цены были, мягко говоря, высоковаты.',
+    goods: [
+      'Heating'
+    ],
+    host: {
+      avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
+      id: 3,
+      isPro: true,
+      name: 'Angelina'
+    },
+    images: [
+      `${AVATAR_URL}?rnd=${Math.random()}`
+    ],
+    isFavorite: true,
+    isPremium: true,
+    location: {
+      latitude: 52.41463874452988,
+      longitude: 5.025148896856438,
+      zoom: 8
+    },
+    maxAdults: 4,
+    previewImage: 'img/apartment-small-03.jpg',
+    price: 70,
+    rating: 1,
+    title: 'CONCERT at Elektrozavodskaya KONCERT.RU™ HOTEL',
+    type: 'room'
   }
 ];
 
