@@ -10,7 +10,7 @@ const offers: Offers = [
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
-        zoom: 10
+        zoom: 12
       },
       name: 'Amsterdam'
     },
@@ -32,7 +32,7 @@ const offers: Offers = [
     location: {
       latitude: 52.3909553943508,
       longitude: 4.85309666406198,
-      zoom: 8
+      zoom: 12
     },
     maxAdults: 4,
     previewImage: 'img/apartment-01.jpg',
@@ -48,7 +48,7 @@ const offers: Offers = [
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
-        zoom: 10
+        zoom: 12
       },
       name: 'Amsterdam'
     },
@@ -70,7 +70,7 @@ const offers: Offers = [
     location: {
       latitude: 52.3609553943508,
       longitude: 4.85309666406198,
-      zoom: 8
+      zoom: 12
     },
     maxAdults: 4,
     previewImage: 'img/apartment-01.jpg',
@@ -86,7 +86,7 @@ const offers: Offers = [
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
-        zoom: 10
+        zoom: 12
       },
       name: 'Amsterdam'
     },
@@ -108,7 +108,7 @@ const offers: Offers = [
     location: {
       latitude: 52.3909553943508,
       longitude: 4.929309666406198,
-      zoom: 8
+      zoom: 12
     },
     maxAdults: 4,
     previewImage: 'img/apartment-01.jpg',
@@ -124,7 +124,7 @@ const offers: Offers = [
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
-        zoom: 10
+        zoom: 12
       },
       name: 'Amsterdam'
     },
@@ -146,7 +146,7 @@ const offers: Offers = [
     location: {
       latitude: 52.3809553943508,
       longitude: 4.939309666406198,
-      zoom: 8
+      zoom: 12
     },
     maxAdults: 4,
     previewImage: 'img/apartment-01.jpg',
@@ -162,7 +162,7 @@ const offers: Offers = [
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
-        zoom: 10
+        zoom: 12
       },
       name: 'Paris'
     },
@@ -184,7 +184,7 @@ const offers: Offers = [
     location: {
       latitude: 52.35514938496378,
       longitude: 4.673877537499948,
-      zoom: 8
+      zoom: 12
     },
     maxAdults: 4,
     previewImage: 'img/apartment-02.jpg',
@@ -200,7 +200,7 @@ const offers: Offers = [
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
-        zoom: 10
+        zoom: 12
       },
       name: 'Hamburg'
     },
@@ -222,7 +222,7 @@ const offers: Offers = [
     location: {
       latitude: 52.35514938496378,
       longitude: 4.673877537499948,
-      zoom: 8
+      zoom: 12
     },
     maxAdults: 4,
     previewImage: 'img/apartment-small-04.jpg',
@@ -238,7 +238,7 @@ const offers: Offers = [
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
-        zoom: 10
+        zoom: 12
       },
       name: 'Dussledorf'
     },
@@ -260,7 +260,7 @@ const offers: Offers = [
     location: {
       latitude: 52.35514938496378,
       longitude: 4.673877537499948,
-      zoom: 8
+      zoom: 12
     },
     maxAdults: 4,
     previewImage: 'img/apartment-03.jpg',
@@ -276,7 +276,7 @@ const offers: Offers = [
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
-        zoom: 10
+        zoom: 12
       },
       name: 'Dussledorf'
     },
@@ -298,7 +298,7 @@ const offers: Offers = [
     location: {
       latitude: 52.35514938496378,
       longitude: 4.673877537499948,
-      zoom: 8
+      zoom: 12
     },
     maxAdults: 4,
     previewImage: 'img/apartment-small-03.jpg',
@@ -308,13 +308,13 @@ const offers: Offers = [
     type: 'room'
   },
   {
-    id: 8,
+    id: 9,
     bedrooms: 1,
     city: {
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
-        zoom: 10
+        zoom: 12
       },
       name: 'Amsterdam'
     },
@@ -334,9 +334,9 @@ const offers: Offers = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 52.41463874452988,
-      longitude: 5.025148896856438,
-      zoom: 8
+      latitude: 52.414638,
+      longitude: 5.025148,
+      zoom: 12
     },
     maxAdults: 4,
     previewImage: 'img/apartment-small-03.jpg',

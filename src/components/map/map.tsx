@@ -29,6 +29,18 @@ function Map({ offersByCity, selectedPoint }: MapProps): JSX.Element {
 
   useEffect(() => {
     if (map) {
+
+      if (selectedPoint) {
+        const mapLating = {
+          lat: selectedPoint.location.latitude,
+          lng: selectedPoint.location.longitude
+        };
+
+        const mapZoom = selectedPoint.location.zoom;
+
+        map.setView(mapLating, mapZoom);
+      }
+
       const markerLayer = layerGroup().addTo(map);
       offersByCity.forEach((offer) => {
         const marker = new Marker({
