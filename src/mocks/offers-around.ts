@@ -36,7 +36,7 @@ const offersAroundHere: Offers = [
     },
     maxAdults: 4,
     previewImage: 'img/apartment-01.jpg',
-    price: 80,
+    price: 160,
     rating: 4.8,
     title: 'Beautiful & luxurious studio at great location',
     type: 'room'
@@ -65,7 +65,7 @@ const offersAroundHere: Offers = [
     images: [
       `${AVATAR_URL}?rnd=${Math.random()}`
     ],
-    isFavorite: true,
+    isFavorite: false,
     isPremium: false,
     location: {
       latitude: 52.3609553943508,
@@ -73,8 +73,8 @@ const offersAroundHere: Offers = [
       zoom: 8
     },
     maxAdults: 4,
-    previewImage: 'img/apartment-01.jpg',
-    price: 80,
+    previewImage: 'img/apartment-02.jpg',
+    price: 70,
     rating: 4.8,
     title: 'Beautiful & luxurious studio at great location',
     type: 'room'
@@ -103,7 +103,7 @@ const offersAroundHere: Offers = [
     images: [
       `${AVATAR_URL}?rnd=${Math.random()}`
     ],
-    isFavorite: true,
+    isFavorite: false,
     isPremium: false,
     location: {
       latitude: 52.3909553943508,
@@ -111,8 +111,8 @@ const offersAroundHere: Offers = [
       zoom: 8
     },
     maxAdults: 4,
-    previewImage: 'img/apartment-01.jpg',
-    price: 80,
+    previewImage: 'img/apartment-03.jpg',
+    price: 50,
     rating: 4.8,
     title: 'Beautiful & luxurious studio at great location',
     type: 'room'
