@@ -7,7 +7,7 @@ import useMap from '../../hooks/use-map';
 import { URL_MARKER_DEFAULT } from '../../const';
 
 type OfferMapProps = {
-  offer: Offer | undefined;
+  offer: Offer;
   offersAroundHere: Offers;
 }
 
@@ -20,7 +20,7 @@ const defaultCustomIcon = new Icon({
 function OfferMap({ offer, offersAroundHere }: OfferMapProps): JSX.Element {
   const mapRef = useRef(null);
 
-  const map = useMap({ mapRef, city: offer.city });
+  const map = useMap({ mapRef, city: offer.city});
 
   useEffect(() => {
     if (map) {
