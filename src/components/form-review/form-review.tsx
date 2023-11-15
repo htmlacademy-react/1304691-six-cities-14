@@ -1,10 +1,18 @@
 import { useState, ChangeEvent, Fragment } from 'react';
+import { MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH } from '../../const';
+
+const RATING_TITLES = ['terribly', 'badly', 'not bad', 'good', 'perfect'];
 
 function FormReview() {
   const [formData, setFormData] = useState({
-    rating: '1',
+    rating: '',
     review: ''
   });
+
+  const isValid =
+    formData.review.length >= MIN_COMMENT_LENGTH &&
+    formData.review.length <= MAX_COMMENT_LENGTH &&
+    formData.rating !== '';
 
   function handleFormChange(evt: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) {
     const name = evt.target.name;
@@ -19,8 +27,8 @@ function FormReview() {
           .reverse()
           .map((item) => (
             <Fragment key={`${item}-stars`}>
-              <input className="form__rating-input visually-hidden" name="rating" value={item} id={`${item}-stars`} type="radio" onChange={handleFormChange} checked={formData.rating === String(item)}/>
-              <label htmlFor={`${item}-stars`} className="reviews__rating-label form__rating-label" title="good">
+              <input className="form__rating-input visually-hidden" name="rating" value={item} id={`${item}-stars`} type="radio" onChange={handleFormChange} checked={formData.rating === String(item)} />
+              <label htmlFor={`${item}-stars`} className="reviews__rating-label form__rating-label" title={RATING_TITLES[item - 1]}>
                 <svg className="form__star-image" width="37" height="33">
                   <use xlinkHref="#icon-star"></use>
                 </svg>
@@ -31,9 +39,9 @@ function FormReview() {
       <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={handleFormChange} value={formData.review}></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{MIN_COMMENT_LENGTH} characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={!isValid}>Submit</button>
       </div>
     </form>
   );

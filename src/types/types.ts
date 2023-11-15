@@ -1,6 +1,7 @@
+import { CityName } from '../const';
+
 type Host = {
   avatarUrl: string;
-  id: number;
   isPro: boolean;
   name: string;
 }
@@ -11,7 +12,7 @@ export type City = {
     longitude: number;
     zoom: number;
   };
-  name: string;
+  name: CityName;
 }
 
 type Location = {
@@ -27,7 +28,6 @@ export type Review = {
   rating: number;
   user: {
     avatarUrl: string;
-    id: number;
     isPro: boolean;
     name: string;
   };
@@ -41,7 +41,7 @@ export type Offer = {
   description: string;
   goods: string[];
   host: Host;
-  id: number;
+  id: string;
   images: string[];
   isFavorite: boolean;
   isPremium: boolean;

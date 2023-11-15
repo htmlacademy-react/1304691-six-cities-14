@@ -2,10 +2,11 @@ import Logo from '../../components/logo/logo';
 import { Helmet } from 'react-helmet-async';
 import FormReview from '../../components/form-review/form-review';
 import ReviewsList from '../../components/reviews-list/reviews-list';
-import { Reviews, Offers, Offer as OfferType } from '../../types/types';
+import { Reviews, Offers, } from '../../types/types';
 import OfferMap from '../../components/map/offer-map';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import { CardsList } from '../../components/cards-list/cards-list';
+import { AppRoute } from '../../const';
 
 type OfferProps = {
   reviews: Reviews;
@@ -14,11 +15,13 @@ type OfferProps = {
 }
 
 function Offer({ reviews, offers, offersAroundHere }: OfferProps): JSX.Element {
-  const params = useParams();
+  const { id } = useParams();
 
-  const paramsId = Number(params.id);
+  const offer = offers.find((item) => item.id === id);
 
-  const offer = offers.find((item) => item.id === paramsId) as OfferType;
+  if (!offer) {
+    return <Navigate to={AppRoute.NotFound} />;
+  }
 
   return (
     <div className="page">
@@ -172,14 +175,12 @@ function Offer({ reviews, offers, offersAroundHere }: OfferProps): JSX.Element {
               </section>
             </div>
           </div>
-          <section className="offer__map map">
-            <OfferMap offer={offer} offersAroundHere={offersAroundHere}></OfferMap>
-          </section>
+          <OfferMap offer={offer} offersAroundHere={offersAroundHere}></OfferMap>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <CardsList offers={offersAroundHere} isOtherPlaces></CardsList>
+            <CardsList offers={offersAroundHere} block={'near-places'} isOtherPlaces></CardsList>
           </section>
         </div>
       </main>

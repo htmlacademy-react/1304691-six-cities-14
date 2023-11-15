@@ -1,4 +1,5 @@
 import { City } from '../types/types';
+import { CityName } from '../const';
 
 const CITY: City = {
   location: {
@@ -6,7 +7,7 @@ const CITY: City = {
     longitude: 4.89517,
     zoom: 10
   },
-  name: 'Amsterdam',
+  name: CityName.Amsterdam,
 };
 
 export {

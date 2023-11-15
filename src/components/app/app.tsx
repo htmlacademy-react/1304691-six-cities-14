@@ -8,10 +8,9 @@ import PrivateRoute from '../private-route/private-route';
 import Offer from '../../pages/offer/offer';
 import { Offers } from '../../types/types';
 import { HelmetProvider } from 'react-helmet-async';
-import { Offer as OfferType } from '../../types/types';
-import { useState } from 'react';
 import { Reviews } from '../../types/types';
-import { CITY } from '../../mocks/map';
+import { CityName } from '../../const';
+import ScrollToTop from '../scroll-to-top/scroll-to-top';
 
 type AppScreenProps = {
   offers: Offers;
@@ -21,45 +20,19 @@ type AppScreenProps = {
 
 function App({ offers, reviews, offersAroundHere }: AppScreenProps): JSX.Element {
 
-  function getFavoritesOffers() {
-    return offers.filter((offer) => offer.isFavorite === true);
-  }
+  const favoritesOffers = offers.filter((offer) => offer.isFavorite === true);
 
-  const favoritesOffers = getFavoritesOffers();
-
-  const [selectedPoint, setSelectedPoint] = useState<OfferType | undefined>(
-    undefined
-  );
-
-  function handleListItemHover(id: number) {
-    const currentOffer = offers.find((offer) => offer.id === id);
-
-    setSelectedPoint(currentOffer);
-  }
-
-  function handleListItemLeave() {
-    setSelectedPoint(undefined);
-  }
-
-  function getOffersByCity() {
-    return offers.filter((offer) => offer.city.name === CITY.name);
-  }
-
-  const offersByCity = getOffersByCity();
+  const offersByCity = offers.filter((offer) => offer.city.name === CityName.Amsterdam);
 
   return (
     <HelmetProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route
             path={AppRoute.Root}
             element={
-              <MainPage
-                selectedPoint={selectedPoint}
-                onListItemHover={handleListItemHover}
-                onListItemLeave={handleListItemLeave}
-                offersByCity={offersByCity}
-              />
+              <MainPage offersByCity={offersByCity} />
             }
           />
           <Route
@@ -67,6 +40,7 @@ function App({ offers, reviews, offersAroundHere }: AppScreenProps): JSX.Element
             element={
               <PrivateRoute
                 authorizationStatus={AuthorizationStatus.Auth}
+                redirectTo={AppRoute.Login}
               >
                 <Favorites favoritesOffers={favoritesOffers} />
               </PrivateRoute>
@@ -74,7 +48,14 @@ function App({ offers, reviews, offersAroundHere }: AppScreenProps): JSX.Element
           />
           <Route
             path={AppRoute.Login}
-            element={<Login />}
+            element={
+              <PrivateRoute
+                authorizationStatus={AuthorizationStatus.Auth}
+                redirectTo={AppRoute.Root}
+              >
+                <Login />
+              </PrivateRoute>
+            }
           />
           <Route
             path={`${AppRoute.Offer}:id`}

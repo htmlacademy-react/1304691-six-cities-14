@@ -4,7 +4,8 @@ import { Icon, Marker, layerGroup } from 'leaflet';
 import { Offer, Offers } from '../../types/types';
 import { useRef, useEffect } from 'react';
 import useMap from '../../hooks/use-map';
-import { URL_MARKER_DEFAULT } from '../../const';
+
+const URL_MARKER_DEFAULT = '../markup/img/pin.svg';
 
 type OfferMapProps = {
   offer: Offer;
@@ -42,11 +43,10 @@ function OfferMap({ offer, offersAroundHere }: OfferMapProps): JSX.Element {
     }
   }, [map, offersAroundHere]);
   return (
-    <div
-      style={{ height: '579px' }}
+    <section className='offer__map map'
       ref={mapRef}
     >
-    </div>
+    </section>
   );
 }
 

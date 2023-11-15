@@ -10,7 +10,6 @@ const reviews: Reviews = [
     rating: 4,
     user: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 1,
       isPro: false,
       name: 'Max'
     }
@@ -22,7 +21,6 @@ const reviews: Reviews = [
     rating: 4,
     user: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 1,
       isPro: true,
       name: 'Jhon'
     }
@@ -34,7 +32,6 @@ const reviews: Reviews = [
     rating: 5,
     user: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 1,
       isPro: false,
       name: 'Steve'
     }
@@ -46,7 +43,6 @@ const reviews: Reviews = [
     rating: 2,
     user: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 4,
       isPro: false,
       name: 'Oliver'
     }
@@ -58,7 +54,6 @@ const reviews: Reviews = [
     rating: 5,
     user: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 1,
       isPro: true,
       name: 'Karl'
     }

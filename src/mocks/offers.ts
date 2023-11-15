@@ -1,10 +1,12 @@
+import { CityName } from '../const';
 import { Offers } from '../types/types';
+import { nanoid } from 'nanoid';
 
 const AVATAR_URL = 'https://i.pravatar.cc/128';
 
 const offers: Offers = [
   {
-    id: 1,
+    id: nanoid(),
     bedrooms: 3,
     city: {
       location: {
@@ -12,7 +14,7 @@ const offers: Offers = [
         longitude: 4.895168,
         zoom: 12
       },
-      name: 'Amsterdam'
+      name: CityName.Amsterdam
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: [
@@ -20,7 +22,6 @@ const offers: Offers = [
     ],
     host: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 3,
       isPro: true,
       name: 'Angelina'
     },
@@ -42,7 +43,7 @@ const offers: Offers = [
     type: 'room'
   },
   {
-    id: 2,
+    id: nanoid(),
     bedrooms: 3,
     city: {
       location: {
@@ -50,7 +51,7 @@ const offers: Offers = [
         longitude: 4.895168,
         zoom: 12
       },
-      name: 'Amsterdam'
+      name: CityName.Amsterdam
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: [
@@ -58,7 +59,6 @@ const offers: Offers = [
     ],
     host: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 3,
       isPro: true,
       name: 'Angelina'
     },
@@ -80,7 +80,7 @@ const offers: Offers = [
     type: 'room'
   },
   {
-    id: 3,
+    id: nanoid(),
     bedrooms: 3,
     city: {
       location: {
@@ -88,7 +88,7 @@ const offers: Offers = [
         longitude: 4.895168,
         zoom: 12
       },
-      name: 'Amsterdam'
+      name: CityName.Amsterdam
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: [
@@ -96,7 +96,6 @@ const offers: Offers = [
     ],
     host: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 3,
       isPro: true,
       name: 'Angelina'
     },
@@ -118,7 +117,7 @@ const offers: Offers = [
     type: 'room'
   },
   {
-    id: 4,
+    id: nanoid(),
     bedrooms: 3,
     city: {
       location: {
@@ -126,7 +125,7 @@ const offers: Offers = [
         longitude: 4.895168,
         zoom: 12
       },
-      name: 'Amsterdam'
+      name: CityName.Amsterdam
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: [
@@ -134,7 +133,6 @@ const offers: Offers = [
     ],
     host: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 3,
       isPro: true,
       name: 'Angelina'
     },
@@ -156,7 +154,7 @@ const offers: Offers = [
     type: 'room'
   },
   {
-    id: 5,
+    id: nanoid(),
     bedrooms: 1,
     city: {
       location: {
@@ -164,7 +162,7 @@ const offers: Offers = [
         longitude: 4.895168,
         zoom: 12
       },
-      name: 'Paris'
+      name: CityName.Paris
     },
     description: 'I really wanted to see Paris, and when the opportunity arose to accompany my husband on a business trip to Paris, I was very happy about it. Trip for 4 days.',
     goods: [
@@ -172,7 +170,6 @@ const offers: Offers = [
     ],
     host: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 3,
       isPro: true,
       name: 'Angelina'
     },
@@ -194,7 +191,7 @@ const offers: Offers = [
     type: 'apartment'
   },
   {
-    id: 6,
+    id: nanoid(),
     bedrooms: 2,
     city: {
       location: {
@@ -202,7 +199,7 @@ const offers: Offers = [
         longitude: 4.895168,
         zoom: 12
       },
-      name: 'Hamburg'
+      name: CityName.Hamburg
     },
     description: 'В Гамбург и вообще на Север Германии я хотел добраться очень давно, но постоянно возникали другие хотелки по поездкам. Но сейчас, когда уже истекала многолетняя немецкая виза, учитывая, что новую немецкую визу фактически не получить на данный момент, то Гамбург был наиболее очевидным выбором. ',
     goods: [
@@ -210,7 +207,6 @@ const offers: Offers = [
     ],
     host: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 3,
       isPro: true,
       name: 'Angelina'
     },
@@ -232,7 +228,7 @@ const offers: Offers = [
     type: 'room'
   },
   {
-    id: 7,
+    id: nanoid(),
     bedrooms: 1,
     city: {
       location: {
@@ -240,7 +236,7 @@ const offers: Offers = [
         longitude: 4.895168,
         zoom: 12
       },
-      name: 'Dussledorf'
+      name: CityName.Dussledorf
     },
     description: 'На последние выходные августам нам нужна была ночёвка в Дюссельдорфе, но мы тянули с бронированием отеля до последнего и поэтому в начале недели на букинге в интересующем нас районе всё было распродано или цены были, мягко говоря, высоковаты.',
     goods: [
@@ -248,7 +244,6 @@ const offers: Offers = [
     ],
     host: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 3,
       isPro: true,
       name: 'Angelina'
     },
@@ -270,7 +265,7 @@ const offers: Offers = [
     type: 'apartment'
   },
   {
-    id: 8,
+    id: nanoid(),
     bedrooms: 1,
     city: {
       location: {
@@ -278,7 +273,7 @@ const offers: Offers = [
         longitude: 4.895168,
         zoom: 12
       },
-      name: 'Dussledorf'
+      name: CityName.Dussledorf
     },
     description: 'На последние выходные августам нам нужна была ночёвка в Дюссельдорфе, но мы тянули с бронированием отеля до последнего и поэтому в начале недели на букинге в интересующем нас районе всё было распродано или цены были, мягко говоря, высоковаты.',
     goods: [
@@ -286,7 +281,6 @@ const offers: Offers = [
     ],
     host: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 3,
       isPro: true,
       name: 'Angelina'
     },
@@ -308,7 +302,7 @@ const offers: Offers = [
     type: 'room'
   },
   {
-    id: 9,
+    id: nanoid(),
     bedrooms: 1,
     city: {
       location: {
@@ -316,7 +310,7 @@ const offers: Offers = [
         longitude: 4.895168,
         zoom: 12
       },
-      name: 'Amsterdam'
+      name: CityName.Amsterdam
     },
     description: 'На последние выходные августам нам нужна была ночёвка в Дюссельдорфе, но мы тянули с бронированием отеля до последнего и поэтому в начале недели на букинге в интересующем нас районе всё было распродано или цены были, мягко говоря, высоковаты.',
     goods: [
@@ -324,7 +318,6 @@ const offers: Offers = [
     ],
     host: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 3,
       isPro: true,
       name: 'Angelina'
     },

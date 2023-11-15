@@ -1,13 +1,15 @@
 import 'leaflet/dist/leaflet.css';
 import { Icon, Marker, layerGroup } from 'leaflet';
-import { Offers, Offer } from '../../types/types';
+import { Offers, Offer as OfferType } from '../../types/types';
 import { useRef, useEffect } from 'react';
 import useMap from '../../hooks/use-map';
-import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
+
+const URL_MARKER_DEFAULT = '../markup/img/pin.svg';
+const URL_MARKER_CURRENT = '../markup/img/pin-active.svg';
 
 type MapProps = {
   offersByCity: Offers;
-  selectedPoint: Offer | undefined;
+  selectedPointId?: OfferType['id'] | null;
 }
 
 const defaultCustomIcon = new Icon({
@@ -22,10 +24,12 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map({ offersByCity, selectedPoint }: MapProps): JSX.Element {
+function Map({ offersByCity, selectedPointId }: MapProps): JSX.Element {
   const mapRef = useRef(null);
 
   const map = useMap({ mapRef, city: offersByCity[0].city });
+
+  const selectedPoint = offersByCity.find((offer) => offer.id === selectedPointId);
 
   useEffect(() => {
     if (map) {
@@ -64,11 +68,10 @@ function Map({ offersByCity, selectedPoint }: MapProps): JSX.Element {
   }, [map, offersByCity, selectedPoint]);
 
   return (
-    <div
-      style={{ height: '813px' }}
+    <section className='cities__map map'
       ref={mapRef}
     >
-    </div>
+    </section>
   );
 }
 
