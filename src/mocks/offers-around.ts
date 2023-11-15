@@ -1,10 +1,12 @@
 import { Offers } from '../types/types';
+import { nanoid } from 'nanoid';
+import { CityName } from '../const';
 
 const AVATAR_URL = 'https://i.pravatar.cc/128';
 
 const offersAroundHere: Offers = [
   {
-    id: 1,
+    id: nanoid(),
     bedrooms: 3,
     city: {
       location: {
@@ -12,7 +14,7 @@ const offersAroundHere: Offers = [
         longitude: 4.895168,
         zoom: 10
       },
-      name: 'Amsterdam'
+      name: CityName.Amsterdam
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: [
@@ -20,7 +22,6 @@ const offersAroundHere: Offers = [
     ],
     host: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 3,
       isPro: true,
       name: 'Angelina'
     },
@@ -42,7 +43,7 @@ const offersAroundHere: Offers = [
     type: 'room'
   },
   {
-    id: 2,
+    id: nanoid(),
     bedrooms: 3,
     city: {
       location: {
@@ -50,7 +51,7 @@ const offersAroundHere: Offers = [
         longitude: 4.895168,
         zoom: 10
       },
-      name: 'Amsterdam'
+      name: CityName.Amsterdam
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: [
@@ -58,7 +59,6 @@ const offersAroundHere: Offers = [
     ],
     host: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 3,
       isPro: true,
       name: 'Angelina'
     },
@@ -80,7 +80,7 @@ const offersAroundHere: Offers = [
     type: 'room'
   },
   {
-    id: 3,
+    id: nanoid(),
     bedrooms: 3,
     city: {
       location: {
@@ -88,7 +88,7 @@ const offersAroundHere: Offers = [
         longitude: 4.895168,
         zoom: 10
       },
-      name: 'Amsterdam'
+      name: CityName.Amsterdam
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: [
@@ -96,7 +96,6 @@ const offersAroundHere: Offers = [
     ],
     host: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 3,
       isPro: true,
       name: 'Angelina'
     },
