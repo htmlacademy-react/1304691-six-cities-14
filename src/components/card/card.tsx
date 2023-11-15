@@ -1,28 +1,35 @@
 import { Offer } from '../../types/types';
 import { Link } from 'react-router-dom';
-import { RATING_MAX } from '../../const';
 import { AppRoute } from '../../const';
+import { getRatingValue, capitalize } from '../../utils/utils';
 
 type CardProps = {
   offer: Offer;
-  onOfferMouseEnter: () => void;
-  onOfferMouseLeave: () => void;
+  block: string;
+  onListItemHover?: (itemId: Offer['id'] | null) => void;
 }
 
-function Card({ offer, onOfferMouseEnter, onOfferMouseLeave }: CardProps): JSX.Element {
+function Card({ offer, block, onListItemHover }: CardProps): JSX.Element {
 
   const { price, title, rating, previewImage, isPremium, isFavorite, type, id } = offer;
 
-  const ratingValue = (rating * 100) / RATING_MAX;
+  function handleOfferMouseEnter() {
+    onListItemHover?.(id);
+  }
+
+  function handleOfferMouseLeave() {
+    onListItemHover?.(null);
+  }
 
   return (
-    <article className="cities__card place-card" data-id={id} onMouseEnter={onOfferMouseEnter}
-      onMouseLeave={onOfferMouseLeave}
+    <article className={`${block}__card place-card`}
+      onMouseEnter={handleOfferMouseEnter}
+      onMouseLeave={handleOfferMouseLeave}
     >
       {isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ''}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${block}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${AppRoute.Offer}${id}`}>
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"></img>
+          <img className="place-card__image" src={previewImage} width="260" height="200" alt={title}></img>
         </Link>
       </div>
       <div className="place-card__info">
@@ -40,14 +47,14 @@ function Card({ offer, onOfferMouseEnter, onOfferMouseLeave }: CardProps): JSX.E
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${ratingValue}%` }}></span>
+            <span style={{ width: `${getRatingValue(rating)}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
           <Link to={`${AppRoute.Offer}${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{capitalize(type)}</p>
       </div>
     </article>
   );

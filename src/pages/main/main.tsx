@@ -4,17 +4,24 @@ import Logo from '../../components/logo/logo';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import Map from '../../components/map/map';
-import { Offers, City, Offer } from '../../types/types';
+import { Offers, Offer as OfferType } from '../../types/types';
+import { addPluralEnding } from '../../utils/utils';
+import { useState } from 'react';
+import { CityName } from '../../const';
 
 type MainPageProps = {
-  city: City;
-  selectedPoint: Offer | undefined;
-  onListItemHover: (listItemName: number) => void;
-  onListItemLeave: () => void;
   offersByCity: Offers;
 }
 
-function MainPage({ city, selectedPoint, onListItemHover, onListItemLeave, offersByCity }: MainPageProps): JSX.Element {
+function MainPage({ offersByCity }: MainPageProps): JSX.Element {
+
+  const [selectedPointId, setSelectedPointId] = useState<OfferType['id'] | null>(null);
+
+  const activeCity = CityName.Amsterdam;
+
+  function handleListItemHover(itemId: OfferType['id'] | null) {
+    setSelectedPointId(itemId);
+  }
 
   return (
     <div className="page page--gray page--main">
@@ -25,7 +32,7 @@ function MainPage({ city, selectedPoint, onListItemHover, onListItemLeave, offer
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Logo/>
+              <Logo />
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -90,7 +97,7 @@ function MainPage({ city, selectedPoint, onListItemHover, onListItemLeave, offer
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersByCity.length} places to stay in {city.name}</b>
+              <b className="places__found">{offersByCity.length} place{addPluralEnding(offersByCity.length)} to stay in {activeCity}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -106,14 +113,10 @@ function MainPage({ city, selectedPoint, onListItemHover, onListItemLeave, offer
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                <CardsList offers={offersByCity} onListItemHover={onListItemHover} onListItemLeave={onListItemLeave}></CardsList>
-              </div>
+              <CardsList offers={offersByCity} block={'cities'} onListItemHover={handleListItemHover}></CardsList>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map city={city} offers={offersByCity} selectedPoint={selectedPoint}></Map>
-              </section>
+              <Map offersByCity={offersByCity} selectedPointId={selectedPointId}></Map>
             </div>
           </div>
         </div >

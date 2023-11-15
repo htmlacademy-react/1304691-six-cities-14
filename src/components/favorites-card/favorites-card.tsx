@@ -1,6 +1,8 @@
 
 import { Offer } from '../../types/types';
-import { RATING_MAX } from '../../const';
+import { AppRoute, RATING_MAX } from '../../const';
+import { Link } from 'react-router-dom';
+import { capitalize } from '../../utils/utils';
 
 type FavoritesCardProps = {
   offer: Offer;
@@ -8,7 +10,7 @@ type FavoritesCardProps = {
 
 function FavoritesCard({ offer }: FavoritesCardProps): JSX.Element {
 
-  const { isPremium, price, title, rating, type, previewImage } = offer;
+  const { isPremium, price, title, rating, type, previewImage, id } = offer;
 
   const ratingValue = (rating * 100) / RATING_MAX;
 
@@ -16,9 +18,9 @@ function FavoritesCard({ offer }: FavoritesCardProps): JSX.Element {
     <article className="favorites__card place-card">
       {isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ''}
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={`${AppRoute.Offer}${id}`}>
           <img className="place-card__image" src={previewImage} width="150" height="110" alt="Place image" />
-        </a>
+        </Link>
       </div>
       <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
@@ -40,11 +42,11 @@ function FavoritesCard({ offer }: FavoritesCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`${AppRoute.Offer}${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{capitalize(type)}</p>
       </div>
-    </article>
+    </article >
   );
 }
 

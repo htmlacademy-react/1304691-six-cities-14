@@ -2,9 +2,7 @@ const CARD_COUNT: number = 5;
 
 const RATING_MAX = 5;
 
-const URL_MARKER_DEFAULT = '../markup/img/pin.svg';
-
-const URL_MARKER_CURRENT = '../markup/img/pin-active.svg';
+const REVIEW_DATE_FORMAT = 'MMMM YYYY';
 
 enum AppRoute {
   Root = '/',
@@ -20,11 +18,25 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+const MIN_COMMENT_LENGTH = 50;
+const MAX_COMMENT_LENGTH = 300;
+
+enum CityName {
+  Paris = 'Paris',
+  Cologne = 'Cologne',
+  Brussels = 'Brussels',
+  Amsterdam = 'Amsterdam',
+  Hamburg = 'Hamburg',
+  Dussledorf = 'Dusseldorf'
+}
+
 export {
   CARD_COUNT,
   AppRoute,
   AuthorizationStatus,
+  CityName,
   RATING_MAX,
-  URL_MARKER_DEFAULT,
-  URL_MARKER_CURRENT,
+  REVIEW_DATE_FORMAT,
+  MIN_COMMENT_LENGTH,
+  MAX_COMMENT_LENGTH
 };
