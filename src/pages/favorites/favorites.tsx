@@ -1,15 +1,10 @@
-import { Offers } from '../../types/types';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import Header from '../../components/header/header';
 
-type FavoritesProps = {
-  favoritesOffers: Offers;
-}
-
-function Favorites({ favoritesOffers }: FavoritesProps): JSX.Element {
+function Favorites(): JSX.Element {
 
   return (
     <div className="page">
@@ -21,7 +16,7 @@ function Favorites({ favoritesOffers }: FavoritesProps): JSX.Element {
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
-            <FavoritesList favoritesOffers={favoritesOffers}></FavoritesList>
+            <FavoritesList></FavoritesList>
           </section>
         </div>
       </main>

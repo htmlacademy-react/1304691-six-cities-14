@@ -19,8 +19,6 @@ type AppScreenProps = {
 
 function App({ offers, reviews, offersAroundHere }: AppScreenProps): JSX.Element {
 
-  const favoritesOffers = offers.filter((offer) => offer.isFavorite === true);
-
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -39,7 +37,7 @@ function App({ offers, reviews, offersAroundHere }: AppScreenProps): JSX.Element
                 authorizationStatus={AuthorizationStatus.Auth}
                 redirectTo={AppRoute.Login}
               >
-                <Favorites favoritesOffers={favoritesOffers} />
+                <Favorites />
               </PrivateRoute>
             }
           />

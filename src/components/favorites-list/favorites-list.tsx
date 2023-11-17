@@ -1,11 +1,14 @@
-import { Offers } from '../../types/types';
 import FavoritesCard from '../favorites-card/favorites-card';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { fetchFavoriteOffers } from '../../store/actions';
 
-type FavoritesListProps = {
-  favoritesOffers: Offers;
-}
+function FavoritesList(): JSX.Element {
 
-function FavoritesList({ favoritesOffers }: FavoritesListProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  dispatch(fetchFavoriteOffers());
+
+  const favoritesOffers = useAppSelector((state) => state.favorites);
+
   const CitiesList = [...new Set(favoritesOffers.map((offer) => offer.city.name))].sort();
 
   return (

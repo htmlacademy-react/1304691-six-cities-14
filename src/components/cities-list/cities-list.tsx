@@ -10,7 +10,7 @@ function CitiesList(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  function onCitiesItemClick(city: City) {
+  function handleCitiesItemClick(city: City) {
     dispatch(fetchOffers());
     dispatch(setActiveCity(city));
   }
@@ -24,7 +24,7 @@ function CitiesList(): JSX.Element {
               <Link
                 className={`locations__item-link tabs__item ${city.name === activeCity.name && 'tabs__item--active'}`}
                 to="/"
-                onClick={() => onCitiesItemClick(city)}
+                onClick={() => handleCitiesItemClick(city)}
               >
                 <span>{city.name}</span>
               </Link>
