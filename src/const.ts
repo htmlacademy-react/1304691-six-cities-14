@@ -1,5 +1,3 @@
-import { City } from './types/types';
-
 const CARD_COUNT: number = 5;
 
 const RATING_MAX = 5;
@@ -32,6 +30,8 @@ enum CityName {
   Dussledorf = 'Dusseldorf'
 }
 
+const CityNames = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'] as const;
+
 const CityMap = {
   Paris: {
     name: CityName.Paris,
@@ -49,6 +49,7 @@ export {
   AuthorizationStatus,
   CityName,
   CityMap,
+  CityNames,
   RATING_MAX,
   REVIEW_DATE_FORMAT,
   MIN_COMMENT_LENGTH,
