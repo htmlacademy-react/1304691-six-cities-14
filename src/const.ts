@@ -1,3 +1,5 @@
+import { City } from './types/types';
+
 const CARD_COUNT: number = 5;
 
 const RATING_MAX = 5;
@@ -30,11 +32,23 @@ enum CityName {
   Dussledorf = 'Dusseldorf'
 }
 
+const CityMap = {
+  Paris: {
+    name: CityName.Paris,
+    location: {
+      latitude: 48.85661,
+      longitude: 2.351499,
+      zoom: 13
+    }
+  }
+};
+
 export {
   CARD_COUNT,
   AppRoute,
   AuthorizationStatus,
   CityName,
+  CityMap,
   RATING_MAX,
   REVIEW_DATE_FORMAT,
   MIN_COMMENT_LENGTH,
