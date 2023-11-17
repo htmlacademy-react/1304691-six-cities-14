@@ -236,7 +236,7 @@ const offers: Offers = [
         longitude: 4.895168,
         zoom: 12
       },
-      name: CityName.Dussledorf
+      name: CityName.Dusseldorf
     },
     description: 'На последние выходные августам нам нужна была ночёвка в Дюссельдорфе, но мы тянули с бронированием отеля до последнего и поэтому в начале недели на букинге в интересующем нас районе всё было распродано или цены были, мягко говоря, высоковаты.',
     goods: [
@@ -273,7 +273,7 @@ const offers: Offers = [
         longitude: 4.895168,
         zoom: 12
       },
-      name: CityName.Dussledorf
+      name: CityName.Dusseldorf
     },
     description: 'На последние выходные августам нам нужна была ночёвка в Дюссельдорфе, но мы тянули с бронированием отеля до последнего и поэтому в начале недели на букинге в интересующем нас районе всё было распродано или цены были, мягко говоря, высоковаты.',
     goods: [
@@ -290,8 +290,8 @@ const offers: Offers = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
+      latitude: 51.225402,
+      longitude: 6.776314,
       zoom: 12
     },
     maxAdults: 4,

@@ -1,26 +1,25 @@
 import { CardsList } from '../../components/cards-list/cards-list';
 import { Helmet } from 'react-helmet-async';
 import Map from '../../components/map/map';
-import { Offers, Offer as OfferType } from '../../types/types';
+import { Offer as OfferType } from '../../types/types';
 import { addPluralEnding } from '../../utils/utils';
 import { useState } from 'react';
-import { CityName } from '../../const';
+import { useAppSelector } from '../../hooks';
 import CitiesList from '../../components/cities-list/cities-list';
 import Header from '../../components/header/header';
 
-type MainPageProps = {
-  offersByCity: Offers;
-}
-
-function MainPage({ offersByCity }: MainPageProps): JSX.Element {
+function MainPage(): JSX.Element {
 
   const [selectedPointId, setSelectedPointId] = useState<OfferType['id'] | null>(null);
 
-  const activeCity = CityName.Amsterdam;
+  const activeCity = useAppSelector((state) => state.activeCity);
+  const offers = useAppSelector((state) => state.offers);
 
   function handleListItemHover(itemId: OfferType['id'] | null) {
     setSelectedPointId(itemId);
   }
+
+  const currentOffers = offers.filter((offer) => offer.city.name === activeCity.name);
 
   return (
     <div className="page page--gray page--main">
@@ -35,7 +34,7 @@ function MainPage({ offersByCity }: MainPageProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersByCity.length} place{addPluralEnding(offersByCity.length)} to stay in {activeCity}</b>
+              <b className="places__found">{currentOffers.length} place{addPluralEnding(currentOffers.length)} to stay in {activeCity.name}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -51,10 +50,10 @@ function MainPage({ offersByCity }: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <CardsList offers={offersByCity} block={'cities'} onListItemHover={handleListItemHover}></CardsList>
+              <CardsList offers={currentOffers} block={'cities'} onListItemHover={handleListItemHover}></CardsList>
             </section>
             <div className="cities__right-section">
-              <Map offersByCity={offersByCity} selectedPointId={selectedPointId}></Map>
+              <Map offers={currentOffers} selectedPointId={selectedPointId}></Map>
             </div>
           </div>
         </div >

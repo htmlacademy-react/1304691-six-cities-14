@@ -3,7 +3,7 @@ import { offers } from '../mocks/offers';
 import { reviews } from '../mocks/reviews';
 import { Offers, Reviews, Offer, City } from '../types/types';
 import { dropOffer, fetchAroundOffers, fetchOffer, fetchOffers, fetchReviews, setActiveCity, fetchFavoriteOffers } from './actions';
-import { CityMap } from '../const';
+import { CityMapDefault } from '../const';
 
 const initialState: {
   offers: Offers;
@@ -18,7 +18,7 @@ const initialState: {
   reviews: [],
   offer: null,
   favorites: [],
-  activeCity: CityMap.Paris
+  activeCity: CityMapDefault
 };
 
 const reducer = createReducer(initialState, (bulder) => {

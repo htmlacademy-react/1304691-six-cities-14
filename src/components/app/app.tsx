@@ -9,7 +9,6 @@ import Offer from '../../pages/offer/offer';
 import { Offers } from '../../types/types';
 import { HelmetProvider } from 'react-helmet-async';
 import { Reviews } from '../../types/types';
-import { CityName } from '../../const';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 
 type AppScreenProps = {
@@ -22,8 +21,6 @@ function App({ offers, reviews, offersAroundHere }: AppScreenProps): JSX.Element
 
   const favoritesOffers = offers.filter((offer) => offer.isFavorite === true);
 
-  const offersByCity = offers.filter((offer) => offer.city.name === CityName.Amsterdam);
-
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -32,7 +29,7 @@ function App({ offers, reviews, offersAroundHere }: AppScreenProps): JSX.Element
           <Route
             path={AppRoute.Root}
             element={
-              <MainPage offersByCity={offersByCity} />
+              <MainPage />
             }
           />
           <Route
