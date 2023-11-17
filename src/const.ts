@@ -6,6 +6,8 @@ const RATING_MAX = 5;
 
 const REVIEW_DATE_FORMAT = 'MMMM YYYY';
 
+const MAX_AROUND_OFFERS_COUNT = 3;
+
 enum AppRoute {
   Root = '/',
   Login = '/login',
@@ -102,5 +104,6 @@ export {
   RATING_MAX,
   REVIEW_DATE_FORMAT,
   MIN_COMMENT_LENGTH,
-  MAX_COMMENT_LENGTH
+  MAX_COMMENT_LENGTH,
+  MAX_AROUND_OFFERS_COUNT
 };

@@ -2,22 +2,31 @@ import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
 import FormReview from '../../components/form-review/form-review';
 import ReviewsList from '../../components/reviews-list/reviews-list';
-import { Reviews, Offers, } from '../../types/types';
 import OfferMap from '../../components/map/offer-map';
 import { useParams, Navigate } from 'react-router-dom';
 import { CardsList } from '../../components/cards-list/cards-list';
 import { AppRoute } from '../../const';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { fetchOffer, fetchAroundOffers, fetchReviews } from '../../store/actions';
+import { MAX_AROUND_OFFERS_COUNT } from '../../const';
 
-type OfferProps = {
-  reviews: Reviews;
-  offers: Offers;
-  offersAroundHere: Offers;
-}
-
-function Offer({ reviews, offers, offersAroundHere }: OfferProps): JSX.Element {
+function Offer(): JSX.Element {
   const { id } = useParams();
 
-  const offer = offers.find((item) => item.id === id);
+  const dispatch = useAppDispatch();
+
+  if (id) {
+    dispatch(fetchOffer(id));
+    dispatch(fetchAroundOffers(id));
+    dispatch(fetchReviews(id));
+  }
+
+  const offer = useAppSelector((state) => state.offer);
+
+  const offersAround = useAppSelector((state) => state.aroundOffers);
+  const offersAroundRender = offersAround.slice(0, MAX_AROUND_OFFERS_COUNT);
+
+  const reviews = useAppSelector((state) => state.reviews);
 
   if (!offer) {
     return <Navigate to={AppRoute.NotFound} />;
@@ -156,12 +165,12 @@ function Offer({ reviews, offers, offersAroundHere }: OfferProps): JSX.Element {
               </section>
             </div>
           </div>
-          <OfferMap offer={offer} offersAroundHere={offersAroundHere}></OfferMap>
+          <OfferMap offer={offer} offers={offersAroundRender}></OfferMap>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <CardsList offers={offersAroundHere} block={'near-places'} isOtherPlaces></CardsList>
+            <CardsList offers={offersAroundRender} block={'near-places'} isOtherPlaces></CardsList>
           </section>
         </div>
       </main>
