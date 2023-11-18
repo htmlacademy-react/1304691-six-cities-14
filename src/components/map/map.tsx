@@ -3,12 +3,13 @@ import { Icon, Marker, layerGroup } from 'leaflet';
 import { Offers, Offer as OfferType } from '../../types/types';
 import { useRef, useEffect } from 'react';
 import useMap from '../../hooks/use-map';
+import { useAppSelector } from '../../hooks';
 
 const URL_MARKER_DEFAULT = '../markup/img/pin.svg';
 const URL_MARKER_CURRENT = '../markup/img/pin-active.svg';
 
 type MapProps = {
-  offersByCity: Offers;
+  offers: Offers;
   selectedPointId?: OfferType['id'] | null;
 }
 
@@ -24,12 +25,14 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map({ offersByCity, selectedPointId }: MapProps): JSX.Element {
+function Map({ offers, selectedPointId }: MapProps): JSX.Element {
+  const city = useAppSelector((state) => state.activeCity);
+
   const mapRef = useRef(null);
 
-  const map = useMap({ mapRef, city: offersByCity[0].city });
+  const map = useMap({ mapRef, city });
 
-  const selectedPoint = offersByCity.find((offer) => offer.id === selectedPointId);
+  const selectedPoint = offers.find((offer) => offer.id === selectedPointId);
 
   useEffect(() => {
     if (map) {
@@ -46,7 +49,7 @@ function Map({ offersByCity, selectedPointId }: MapProps): JSX.Element {
       }
 
       const markerLayer = layerGroup().addTo(map);
-      offersByCity.forEach((offer) => {
+      offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
           lng: offer.location.longitude
@@ -65,7 +68,7 @@ function Map({ offersByCity, selectedPointId }: MapProps): JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offersByCity, selectedPoint]);
+  }, [map, offers, selectedPoint]);
 
   return (
     <section className='cities__map map'

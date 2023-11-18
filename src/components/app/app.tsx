@@ -6,24 +6,10 @@ import Favorites from '../../pages/favorites/favorites';
 import Login from '../../pages/login/login';
 import PrivateRoute from '../private-route/private-route';
 import Offer from '../../pages/offer/offer';
-import { Offers } from '../../types/types';
 import { HelmetProvider } from 'react-helmet-async';
-import { Reviews } from '../../types/types';
-import { CityName } from '../../const';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 
-type AppScreenProps = {
-  offers: Offers;
-  reviews: Reviews;
-  offersAroundHere: Offers;
-}
-
-function App({ offers, reviews, offersAroundHere }: AppScreenProps): JSX.Element {
-
-  const favoritesOffers = offers.filter((offer) => offer.isFavorite === true);
-
-  const offersByCity = offers.filter((offer) => offer.city.name === CityName.Amsterdam);
-
+function App(): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -32,7 +18,7 @@ function App({ offers, reviews, offersAroundHere }: AppScreenProps): JSX.Element
           <Route
             path={AppRoute.Root}
             element={
-              <MainPage offersByCity={offersByCity} />
+              <MainPage />
             }
           />
           <Route
@@ -42,7 +28,7 @@ function App({ offers, reviews, offersAroundHere }: AppScreenProps): JSX.Element
                 authorizationStatus={AuthorizationStatus.Auth}
                 redirectTo={AppRoute.Login}
               >
-                <Favorites favoritesOffers={favoritesOffers} />
+                <Favorites />
               </PrivateRoute>
             }
           />
@@ -60,11 +46,7 @@ function App({ offers, reviews, offersAroundHere }: AppScreenProps): JSX.Element
           <Route
             path={`${AppRoute.Offer}:id`}
             element={
-              <Offer
-                reviews={reviews}
-                offers={offers}
-                offersAroundHere={offersAroundHere}
-              />
+              <Offer />
             }
           />
           <Route

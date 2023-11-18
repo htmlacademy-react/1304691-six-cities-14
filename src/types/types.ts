@@ -1,4 +1,5 @@
 import { CityName } from '../const';
+import { store } from '../store/index.js';
 
 type Host = {
   avatarUrl: string;
@@ -7,12 +8,12 @@ type Host = {
 }
 
 export type City = {
+  name: CityName;
   location: {
     latitude: number;
     longitude: number;
     zoom: number;
   };
-  name: CityName;
 }
 
 type Location = {
@@ -55,4 +56,8 @@ export type Offer = {
 }
 
 export type Offers = Offer[];
+
+export type State = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;
 

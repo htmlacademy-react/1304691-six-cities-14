@@ -1,26 +1,50 @@
-import Logo from '../../components/logo/logo';
+import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
 import FormReview from '../../components/form-review/form-review';
 import ReviewsList from '../../components/reviews-list/reviews-list';
-import { Reviews, Offers, } from '../../types/types';
 import OfferMap from '../../components/map/offer-map';
 import { useParams, Navigate } from 'react-router-dom';
 import { CardsList } from '../../components/cards-list/cards-list';
 import { AppRoute } from '../../const';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { fetchOffer, fetchAroundOffers, fetchReviews, dropOffer } from '../../store/actions';
+import { MAX_AROUND_OFFERS_COUNT } from '../../const';
+import { useEffect } from 'react';
 
-type OfferProps = {
-  reviews: Reviews;
-  offers: Offers;
-  offersAroundHere: Offers;
-}
-
-function Offer({ reviews, offers, offersAroundHere }: OfferProps): JSX.Element {
+function Offer(): JSX.Element | null {
   const { id } = useParams();
 
-  const offer = offers.find((item) => item.id === id);
+  const dispatch = useAppDispatch();
+
+  const offer = useAppSelector((state) => state.offer);
+  const loaded = useAppSelector((state) => state.loaded);
+
+  const offersAround = useAppSelector((state) => state.aroundOffers);
+  const offersAroundRender = offersAround.slice(0, MAX_AROUND_OFFERS_COUNT);
+
+  const reviews = useAppSelector((state) => state.reviews);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchOffer(id));
+      dispatch(fetchAroundOffers(id));
+      dispatch(fetchReviews(id));
+    }
+    return () => {
+      dispatch(dropOffer());
+    };
+  }, [dispatch, id]);
+
+  if (loaded && offer === null) {
+    return <Navigate to={AppRoute.NotFound} />;
+  }
+
+  if (!loaded) {
+    return null;
+  }
 
   if (!offer) {
-    return <Navigate to={AppRoute.NotFound} />;
+    return null;
   }
 
   return (
@@ -28,26 +52,7 @@ function Offer({ reviews, offers, offersAroundHere }: OfferProps): JSX.Element {
       <Helmet>
         <title>{'6 cities - Offer'}</title>
       </Helmet>
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo />
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__login">Sign in</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main className="page__main page__main--offer">
         <section className="offer">
@@ -175,12 +180,12 @@ function Offer({ reviews, offers, offersAroundHere }: OfferProps): JSX.Element {
               </section>
             </div>
           </div>
-          <OfferMap offer={offer} offersAroundHere={offersAroundHere}></OfferMap>
+          <OfferMap offer={offer} offers={offersAroundRender}></OfferMap>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <CardsList offers={offersAroundHere} block={'near-places'} isOtherPlaces></CardsList>
+            <CardsList offers={offersAroundRender} block={'near-places'} isOtherPlaces></CardsList>
           </section>
         </div>
       </main>
