@@ -12,12 +12,14 @@ const initialState: {
   offer: Offer | null;
   favorites: Offers;
   activeCity: City;
+  loaded: boolean;
 } = {
   offers,
   aroundOffers: [],
   reviews: [],
   offer: null,
   favorites: [],
+  loaded: false,
   activeCity: CityMapDefault
 };
 
@@ -28,6 +30,7 @@ const reducer = createReducer(initialState, (bulder) => {
     })
     .addCase(fetchOffer, (state, action) => {
       state.offer = offers.find((offer) => offer.id === action.payload) ?? null;
+      state.loaded = true;
     })
     .addCase(fetchAroundOffers, (state, action) => {
       state.aroundOffers = offers.filter((offer) => offer.id !== action.payload);
@@ -38,6 +41,7 @@ const reducer = createReducer(initialState, (bulder) => {
     .addCase(dropOffer, (state) => {
       state.offer = null;
       state.aroundOffers = [];
+      state.loaded = false;
     })
     .addCase(setActiveCity, (state, action) => {
       state.activeCity = action.payload;

@@ -7,29 +7,44 @@ import { useParams, Navigate } from 'react-router-dom';
 import { CardsList } from '../../components/cards-list/cards-list';
 import { AppRoute } from '../../const';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { fetchOffer, fetchAroundOffers, fetchReviews } from '../../store/actions';
+import { fetchOffer, fetchAroundOffers, fetchReviews, dropOffer } from '../../store/actions';
 import { MAX_AROUND_OFFERS_COUNT } from '../../const';
+import { useEffect } from 'react';
 
-function Offer(): JSX.Element {
+function Offer(): JSX.Element | null {
   const { id } = useParams();
 
   const dispatch = useAppDispatch();
 
-  if (id) {
-    dispatch(fetchOffer(id));
-    dispatch(fetchAroundOffers(id));
-    dispatch(fetchReviews(id));
-  }
-
   const offer = useAppSelector((state) => state.offer);
+  const loaded = useAppSelector((state) => state.loaded);
 
   const offersAround = useAppSelector((state) => state.aroundOffers);
   const offersAroundRender = offersAround.slice(0, MAX_AROUND_OFFERS_COUNT);
 
   const reviews = useAppSelector((state) => state.reviews);
 
-  if (!offer) {
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchOffer(id));
+      dispatch(fetchAroundOffers(id));
+      dispatch(fetchReviews(id));
+    }
+    return () => {
+      dispatch(dropOffer());
+    };
+  }, [dispatch, id]);
+
+  if (loaded && offer === null) {
     return <Navigate to={AppRoute.NotFound} />;
+  }
+
+  if (!loaded) {
+    return null;
+  }
+
+  if (!offer) {
+    return null;
   }
 
   return (
