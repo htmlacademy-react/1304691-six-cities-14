@@ -8,7 +8,7 @@ import { CardsList } from '../../components/cards-list/cards-list';
 import { AppRoute } from '../../const';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { fetchOffer, fetchAroundOffers, fetchReviews, dropOffer } from '../../store/actions';
-import { MAX_AROUND_OFFERS_COUNT } from '../../const';
+import { MAX_AROUND_OFFERS_COUNT, MAX_REVIEWS_COUNT } from '../../const';
 import { useEffect } from 'react';
 
 function Offer(): JSX.Element | null {
@@ -23,6 +23,7 @@ function Offer(): JSX.Element | null {
   const offersAroundRender = offersAround.slice(0, MAX_AROUND_OFFERS_COUNT);
 
   const reviews = useAppSelector((state) => state.reviews);
+  const reviewsRender = reviews.slice(0, MAX_REVIEWS_COUNT);
 
   useEffect(() => {
     if (id) {
@@ -175,7 +176,7 @@ function Offer(): JSX.Element | null {
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                <ReviewsList reviews={reviews}></ReviewsList>
+                <ReviewsList reviews={reviewsRender}></ReviewsList>
                 <FormReview></FormReview>
               </section>
             </div>
