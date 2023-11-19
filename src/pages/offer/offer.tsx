@@ -2,7 +2,7 @@ import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
 import FormReview from '../../components/form-review/form-review';
 import ReviewsList from '../../components/reviews-list/reviews-list';
-import OfferMap from '../../components/map/offer-map';
+import Map from '../../components/map/map';
 import { useParams, Navigate } from 'react-router-dom';
 import { CardsList } from '../../components/cards-list/cards-list';
 import { AppRoute } from '../../const';
@@ -180,7 +180,7 @@ function Offer(): JSX.Element | null {
               </section>
             </div>
           </div>
-          <OfferMap offer={offer} offers={offersAroundRender}></OfferMap>
+          <Map offers={offersAroundRender} block={'offer'} location={offer.location} offer={offer}></Map>
         </section>
         <div className="container">
           <section className="near-places places">

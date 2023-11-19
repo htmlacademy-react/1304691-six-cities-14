@@ -53,7 +53,7 @@ function MainPage(): JSX.Element {
               <CardsList offers={currentOffers} block={'cities'} onListItemHover={handleListItemHover}></CardsList>
             </section>
             <div className="cities__right-section">
-              <Map offers={currentOffers} selectedPointId={selectedPointId}></Map>
+              <Map block={'cities'} offers={currentOffers} location={activeCity.location} selectedPointId={selectedPointId}></Map>
             </div>
           </div>
         </div >
