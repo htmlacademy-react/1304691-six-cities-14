@@ -95,11 +95,19 @@ const CitiesMap: City[] = [
   }
 ];
 
+const SortMap = {
+  Popular: 'Popular',
+  LowToHigh: 'Price: low to high',
+  HightToLow: 'Price: high to low',
+  TopRated: 'Top rated first'
+} as const;
+
 export {
   CARD_COUNT,
   AppRoute,
   AuthorizationStatus,
   CityName,
+  SortMap,
   CitiesMap,
   CityMapDefault,
   RATING_MAX,
