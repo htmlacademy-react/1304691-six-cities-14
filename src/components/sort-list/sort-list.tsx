@@ -1,10 +1,11 @@
 import { useState, KeyboardEvent } from 'react';
 import classNames from 'classnames';
 import { SortMap } from '../../const';
+import { SortItem } from '../../types/types';
 
 type SortListProps = {
-  activeSortItem: string;
-  onSortItems: (label: string) => void;
+  activeSortItem: SortItem;
+  onSortItems: (type: SortItem) => void;
 }
 
 function SortList({ onSortItems, activeSortItem }: SortListProps): JSX.Element {
@@ -22,8 +23,8 @@ function SortList({ onSortItems, activeSortItem }: SortListProps): JSX.Element {
     }
   }
 
-  function handleSortItemClick(label: string) {
-    onSortItems(label);
+  function handleSortItemClick(type: SortItem) {
+    onSortItems(type);
     setOpenSort(false);
   }
 
@@ -31,7 +32,7 @@ function SortList({ onSortItems, activeSortItem }: SortListProps): JSX.Element {
     <form className="places__sorting" action="#" method="get" onKeyDown={handleKeydown}>
       <span className="places__sorting-caption">Sort by</span>
       <span className="places__sorting-type" tabIndex={0} onClick={handleSortFormClick}>
-        {activeSortItem}
+        {SortMap[activeSortItem]}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
@@ -49,7 +50,7 @@ function SortList({ onSortItems, activeSortItem }: SortListProps): JSX.Element {
               { 'places__option--active': activeSortItem === type }
             )}
             tabIndex={0}
-            onClick={() => handleSortItemClick(label)}
+            onClick={() => handleSortItemClick(type as SortItem)}
           >
             {label}
           </li>

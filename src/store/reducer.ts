@@ -1,18 +1,20 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { offers } from '../mocks/offers';
 import { reviews } from '../mocks/reviews';
-import { Offers, Reviews, Offer, City } from '../types/types';
-import { dropOffer, fetchAroundOffers, fetchOffer, fetchOffers, fetchReviews, setActiveCity, fetchFavoriteOffers } from './actions';
+import { Offers, Reviews, Offer, City, OfferPreview } from '../types/types';
+import { dropOffer, fetchAroundOffers, fetchOffer, fetchOffers, fetchReviews, setActiveCity, fetchFavoriteOffers, setActiveSortItem } from './actions';
 import { CityMapDefault } from '../const';
+import { SortItem } from '../types/types';
 
 const initialState: {
   offers: Offers;
-  aroundOffers: Offers;
+  aroundOffers: OfferPreview[];
   reviews: Reviews;
   offer: Offer | null;
-  favorites: Offers;
+  favorites: OfferPreview[];
   activeCity: City;
   loaded: boolean;
+  activeSortItem: SortItem;
 } = {
   offers,
   aroundOffers: [],
@@ -20,7 +22,8 @@ const initialState: {
   offer: null,
   favorites: [],
   loaded: false,
-  activeCity: CityMapDefault
+  activeCity: CityMapDefault,
+  activeSortItem: 'Popular'
 };
 
 const reducer = createReducer(initialState, (bulder) => {
@@ -48,6 +51,9 @@ const reducer = createReducer(initialState, (bulder) => {
     })
     .addCase(fetchFavoriteOffers, (state) => {
       state.favorites = offers.filter((offer) => offer.isFavorite);
+    })
+    .addCase(setActiveSortItem, (state, action) => {
+      state.activeSortItem = action.payload;
     });
 });
 

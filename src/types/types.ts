@@ -1,5 +1,7 @@
-import { CityName } from '../const';
+import { CityName, SortMap } from '../const';
 import { store } from '../store/index.js';
+
+export type SortItem = keyof typeof SortMap;
 
 type Host = {
   avatarUrl: string;

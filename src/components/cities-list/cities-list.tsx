@@ -1,8 +1,7 @@
 import { CitiesMap } from '../../const';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
-import { fetchOffers, setActiveCity } from '../../store/actions';
-import { useAppDispatch } from '../../hooks';
+import { setActiveCity } from '../../store/actions';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { City } from '../../types/types';
 import classNames from 'classnames';
 
@@ -12,7 +11,6 @@ function CitiesList(): JSX.Element {
   const dispatch = useAppDispatch();
 
   function handleCitiesItemClick(city: City) {
-    dispatch(fetchOffers());
     dispatch(setActiveCity(city));
   }
 

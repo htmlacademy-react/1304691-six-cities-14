@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { City, Offer } from '../types/types';
+import { City, Offer, SortItem } from '../types/types';
 
 export const fetchOffers = createAction('offers/fetch');
 
@@ -14,3 +14,5 @@ export const dropOffer = createAction('offer/dropOffer');
 export const setActiveCity = createAction<City>('offers/setActiveCity');
 
 export const fetchFavoriteOffers = createAction('favorites/fetch');
+
+export const setActiveSortItem = createAction<SortItem>('offers/setActiveSortItem');
