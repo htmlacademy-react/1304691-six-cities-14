@@ -1,12 +1,12 @@
-import { Offer } from '../../types/types';
+import { OfferPreview } from '../../types/types';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { getRatingValue, capitalize } from '../../utils/utils';
 
 type CardProps = {
-  offer: Offer;
+  offer: OfferPreview;
   block: string;
-  onListItemHover?: (itemId: Offer['id'] | null) => void;
+  onListItemHover?: (itemId: OfferPreview['id'] | null) => void;
 }
 
 function Card({ offer, block, onListItemHover }: CardProps): JSX.Element {

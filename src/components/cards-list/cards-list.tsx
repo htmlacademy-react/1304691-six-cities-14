@@ -1,8 +1,8 @@
 import Card from '../card/card';
-import { Offers, Offer } from '../../types/types';
+import { Offer, OfferPreview } from '../../types/types';
 
 type CardsListProps = {
-  offers: Offers;
+  offers: OfferPreview[];
   isOtherPlaces?: boolean;
   block: string;
   onListItemHover?: (itemId: Offer['id'] | null) => void;

@@ -9,14 +9,10 @@ type Host = {
 
 export type City = {
   name: CityName;
-  location: {
-    latitude: number;
-    longitude: number;
-    zoom: number;
-  };
+  location: Location;
 }
 
-type Location = {
+export type Location = {
   latitude: number;
   longitude: number;
   zoom: number;
@@ -36,23 +32,26 @@ export type Review = {
 
 export type Reviews = Review[];
 
-export type Offer = {
-  bedrooms: number;
+export type OfferPreview = {
   city: City;
-  description: string;
-  goods: string[];
-  host: Host;
   id: string;
-  images: string[];
   isFavorite: boolean;
   isPremium: boolean;
   location: Location;
-  maxAdults: number;
   previewImage: string;
   price: number;
   rating: number;
   title: string;
   type: string;
+}
+
+export type Offer = OfferPreview & {
+  bedrooms: number;
+  description: string;
+  goods: string[];
+  host: Host;
+  images: string[];
+  maxAdults: number;
 }
 
 export type Offers = Offer[];

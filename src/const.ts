@@ -7,6 +7,7 @@ const RATING_MAX = 5;
 const REVIEW_DATE_FORMAT = 'MMMM YYYY';
 
 const MAX_AROUND_OFFERS_COUNT = 3;
+const MAX_REVIEWS_COUNT = 10;
 
 enum AppRoute {
   Root = '/',
@@ -94,16 +95,25 @@ const CitiesMap: City[] = [
   }
 ];
 
+const SortMap = {
+  Popular: 'Popular',
+  LowToHigh: 'Price: low to high',
+  HightToLow: 'Price: high to low',
+  TopRated: 'Top rated first'
+} as const;
+
 export {
   CARD_COUNT,
   AppRoute,
   AuthorizationStatus,
   CityName,
+  SortMap,
   CitiesMap,
   CityMapDefault,
   RATING_MAX,
   REVIEW_DATE_FORMAT,
   MIN_COMMENT_LENGTH,
   MAX_COMMENT_LENGTH,
+  MAX_REVIEWS_COUNT,
   MAX_AROUND_OFFERS_COUNT
 };

@@ -4,6 +4,7 @@ import { useAppSelector } from '../../hooks';
 import { fetchOffers, setActiveCity } from '../../store/actions';
 import { useAppDispatch } from '../../hooks';
 import { City } from '../../types/types';
+import classNames from 'classnames';
 
 function CitiesList(): JSX.Element {
   const activeCity = useAppSelector((state) => state.activeCity);
@@ -22,7 +23,10 @@ function CitiesList(): JSX.Element {
           {CitiesMap.map((city) => (
             <li key={city.name} className="locations__item">
               <Link
-                className={`locations__item-link tabs__item ${city.name === activeCity.name && 'tabs__item--active'}`}
+                className={classNames(
+                  'locations__item-link tabs__item',
+                  { 'tabs__item--active': city.name === activeCity.name }
+                )}
                 to="/"
                 onClick={() => handleCitiesItemClick(city)}
               >

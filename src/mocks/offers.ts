@@ -38,7 +38,7 @@ const offers: Offers = [
     maxAdults: 4,
     previewImage: 'img/apartment-01.jpg',
     price: 80,
-    rating: 4.8,
+    rating: 2.8,
     title: 'Beautiful & luxurious studio at great location',
     type: 'room'
   },
@@ -74,8 +74,8 @@ const offers: Offers = [
     },
     maxAdults: 4,
     previewImage: 'img/apartment-01.jpg',
-    price: 80,
-    rating: 4.8,
+    price: 40,
+    rating: 2,
     title: 'Beautiful & luxurious studio at great location',
     type: 'room'
   },
@@ -112,7 +112,7 @@ const offers: Offers = [
     maxAdults: 4,
     previewImage: 'img/apartment-01.jpg',
     price: 80,
-    rating: 4.8,
+    rating: 4.5,
     title: 'Beautiful & luxurious studio at great location',
     type: 'room'
   },
@@ -148,8 +148,8 @@ const offers: Offers = [
     },
     maxAdults: 4,
     previewImage: 'img/apartment-01.jpg',
-    price: 80,
-    rating: 4.8,
+    price: 100,
+    rating: 3,
     title: 'Beautiful & luxurious studio at great location',
     type: 'room'
   },
