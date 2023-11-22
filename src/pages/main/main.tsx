@@ -10,7 +10,8 @@ import Header from '../../components/header/header';
 import SortList from '../../components/sort-list/sort-list';
 import { setActiveSortItem } from '../../store/actions';
 import { useAppDispatch } from '../../hooks';
-import { sortOffers } from '../../store/selectors';
+import { sortOffers, getOffers, getSortItem, getActiveCity } from '../../store/selectors';
+import NoCards from '../../components/no-cards/no-cards';
 
 function MainPage(): JSX.Element {
 
@@ -18,11 +19,11 @@ function MainPage(): JSX.Element {
 
   const [selectedPointId, setSelectedPointId] = useState<OfferType['id'] | null>(null);
 
-  const activeSortItem = useAppSelector((state) => state.activeSortItem);
+  const activeSortItem = useAppSelector(getSortItem);
 
-  const activeCity = useAppSelector((state) => state.activeCity);
+  const activeCity = useAppSelector(getActiveCity);
 
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(getOffers);
 
   const filteredOffers = offers.filter((offer) => offer.city.name === activeCity.name);
 
@@ -43,21 +44,22 @@ function MainPage(): JSX.Element {
         <title>{'6 cities'}</title>
       </Helmet>
       <Header />
-      <main className="page__main page__main--index">
+      <main className={`page__main page__main--index ${currentOffers.length === 0 && 'page__main--index-empty'}`}>
         <h1 className="visually-hidden">Cities</h1>
         <CitiesList />
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{currentOffers.length} place{addPluralEnding(currentOffers.length)} to stay in {activeCity.name}</b>
-              <SortList activeSortItem={activeSortItem} onSortItems={handleSortItems} />
-              <CardsList offers={currentOffers} block={'cities'} onListItemHover={handleListItemHover}></CardsList>
-            </section>
-            <div className="cities__right-section">
-              <Map block={'cities'} offers={currentOffers} location={activeCity.location} selectedPointId={selectedPointId}></Map>
-            </div>
-          </div>
+          {currentOffers.length === 0 ? <NoCards /> :
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">{currentOffers.length} place{addPluralEnding(currentOffers.length)} to stay in {activeCity.name}</b>
+                <SortList activeSortItem={activeSortItem} onSortItems={handleSortItems} />
+                <CardsList offers={currentOffers} block={'cities'} onListItemHover={handleListItemHover}></CardsList>
+              </section>
+              <div className="cities__right-section">
+                <Map block={'cities'} offers={currentOffers} location={activeCity.location} selectedPointId={selectedPointId}></Map>
+              </div>
+            </div>}
         </div >
       </main >
     </div >
