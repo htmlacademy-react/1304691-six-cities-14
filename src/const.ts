@@ -102,11 +102,20 @@ const SortMap = {
   TopRated: 'Top rated first'
 } as const;
 
+enum APIRoute {
+  Offers = '/offers',
+  Favorite = '/favorite',
+  Comments = '/comments',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 export {
   CARD_COUNT,
   AppRoute,
   AuthorizationStatus,
   CityName,
+  APIRoute,
   SortMap,
   CitiesMap,
   CityMapDefault,
