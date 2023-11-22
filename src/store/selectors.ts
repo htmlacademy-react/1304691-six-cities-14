@@ -1,28 +1,24 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { State } from '../types/types';
+import { SortItem, Offers } from '../types/types';
 import { sorting } from '../utils/utils';
 
-const getActiveCity = (state: State) => state.activeCity;
+const getOffers = (state: { offers: Offers; activeSortItem: SortItem }) => state.offers;
 
-const getOffers = (state: State) => state.offers;
-
-const getSortItem = (state: State) => state.activeSortItem;
+const getSortItem = (state: { offers: Offers; activeSortItem: SortItem }) => state.activeSortItem;
 
 export const sortOffers = createSelector(
-  [getOffers, getSortItem, getActiveCity],
-  (offers, activeSortItem, activeCity) => {
-
-    const currentOffers = offers.filter((offer) => offer.city.name === activeCity.name);
+  [getOffers, getSortItem],
+  (offers, activeSortItem) => {
 
     switch (activeSortItem) {
       case 'Popular':
-        return sorting.Popular(currentOffers);
+        return sorting.Popular(offers);
       case 'HightToLow':
-        return sorting.HighToLow(currentOffers);
+        return sorting.HighToLow(offers);
       case 'LowToHigh':
-        return sorting.LowToHigh(currentOffers);
+        return sorting.LowToHigh(offers);
       case 'TopRated':
-        return sorting.TopRated(currentOffers);
+        return sorting.TopRated(offers);
     }
   },
 );

@@ -22,7 +22,11 @@ function MainPage(): JSX.Element {
 
   const activeCity = useAppSelector((state) => state.activeCity);
 
-  const currentOffers = useAppSelector(sortOffers);
+  const offers = useAppSelector((state) => state.offers);
+
+  const filteredOffers = offers.filter((offer) => offer.city.name === activeCity.name);
+
+  const currentOffers = useAppSelector(() => sortOffers({ offers: filteredOffers, activeSortItem }));
 
   function handleListItemHover(itemId: OfferType['id'] | null) {
     setSelectedPointId(itemId);
