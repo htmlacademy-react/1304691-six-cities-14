@@ -23,6 +23,18 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, apiActionConf
   },
 );
 
+export const checkAuthAction = createAsyncThunk<void, undefined, apiActionConfig>(
+  'user/checkAuth',
+  async (_arg, { dispatch, extra: api }) => {
+    try {
+      await api.get(APIRoute.Login);
+      dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    } catch {
+      dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    }
+  },
+);
+
 export const fetchReviewsAction = createAsyncThunk<void, undefined, apiActionConfig>(
   'data/fetchReviews',
   async (_arg, { dispatch, extra: api }) => {
