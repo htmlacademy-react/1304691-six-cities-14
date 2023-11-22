@@ -7,7 +7,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import { CardsList } from '../../components/cards-list/cards-list';
 import { AppRoute } from '../../const';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { fetchOffer, fetchAroundOffers, fetchReviews, dropOffer } from '../../store/actions';
+import { dropOffer } from '../../store/actions';
 import { MAX_AROUND_OFFERS_COUNT, MAX_REVIEWS_COUNT } from '../../const';
 import { useEffect } from 'react';
 
@@ -27,9 +27,9 @@ function Offer(): JSX.Element | null {
 
   useEffect(() => {
     if (id) {
-      dispatch(fetchOffer(id));
-      dispatch(fetchAroundOffers(id));
-      dispatch(fetchReviews(id));
+      //dispatch(fetchOffer(id));
+      //dispatch(fetchAroundOffers(id));
+      //dispatch(fetchReviews(id));
     }
     return () => {
       dispatch(dropOffer());

@@ -1,42 +1,47 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { offers } from '../mocks/offers';
-import { reviews } from '../mocks/reviews';
-import { Offers, Reviews, Offer, City } from '../types/types';
-import { dropOffer, fetchAroundOffers, fetchOffer, fetchOffers, fetchReviews, setActiveCity, fetchFavoriteOffers } from './actions';
-import { CityMapDefault } from '../const';
+import { Reviews, Offer, City, OfferPreview } from '../types/types';
+import { dropOffer, fetchAroundOffers, fetchOffer, fetchOffers, fetchReviews, setActiveCity, fetchFavoriteOffers, setActiveSortItem, requireAuthorization, setOffersDataLoadingStatus } from './actions';
+import { CityMapDefault, AuthorizationStatus } from '../const';
+import { SortItem } from '../types/types';
 
 const initialState: {
-  offers: Offers;
-  aroundOffers: Offers;
+  offers: OfferPreview[];
+  aroundOffers: OfferPreview[];
   reviews: Reviews;
   offer: Offer | null;
-  favorites: Offers;
+  favorites: OfferPreview[];
   activeCity: City;
   loaded: boolean;
+  activeSortItem: SortItem;
+  authorizationStatus: AuthorizationStatus;
+  isOffersDataLoading: boolean;
 } = {
-  offers,
+  offers: [],
   aroundOffers: [],
   reviews: [],
   offer: null,
   favorites: [],
   loaded: false,
-  activeCity: CityMapDefault
+  activeCity: CityMapDefault,
+  activeSortItem: 'Popular',
+  authorizationStatus: AuthorizationStatus.Unknown,
+  isOffersDataLoading: false
 };
 
 const reducer = createReducer(initialState, (bulder) => {
   bulder
-    .addCase(fetchOffers, (state) => {
-      state.offers = offers;
+    .addCase(fetchOffers, (state, action) => {
+      state.offers = action.payload;
     })
     .addCase(fetchOffer, (state, action) => {
-      state.offer = offers.find((offer) => offer.id === action.payload) ?? null;
+      state.offer = action.payload;
       state.loaded = true;
     })
     .addCase(fetchAroundOffers, (state, action) => {
-      state.aroundOffers = offers.filter((offer) => offer.id !== action.payload);
+      state.aroundOffers = action.payload;
     })
-    .addCase(fetchReviews, (state) => {
-      state.reviews = reviews;
+    .addCase(fetchReviews, (state, action) => {
+      state.reviews = action.payload;
     })
     .addCase(dropOffer, (state) => {
       state.offer = null;
@@ -46,9 +51,19 @@ const reducer = createReducer(initialState, (bulder) => {
     .addCase(setActiveCity, (state, action) => {
       state.activeCity = action.payload;
     })
-    .addCase(fetchFavoriteOffers, (state) => {
-      state.favorites = offers.filter((offer) => offer.isFavorite);
+    .addCase(fetchFavoriteOffers, (state, action) => {
+      state.favorites = action.payload;
+    })
+    .addCase(setActiveSortItem, (state, action) => {
+      state.activeSortItem = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setOffersDataLoadingStatus, (state, action) => {
+      state.isOffersDataLoading = action.payload;
     });
+
 });
 
 export { reducer };

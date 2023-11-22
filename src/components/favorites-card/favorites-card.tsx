@@ -1,11 +1,11 @@
 
-import { Offer } from '../../types/types';
+import { OfferPreview } from '../../types/types';
 import { AppRoute, RATING_MAX } from '../../const';
 import { Link } from 'react-router-dom';
 import { capitalize } from '../../utils/utils';
 
 type FavoritesCardProps = {
-  offer: Offer;
+  offer: OfferPreview;
 }
 
 function FavoritesCard({ offer }: FavoritesCardProps): JSX.Element {

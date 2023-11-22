@@ -56,40 +56,40 @@ const CitiesMap: City[] = [
   {
     name: CityName.Cologne,
     location: {
-      latitude: 48.85661,
-      longitude: 2.351499,
+      latitude: 50.938361,
+      longitude: 6.959974,
       zoom: 13
     }
   },
   {
     name: CityName.Brussels,
     location: {
-      latitude: 48.85661,
-      longitude: 2.351499,
+      latitude: 50.846557,
+      longitude: 4.351697,
       zoom: 13
     }
   },
   {
     name: CityName.Amsterdam,
     location: {
-      latitude: 48.85661,
-      longitude: 2.351499,
+      latitude: 52.37454,
+      longitude: 4.897976,
       zoom: 13
     }
   },
   {
     name: CityName.Hamburg,
     location: {
-      latitude: 48.85661,
-      longitude: 2.351499,
+      latitude: 53.550341,
+      longitude: 10.000654,
       zoom: 13
     }
   },
   {
     name: CityName.Dusseldorf,
     location: {
-      latitude: 48.85661,
-      longitude: 2.351499,
+      latitude: 51.225402,
+      longitude: 6.776314,
       zoom: 13
     }
   }
@@ -102,11 +102,20 @@ const SortMap = {
   TopRated: 'Top rated first'
 } as const;
 
+enum APIRoute {
+  Offers = '/offers',
+  Favorite = '/favorite',
+  Comments = '/comments',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 export {
   CARD_COUNT,
   AppRoute,
   AuthorizationStatus,
   CityName,
+  APIRoute,
   SortMap,
   CitiesMap,
   CityMapDefault,

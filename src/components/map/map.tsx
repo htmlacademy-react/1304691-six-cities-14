@@ -1,6 +1,6 @@
 import 'leaflet/dist/leaflet.css';
 import { Icon, Marker, layerGroup } from 'leaflet';
-import { Offers, Offer as OfferType } from '../../types/types';
+import { OfferPreview, Offer as OfferType } from '../../types/types';
 import { useRef, useEffect } from 'react';
 import useMap from '../../hooks/use-map';
 import { Location } from '../../types/types';
@@ -10,7 +10,7 @@ const URL_MARKER_CURRENT = '../markup/img/pin-active.svg';
 
 type MapProps = {
   block: string;
-  offers: Offers;
+  offers: OfferPreview[];
   location: Location;
   offer?: OfferType | null;
   selectedPointId?: OfferType['id'] | null;
@@ -37,10 +37,10 @@ function Map({ block, offers, location, offer, selectedPointId }: MapProps): JSX
   const selectedPoint = offers.find((item) => item.id === selectedPointId);
 
   useEffect(() => {
-    if (map && offers.length !== 0) {
-      map.setView([offers[0].location.latitude, offers[0].location.longitude], offers[0].location.zoom);
+    if (map) {
+      map.setView([location.latitude, location.longitude], location.zoom);
     }
-  }, [map, offers]);
+  }, [map, location]);
 
   useEffect(() => {
     if (map) {
