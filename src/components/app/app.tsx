@@ -9,7 +9,7 @@ import Offer from '../../pages/offer/offer';
 import { HelmetProvider } from 'react-helmet-async';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import { useAppSelector } from '../../hooks';
-import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import LoadingScreen from '../../pages/loading/loading';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
