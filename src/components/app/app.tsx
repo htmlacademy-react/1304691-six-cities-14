@@ -36,7 +36,7 @@ function App(): JSX.Element {
             path={AppRoute.Favorites}
             element={
               <PrivateRoute
-                authorizationStatus={AuthorizationStatus.Auth}
+                authorizationStatus={authorizationStatus}
                 redirectTo={AppRoute.Login}
               >
                 <Favorites />
@@ -45,14 +45,7 @@ function App(): JSX.Element {
           />
           <Route
             path={AppRoute.Login}
-            element={
-              <PrivateRoute
-                authorizationStatus={AuthorizationStatus.Auth}
-                redirectTo={AppRoute.Root}
-              >
-                <Login />
-              </PrivateRoute>
-            }
+            element={<Login />}
           />
           <Route
             path={`${AppRoute.Offer}:id`}

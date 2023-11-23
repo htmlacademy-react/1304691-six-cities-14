@@ -110,6 +110,8 @@ enum APIRoute {
   Logout = '/logout',
 }
 
+const TIMEOUT_SHOW_ERROR = 2000;
+
 export {
   CARD_COUNT,
   AppRoute,
@@ -124,5 +126,6 @@ export {
   MIN_COMMENT_LENGTH,
   MAX_COMMENT_LENGTH,
   MAX_REVIEWS_COUNT,
-  MAX_AROUND_OFFERS_COUNT
+  MAX_AROUND_OFFERS_COUNT,
+  TIMEOUT_SHOW_ERROR
 };

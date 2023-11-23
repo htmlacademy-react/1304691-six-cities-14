@@ -1,8 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { Reviews, Offer, City, OfferPreview } from '../types/types';
-import { dropOffer, fetchAroundOffers, fetchOffer, fetchOffers, fetchReviews, setActiveCity, fetchFavoriteOffers, setActiveSortItem, requireAuthorization, setOffersDataLoadingStatus } from './actions';
+import { dropOffer, fetchAroundOffers, fetchOffer, fetchOffers, fetchReviews, setActiveCity, fetchFavoriteOffers, setActiveSortItem, requireAuthorization, setOffersDataLoadingStatus, setError } from './actions';
 import { CityMapDefault, AuthorizationStatus } from '../const';
-import { SortItem } from '../types/types';
+import { SortItem, Error } from '../types/types';
 
 const initialState: {
   offers: OfferPreview[];
@@ -15,6 +15,7 @@ const initialState: {
   activeSortItem: SortItem;
   authorizationStatus: AuthorizationStatus;
   isOffersDataLoading: boolean;
+  error: Error;
 } = {
   offers: [],
   aroundOffers: [],
@@ -25,7 +26,8 @@ const initialState: {
   activeCity: CityMapDefault,
   activeSortItem: 'Popular',
   authorizationStatus: AuthorizationStatus.Unknown,
-  isOffersDataLoading: false
+  isOffersDataLoading: false,
+  error: null
 };
 
 const reducer = createReducer(initialState, (bulder) => {
@@ -62,6 +64,9 @@ const reducer = createReducer(initialState, (bulder) => {
     })
     .addCase(setOffersDataLoadingStatus, (state, action) => {
       state.isOffersDataLoading = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
     });
 
 });

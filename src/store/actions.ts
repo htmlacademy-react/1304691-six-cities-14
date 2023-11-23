@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { City, Offer, OfferPreview, SortItem, Reviews } from '../types/types';
+import { City, Offer, OfferPreview, SortItem, Reviews, Error } from '../types/types';
 import { AuthorizationStatus } from '../const';
 
 export const fetchOffers = createAction<OfferPreview[]>('offers/fetch');
@@ -23,3 +23,5 @@ export const setActiveSortItem = createAction<SortItem>('offers/setActiveSortIte
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
 export const setOffersDataLoadingStatus = createAction<boolean>('offers/setOffersDataLoadingStatus');
+
+export const setError = createAction<Error>('app/setError');

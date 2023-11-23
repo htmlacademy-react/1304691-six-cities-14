@@ -73,3 +73,5 @@ export type UserData = {
   token: string;
 };
 
+export type Error = string | null;
+
