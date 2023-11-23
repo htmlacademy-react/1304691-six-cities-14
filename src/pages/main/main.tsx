@@ -12,6 +12,7 @@ import { setActiveSortItem } from '../../store/actions';
 import { useAppDispatch } from '../../hooks';
 import { sortOffers, getOffers, getSortItem, getActiveCity } from '../../store/selectors';
 import NoCards from '../../components/no-cards/no-cards';
+import classNames from 'classnames';
 
 function MainPage(): JSX.Element {
 
@@ -44,7 +45,10 @@ function MainPage(): JSX.Element {
         <title>{'6 cities'}</title>
       </Helmet>
       <Header />
-      <main className={`page__main page__main--index ${currentOffers.length === 0 && 'page__main--index-empty'}`}>
+      <main className={classNames(
+        'page__main page__main--index',
+        { 'page__main--index-empty': currentOffers.length === 0 })}
+      >
         <h1 className="visually-hidden">Cities</h1>
         <CitiesList />
         <div className="cities">
