@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { City, Offer, OfferPreview, SortItem, Reviews, Error } from '../types/types';
+import { City, Offer, OfferPreview, SortItem, Reviews, Error, Review } from '../types/types';
 import { AuthorizationStatus } from '../const';
 
 export const getOffers = createAction<OfferPreview[]>('offers/get');
@@ -25,3 +25,5 @@ export const requireAuthorization = createAction<AuthorizationStatus>('user/requ
 export const setOffersDataLoadingStatus = createAction<boolean>('offers/setOffersDataLoadingStatus');
 
 export const setError = createAction<Error>('app/setError');
+
+export const addReview = createAction<Review>('offer/addReview');

@@ -1,11 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatch, State, Offer } from '../types/types';
 import { AxiosInstance } from 'axios';
-import { getOffers, requireAuthorization, getReviews, setOffersDataLoadingStatus, setError, getOffer, getAroundOffers } from './actions';
-import { OfferPreview, Reviews } from '../types/types';
+import { getOffers, requireAuthorization, getReviews, setOffersDataLoadingStatus, setError, getOffer, getAroundOffers, addReview } from './actions';
 import { APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
 import { saveToken, dropToken } from '../services/token';
-import { UserData, AuthData } from '../types/types';
+import { AppDispatch, State, Offer, OfferPreview, Reviews, UserData, AuthData, Review, ReviewData } from '../types/types';
 import { store } from '.';
 
 export const clearErrorAction = createAsyncThunk(
@@ -94,6 +92,21 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     const { data: { token } } = await api.post<UserData>(APIRoute.Login, { email, password });
     saveToken(token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
+  },
+);
+
+export const fetchAddReviewAction = createAsyncThunk<void, ReviewData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'offer/addReview',
+  async ({ comment, rating }, { dispatch, getState, extra: api }) => {
+    const state = getState();
+    if (state.offer) {
+      const { data } = await api.post<Review>(`${APIRoute.Comments}/${state.offer.id}`, { comment, rating });
+      dispatch(addReview(data));
+    }
   },
 );
 

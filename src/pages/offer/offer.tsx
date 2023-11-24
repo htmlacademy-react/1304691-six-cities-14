@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import { CardsList } from '../../components/cards-list/cards-list';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { dropOffer } from '../../store/actions';
-import { MAX_AROUND_OFFERS_COUNT, MAX_REVIEWS_COUNT } from '../../const';
+import { AuthorizationStatus, MAX_AROUND_OFFERS_COUNT, MAX_REVIEWS_COUNT } from '../../const';
 import { useEffect } from 'react';
 import NotFound from '../404/404';
 import Loading from '../loading/loading';
@@ -18,6 +18,8 @@ function Offer(): JSX.Element {
   const { id } = useParams();
 
   const dispatch = useAppDispatch();
+
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   const offer = useAppSelector((state) => state.offer);
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
@@ -145,7 +147,7 @@ function Offer(): JSX.Element {
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                 <ReviewsList reviews={reviewsRender}></ReviewsList>
-                <FormReview></FormReview>
+                {authorizationStatus === AuthorizationStatus.Auth && <FormReview></FormReview>}
               </section>
             </div>
           </div>

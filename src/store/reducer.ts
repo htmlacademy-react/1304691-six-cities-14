@@ -1,8 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { Reviews, Offer, City, OfferPreview } from '../types/types';
-import { dropOffer, getAroundOffers, getOffer, getOffers, getReviews, setActiveCity, getFavoriteOffers, setActiveSortItem, requireAuthorization, setOffersDataLoadingStatus, setError } from './actions';
+import { dropOffer, getAroundOffers, getOffer, getOffers, getReviews, setActiveCity, getFavoriteOffers, setActiveSortItem, requireAuthorization, setOffersDataLoadingStatus, setError, addReview } from './actions';
 import { CityMapDefault, AuthorizationStatus } from '../const';
-import { SortItem, Error } from '../types/types';
+import { Reviews, Offer, City, OfferPreview, SortItem, Error } from '../types/types';
 
 const initialState: {
   offers: OfferPreview[];
@@ -64,6 +63,9 @@ const reducer = createReducer(initialState, (bulder) => {
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;
+    })
+    .addCase(addReview, (state, action) => {
+      state.reviews.push(action.payload);
     });
 
 });
