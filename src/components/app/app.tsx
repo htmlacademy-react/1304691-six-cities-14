@@ -38,6 +38,7 @@ function App(): JSX.Element {
               <PrivateRoute
                 authorizationStatus={authorizationStatus}
                 redirectTo={AppRoute.Login}
+                component
               >
                 <Favorites />
               </PrivateRoute>
@@ -45,7 +46,14 @@ function App(): JSX.Element {
           />
           <Route
             path={AppRoute.Login}
-            element={<Login />}
+            element={
+              <PrivateRoute
+                authorizationStatus={authorizationStatus}
+                redirectTo={AppRoute.Root}
+              >
+                <Login />
+              </PrivateRoute>
+            }
           />
           <Route
             path={`${AppRoute.Offer}:id`}
