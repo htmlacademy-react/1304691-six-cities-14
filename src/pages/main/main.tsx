@@ -28,7 +28,7 @@ function MainPage(): JSX.Element {
 
   const filteredOffers = offers.filter((offer) => offer.city.name === activeCity.name);
 
-  const currentOffers = useAppSelector(() => sortOffers({ offers: filteredOffers, activeSortItem }));
+  const currentOffers = sortOffers({offers: filteredOffers, activeSortItem});
 
   function handleListItemHover(itemId: OfferType['id'] | null) {
     setSelectedPointId(itemId);
