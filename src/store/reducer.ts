@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { Reviews, Offer, City, OfferPreview } from '../types/types';
-import { dropOffer, fetchAroundOffers, fetchOffer, fetchOffers, fetchReviews, setActiveCity, fetchFavoriteOffers, setActiveSortItem, requireAuthorization, setOffersDataLoadingStatus, setError } from './actions';
+import { dropOffer, getAroundOffers, getOffer, getOffers, getReviews, setActiveCity, getFavoriteOffers, setActiveSortItem, requireAuthorization, setOffersDataLoadingStatus, setError } from './actions';
 import { CityMapDefault, AuthorizationStatus } from '../const';
 import { SortItem, Error } from '../types/types';
 
@@ -11,7 +11,6 @@ const initialState: {
   offer: Offer | null;
   favorites: OfferPreview[];
   activeCity: City;
-  loaded: boolean;
   activeSortItem: SortItem;
   authorizationStatus: AuthorizationStatus;
   isOffersDataLoading: boolean;
@@ -22,7 +21,6 @@ const initialState: {
   reviews: [],
   offer: null,
   favorites: [],
-  loaded: false,
   activeCity: CityMapDefault,
   activeSortItem: 'Popular',
   authorizationStatus: AuthorizationStatus.Unknown,
@@ -32,28 +30,27 @@ const initialState: {
 
 const reducer = createReducer(initialState, (bulder) => {
   bulder
-    .addCase(fetchOffers, (state, action) => {
+    .addCase(getOffers, (state, action) => {
       state.offers = action.payload;
     })
-    .addCase(fetchOffer, (state, action) => {
+    .addCase(getOffer, (state, action) => {
       state.offer = action.payload;
-      state.loaded = true;
     })
-    .addCase(fetchAroundOffers, (state, action) => {
+    .addCase(getAroundOffers, (state, action) => {
       state.aroundOffers = action.payload;
     })
-    .addCase(fetchReviews, (state, action) => {
+    .addCase(getReviews, (state, action) => {
       state.reviews = action.payload;
     })
     .addCase(dropOffer, (state) => {
       state.offer = null;
       state.aroundOffers = [];
-      state.loaded = false;
+      state.reviews = [];
     })
     .addCase(setActiveCity, (state, action) => {
       state.activeCity = action.payload;
     })
-    .addCase(fetchFavoriteOffers, (state, action) => {
+    .addCase(getFavoriteOffers, (state, action) => {
       state.favorites = action.payload;
     })
     .addCase(setActiveSortItem, (state, action) => {
