@@ -7,12 +7,13 @@ import { useParams } from 'react-router-dom';
 import { CardsList } from '../../components/cards-list/cards-list';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { dropOffer } from '../../store/actions';
-import { AuthorizationStatus, MAX_AROUND_OFFERS_COUNT, MAX_REVIEWS_COUNT } from '../../const';
+import { MAX_AROUND_OFFERS_COUNT, MAX_REVIEWS_COUNT } from '../../const';
 import { useEffect } from 'react';
 import NotFound from '../404/404';
 import Loading from '../loading/loading';
 import { fetchOfferAction, fetchAroundOffersAction, fetchReviewsAction } from '../../store/api-actions';
 import { getRatingValue } from '../../utils/utils';
+import { checkAuthorizationStatus } from '../../utils/utils';
 
 function Offer(): JSX.Element {
   const { id } = useParams();
@@ -20,6 +21,8 @@ function Offer(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+
+  const isLogged = checkAuthorizationStatus(authorizationStatus);
 
   const offer = useAppSelector((state) => state.offer);
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
@@ -147,7 +150,7 @@ function Offer(): JSX.Element {
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                 <ReviewsList reviews={reviewsRender}></ReviewsList>
-                {authorizationStatus === AuthorizationStatus.Auth && <FormReview></FormReview>}
+                {isLogged && <FormReview></FormReview>}
               </section>
             </div>
           </div>

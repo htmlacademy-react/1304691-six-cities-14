@@ -1,5 +1,6 @@
 import { RATING_MAX } from '../const';
 import { OfferPreview } from '../types/types';
+import { AuthorizationStatus } from '../const';
 
 function getRatingValue(rating: number): number {
   return (rating * 100) / RATING_MAX;
@@ -32,9 +33,14 @@ const sorting: Record<string, (offers: OfferPreview[]) => OfferPreview[]> = {
   TopRated: (offers: OfferPreview[]) => offers.slice().sort(sortByRating)
 };
 
+function checkAuthorizationStatus(status: AuthorizationStatus) {
+  return status === AuthorizationStatus.Auth;
+}
+
 export {
   getRatingValue,
   addPluralEnding,
   capitalize,
-  sorting
+  sorting,
+  checkAuthorizationStatus
 };

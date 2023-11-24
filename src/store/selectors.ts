@@ -4,6 +4,8 @@ import { sorting } from '../utils/utils';
 
 export const getActiveCity = (state: State) => state.activeCity;
 
+export const getAutorisationStatus = (state: State) => state.authorizationStatus;
+
 export const getOffers = (state: { offers: OfferPreview[]; activeSortItem: SortItem }) => state.offers;
 
 export const getSortItem = (state: { offers: OfferPreview[]; activeSortItem: SortItem }) => state.activeSortItem;
