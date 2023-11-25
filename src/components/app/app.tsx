@@ -9,7 +9,7 @@ import Offer from '../../pages/offer/offer';
 import { HelmetProvider } from 'react-helmet-async';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import { useAppSelector } from '../../hooks';
-import LoadingScreen from '../../pages/loading/loading';
+import Loading from '../../pages/loading/loading';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
@@ -17,7 +17,7 @@ function App(): JSX.Element {
 
   if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
     return (
-      <LoadingScreen />
+      <Loading />
     );
   }
 
@@ -38,7 +38,6 @@ function App(): JSX.Element {
               <PrivateRoute
                 authorizationStatus={authorizationStatus}
                 redirectTo={AppRoute.Login}
-                component
               >
                 <Favorites />
               </PrivateRoute>
@@ -46,14 +45,7 @@ function App(): JSX.Element {
           />
           <Route
             path={AppRoute.Login}
-            element={
-              <PrivateRoute
-                authorizationStatus={authorizationStatus}
-                redirectTo={AppRoute.Root}
-              >
-                <Login />
-              </PrivateRoute>
-            }
+            element={<Login />}
           />
           <Route
             path={`${AppRoute.Offer}:id`}

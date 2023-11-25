@@ -23,7 +23,7 @@ export type Location = {
 export type Review = {
   comment: string;
   date: string;
-  id: number;
+  id: string;
   rating: number;
   user: {
     avatarUrl: string;
@@ -74,6 +74,11 @@ export type UserData = {
   email: string;
   token: string;
 };
+
+export type ReviewData = {
+  comment: string;
+  rating: number;
+}
 
 export type Error = string | null;
 
