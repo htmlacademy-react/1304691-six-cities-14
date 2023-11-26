@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { dropOffer, getAroundOffers, getOffer, getOffers, getReviews, setActiveCity, getFavoriteOffers, setActiveSortItem, requireAuthorization, setOffersDataLoadingStatus, setError, addReview } from './actions';
-import { CityMapDefault, AuthorizationStatus } from '../const';
+import { dropOffer, getAroundOffers, getOffer, getOffers, getReviews, setActiveCity, getFavoriteOffers, setActiveSortItem, setOffersDataLoadingStatus, setError, addReview } from './actions';
+import { CityMapDefault } from '../const';
 import { Reviews, Offer, City, OfferPreview, SortItem, Error } from '../types/types';
 
 const initialState: {
@@ -11,7 +11,6 @@ const initialState: {
   favorites: OfferPreview[];
   activeCity: City;
   activeSortItem: SortItem;
-  authorizationStatus: AuthorizationStatus;
   isOffersDataLoading: boolean;
   error: Error;
 } = {
@@ -22,7 +21,6 @@ const initialState: {
   favorites: [],
   activeCity: CityMapDefault,
   activeSortItem: 'Popular',
-  authorizationStatus: AuthorizationStatus.Unknown,
   isOffersDataLoading: false,
   error: null
 };
@@ -54,9 +52,6 @@ const reducer = createReducer(initialState, (bulder) => {
     })
     .addCase(setActiveSortItem, (state, action) => {
       state.activeSortItem = action.payload;
-    })
-    .addCase(requireAuthorization, (state, action) => {
-      state.authorizationStatus = action.payload;
     })
     .addCase(setOffersDataLoadingStatus, (state, action) => {
       state.isOffersDataLoading = action.payload;

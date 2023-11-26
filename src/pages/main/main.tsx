@@ -64,7 +64,7 @@ function MainPage(): JSX.Element {
                 <Map block={'cities'} offers={currentOffers} location={activeCity.location} selectedPointId={selectedPointId}></Map>
               </div>
             </div>}
-        </div >
+        </div>
       </main >
     </div >
   );

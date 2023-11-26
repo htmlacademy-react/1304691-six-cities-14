@@ -112,6 +112,12 @@ enum APIRoute {
 
 const TIMEOUT_SHOW_ERROR = 2000;
 
+enum NameSpace {
+  Data = 'DATA',
+  App = 'APP',
+  User = 'USER',
+}
+
 export {
   CARD_COUNT,
   AppRoute,
@@ -127,5 +133,6 @@ export {
   MAX_COMMENT_LENGTH,
   MAX_REVIEWS_COUNT,
   MAX_AROUND_OFFERS_COUNT,
-  TIMEOUT_SHOW_ERROR
+  TIMEOUT_SHOW_ERROR,
+  NameSpace
 };
