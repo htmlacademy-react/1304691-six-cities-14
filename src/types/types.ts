@@ -100,4 +100,19 @@ export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
 };
 
+export type DataProcess = {
+  offers: OfferPreview[];
+  aroundOffers: OfferPreview[];
+  reviews: Reviews;
+  offer: Offer | null;
+  favorites: OfferPreview[];
+  isOffersDataLoading: boolean;
+  error: Error;
+};
+
+export type AppProcess = {
+  activeCity: City;
+  activeSortItem: SortItem;
+};
+
 

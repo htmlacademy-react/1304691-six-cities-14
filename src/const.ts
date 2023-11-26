@@ -110,8 +110,6 @@ enum APIRoute {
   Logout = '/logout',
 }
 
-const TIMEOUT_SHOW_ERROR = 2000;
-
 enum NameSpace {
   Data = 'DATA',
   App = 'APP',
@@ -133,6 +131,5 @@ export {
   MAX_COMMENT_LENGTH,
   MAX_REVIEWS_COUNT,
   MAX_AROUND_OFFERS_COUNT,
-  TIMEOUT_SHOW_ERROR,
   NameSpace
 };
