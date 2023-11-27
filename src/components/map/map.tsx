@@ -4,6 +4,7 @@ import { OfferPreview, Offer as OfferType } from '../../types/types';
 import { useRef, useEffect } from 'react';
 import useMap from '../../hooks/use-map';
 import { Location } from '../../types/types';
+import { memo } from 'react';
 
 const URL_MARKER_DEFAULT = '../markup/img/pin.svg';
 const URL_MARKER_CURRENT = '../markup/img/pin-active.svg';
@@ -98,4 +99,6 @@ function Map({ block, offers, location, offer, selectedPointId }: MapProps): JSX
   );
 }
 
-export default Map;
+const MapMemo = memo(Map);
+
+export default MapMemo;

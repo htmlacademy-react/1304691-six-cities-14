@@ -2,22 +2,39 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import FavoritesList from '../../components/favorites-list/favorites-list';
-import Header from '../../components/header/header';
+import HeaderMemo from '../../components/header/header';
+import { getFavorites } from '../../store/data-process/selectors';
+import classNames from 'classnames';
+import NoFavoritesMemo from '../../components/no-favorites/no-favorites';
+import { useAppSelector } from '../../hooks';
 
 function Favorites(): JSX.Element {
 
+  const favoritesOffers = useAppSelector(getFavorites);
+
   return (
-    <div className="page">
+    <div className={classNames(
+      'page',
+      { 'page--favorites-empty': favoritesOffers.length === 0 }
+    )}
+    >
       <Helmet>
         <title>{'6 cities - Favorites'}</title>
       </Helmet>
-      <Header />
-      <main className="page__main page__main--favorites">
+      <HeaderMemo />
+      <main className={classNames(
+        'page__main page__main--favorites',
+        { 'page__main--favorites-empty': favoritesOffers.length === 0 }
+      )}
+      >
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <FavoritesList></FavoritesList>
-          </section>
+          {
+            favoritesOffers.length === 0 ? <NoFavoritesMemo /> :
+              <section className="favorites">
+                <h1 className="favorites__title">Saved listing</h1>
+                <FavoritesList offers={favoritesOffers}></FavoritesList>
+              </section>
+          }
         </div>
       </main>
       <footer className="footer container">
@@ -25,7 +42,7 @@ function Favorites(): JSX.Element {
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
         </Link>
       </footer>
-    </div>
+    </ div >
   );
 }
 

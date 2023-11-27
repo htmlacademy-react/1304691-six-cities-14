@@ -10,15 +10,24 @@ import { HelmetProvider } from 'react-helmet-async';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import { useAppSelector } from '../../hooks';
 import Loading from '../../pages/loading/loading';
+import { getErrorStatus, getIsOffersDataLoading } from '../../store/data-process/selectors';
+import { getAutorisationStatus } from '../../store/user-process/selectors';
+import Error from '../../pages/error/error';
 
 function App(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const authorizationStatus = useAppSelector(getAutorisationStatus);
+  const isOffersDataLoading = useAppSelector(getIsOffersDataLoading);
+  const hasError = useAppSelector(getErrorStatus);
 
   if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
     return (
       <Loading />
     );
+  }
+
+  if (hasError) {
+    return (
+      <Error />);
   }
 
   return (

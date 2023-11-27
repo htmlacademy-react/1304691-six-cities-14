@@ -1,12 +1,14 @@
 import { CitiesMap } from '../../const';
 import { Link } from 'react-router-dom';
-import { setActiveCity } from '../../store/actions';
+import { setActiveCity } from '../../store/app-process/app-process';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { City } from '../../types/types';
 import classNames from 'classnames';
+import { getActiveCity } from '../../store/app-process/selectors';
+import { memo } from 'react';
 
 function CitiesList(): JSX.Element {
-  const activeCity = useAppSelector((state) => state.activeCity);
+  const activeCity = useAppSelector(getActiveCity);
 
   const dispatch = useAppDispatch();
 
@@ -38,4 +40,6 @@ function CitiesList(): JSX.Element {
   );
 }
 
-export default CitiesList;
+const CitiesListMemo = memo(CitiesList);
+
+export default CitiesListMemo;

@@ -1,12 +1,11 @@
-import Header from '../../components/header/header';
+import HeaderMemo from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
-import FormReview from '../../components/form-review/form-review';
-import ReviewsList from '../../components/reviews-list/reviews-list';
+import FormReviewMemo from '../../components/form-review/form-review';
+import ReviewsListMemo from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
 import { useParams } from 'react-router-dom';
-import { CardsList } from '../../components/cards-list/cards-list';
+import CardsListMemo from '../../components/cards-list/cards-list';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { dropOffer } from '../../store/actions';
 import { MAX_AROUND_OFFERS_COUNT, MAX_REVIEWS_COUNT } from '../../const';
 import { useEffect } from 'react';
 import NotFound from '../404/404';
@@ -14,23 +13,28 @@ import Loading from '../loading/loading';
 import { fetchOfferAction, fetchAroundOffersAction, fetchReviewsAction } from '../../store/api-actions';
 import { getRatingValue } from '../../utils/utils';
 import { checkAuthorizationStatus } from '../../utils/utils';
+import { getOffer, getAroundOffers, getReviews, getIsOffersDataLoading } from '../../store/data-process/selectors';
+import { getAutorisationStatus } from '../../store/user-process/selectors';
+import { dropOffer } from '../../store/data-process/data-process';
 
 function Offer(): JSX.Element {
+
   const { id } = useParams();
 
   const dispatch = useAppDispatch();
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAutorisationStatus);
 
   const isLogged = checkAuthorizationStatus(authorizationStatus);
 
-  const offer = useAppSelector((state) => state.offer);
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const offer = useAppSelector(getOffer);
 
-  const offersAround = useAppSelector((state) => state.aroundOffers);
+  const isOffersDataLoading = useAppSelector(getIsOffersDataLoading);
+
+  const offersAround = useAppSelector(getAroundOffers);
   const offersAroundRender = offersAround.slice(0, MAX_AROUND_OFFERS_COUNT);
 
-  const reviews = useAppSelector((state) => state.reviews);
+  const reviews = useAppSelector(getReviews);
 
   const reviewsRender = reviews.slice(0, MAX_REVIEWS_COUNT);
 
@@ -65,7 +69,7 @@ function Offer(): JSX.Element {
       <Helmet>
         <title>{'6 cities - Offer'}</title>
       </Helmet>
-      <Header />
+      <HeaderMemo />
 
       <main className="page__main page__main--offer">
         <section className="offer">
@@ -149,8 +153,8 @@ function Offer(): JSX.Element {
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                <ReviewsList reviews={reviewsRender}></ReviewsList>
-                {isLogged && <FormReview></FormReview>}
+                <ReviewsListMemo reviews={reviewsRender}></ReviewsListMemo>
+                {isLogged && <FormReviewMemo></FormReviewMemo>}
               </section>
             </div>
           </div>
@@ -159,7 +163,7 @@ function Offer(): JSX.Element {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <CardsList offers={offersAroundRender} block={'near-places'} isOtherPlaces></CardsList>
+            <CardsListMemo offers={offersAroundRender} block={'near-places'} isOtherPlaces></CardsListMemo>
           </section>
         </div>
       </main>

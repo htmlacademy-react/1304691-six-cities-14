@@ -1,18 +1,22 @@
 import FavoritesCard from '../favorites-card/favorites-card';
-import { useAppSelector, useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import { useEffect } from 'react';
+import { fetchFavoritesAction } from '../../store/api-actions';
+import { OfferPreview } from '../../types/types';
 
-function FavoritesList(): JSX.Element {
+type FavoritesListProps = {
+  offers: OfferPreview[];
+}
+
+function FavoritesList({ offers }: FavoritesListProps): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const favoritesOffers = useAppSelector((state) => state.favorites);
-
   useEffect(() => {
-    //dispatch(fetchFavoriteOffers());
+    dispatch(fetchFavoritesAction());
   }, [dispatch]);
 
-  const CitiesList = [...new Set(favoritesOffers.map((offer) => offer.city.name))].sort();
+  const CitiesList = [...new Set(offers.map((offer) => offer.city.name))].sort();
 
   return (
     <ul className="favorites__list">
@@ -26,7 +30,7 @@ function FavoritesList(): JSX.Element {
             </div>
           </div>
           <div className="favorites__places">
-            {favoritesOffers
+            {offers
               .filter((offer) => offer.city.name === city)
               .map((offer) => (
                 <FavoritesCard offer={offer} key={offer.id} />

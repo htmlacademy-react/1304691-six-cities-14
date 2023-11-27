@@ -1,9 +1,10 @@
 import { CityName, SortMap } from '../const';
 import { store } from '../store/index.js';
+import { AuthorizationStatus } from '../const';
 
 export type SortItem = keyof typeof SortMap;
 
-type Host = {
+export type Host = {
   avatarUrl: string;
   isPro: boolean;
   name: string;
@@ -80,5 +81,23 @@ export type ReviewData = {
   rating: number;
 }
 
-export type Error = string | null;
+export type UserProcess = {
+  authorizationStatus: AuthorizationStatus;
+};
+
+export type DataProcess = {
+  offers: OfferPreview[];
+  isOffersDataLoading: boolean;
+  aroundOffers: OfferPreview[];
+  reviews: Reviews;
+  offer: Offer | null;
+  favorites: OfferPreview[];
+  hasError: boolean;
+};
+
+export type AppProcess = {
+  activeCity: City;
+  activeSortItem: SortItem;
+};
+
 

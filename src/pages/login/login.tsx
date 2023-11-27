@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useNavigate } from 'react-router-dom';
 import { loginAction } from '../../store/api-actions';
 import { checkAuthorizationStatus } from '../../utils/utils';
-import { getAutorisationStatus } from '../../store/selectors';
+import { getAutorisationStatus } from '../../store/user-process/selectors';
 import { AppRoute } from '../../const';
 import { Navigate } from 'react-router-dom';
 
