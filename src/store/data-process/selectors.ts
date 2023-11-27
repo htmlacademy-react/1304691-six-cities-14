@@ -11,4 +11,6 @@ export const getIsOffersDataLoading = (state: State) => state[NameSpace.Data].is
 
 export const getOffers = (state: State) => state[NameSpace.Data].offers;
 
+export const getErrorStatus = (state: State): boolean => state[NameSpace.Data].hasError;
+
 

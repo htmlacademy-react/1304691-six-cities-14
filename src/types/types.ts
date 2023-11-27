@@ -81,8 +81,6 @@ export type ReviewData = {
   rating: number;
 }
 
-export type Error = string | null;
-
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
 };
@@ -94,7 +92,7 @@ export type DataProcess = {
   reviews: Reviews;
   offer: Offer | null;
   favorites: OfferPreview[];
-  error: Error;
+  hasError: boolean;
 };
 
 export type AppProcess = {

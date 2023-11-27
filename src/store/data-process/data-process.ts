@@ -10,7 +10,7 @@ const initialState: DataProcess = {
   reviews: [],
   offer: null,
   favorites: [],
-  error: null
+  hasError: false
 };
 
 export const dataProcess = createSlice({
@@ -46,6 +46,7 @@ export const dataProcess = createSlice({
       })
       .addCase(fetchOffersAction.rejected, (state) => {
         state.isOffersDataLoading = false;
+        state.hasError = true;
       });
   }
 });
