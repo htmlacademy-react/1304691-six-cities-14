@@ -6,10 +6,11 @@ import { useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
 import { checkAuthorizationStatus } from '../../utils/utils';
+import { getAutorisationStatus } from '../../store/user-process/selectors';
 
 function Header(): JSX.Element {
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAutorisationStatus);
 
   const isLogged = checkAuthorizationStatus(authorizationStatus);
 

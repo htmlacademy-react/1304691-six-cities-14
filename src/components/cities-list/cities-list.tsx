@@ -1,12 +1,13 @@
 import { CitiesMap } from '../../const';
 import { Link } from 'react-router-dom';
-import { setActiveCity } from '../../store/actions';
+import { setActiveCity } from '../../store/app-process/app-process';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { City } from '../../types/types';
 import classNames from 'classnames';
+import { getActiveCity } from '../../store/app-process/selectors';
 
 function CitiesList(): JSX.Element {
-  const activeCity = useAppSelector((state) => state.activeCity);
+  const activeCity = useAppSelector(getActiveCity);
 
   const dispatch = useAppDispatch();
 
