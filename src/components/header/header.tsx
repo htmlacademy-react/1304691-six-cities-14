@@ -7,6 +7,7 @@ import { logoutAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
 import { checkAuthorizationStatus } from '../../utils/utils';
 import { getAutorisationStatus } from '../../store/user-process/selectors';
+import { memo } from 'react';
 
 function Header(): JSX.Element {
 
@@ -64,4 +65,6 @@ function Header(): JSX.Element {
   );
 }
 
-export default Header;
+const HeaderMemo = memo(Header);
+
+export default HeaderMemo;

@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import FavoritesList from '../../components/favorites-list/favorites-list';
-import Header from '../../components/header/header';
+import HeaderMemo from '../../components/header/header';
 
 function Favorites(): JSX.Element {
 
@@ -11,7 +11,7 @@ function Favorites(): JSX.Element {
       <Helmet>
         <title>{'6 cities - Favorites'}</title>
       </Helmet>
-      <Header />
+      <HeaderMemo />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">

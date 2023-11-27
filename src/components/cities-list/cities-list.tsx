@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { City } from '../../types/types';
 import classNames from 'classnames';
 import { getActiveCity } from '../../store/app-process/selectors';
+import { memo } from 'react';
 
 function CitiesList(): JSX.Element {
   const activeCity = useAppSelector(getActiveCity);
@@ -39,4 +40,6 @@ function CitiesList(): JSX.Element {
   );
 }
 
-export default CitiesList;
+const CitiesListMemo = memo(CitiesList);
+
+export default CitiesListMemo;

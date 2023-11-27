@@ -1,7 +1,7 @@
-import Header from '../../components/header/header';
+import HeaderMemo from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
-import FormReview from '../../components/form-review/form-review';
-import ReviewsList from '../../components/reviews-list/reviews-list';
+import FormReviewMemo from '../../components/form-review/form-review';
+import ReviewsListMemo from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
 import { useParams } from 'react-router-dom';
 import CardsListMemo from '../../components/cards-list/cards-list';
@@ -18,6 +18,7 @@ import { getAutorisationStatus } from '../../store/user-process/selectors';
 import { dropOffer } from '../../store/data-process/data-process';
 
 function Offer(): JSX.Element {
+
   const { id } = useParams();
 
   const dispatch = useAppDispatch();
@@ -68,7 +69,7 @@ function Offer(): JSX.Element {
       <Helmet>
         <title>{'6 cities - Offer'}</title>
       </Helmet>
-      <Header />
+      <HeaderMemo />
 
       <main className="page__main page__main--offer">
         <section className="offer">
@@ -152,8 +153,8 @@ function Offer(): JSX.Element {
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                <ReviewsList reviews={reviewsRender}></ReviewsList>
-                {isLogged && <FormReview></FormReview>}
+                <ReviewsListMemo reviews={reviewsRender}></ReviewsListMemo>
+                {isLogged && <FormReviewMemo></FormReviewMemo>}
               </section>
             </div>
           </div>

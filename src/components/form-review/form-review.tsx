@@ -2,6 +2,7 @@ import { useState, ChangeEvent, Fragment, FormEvent } from 'react';
 import { MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH } from '../../const';
 import { fetchAddReviewAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
+import { memo } from 'react';
 
 const RATING_TITLES = ['terribly', 'badly', 'not bad', 'good', 'perfect'];
 
@@ -75,4 +76,6 @@ function FormReview(): JSX.Element {
   );
 }
 
-export default FormReview;
+const FormReviewMemo = memo(FormReview);
+
+export default FormReviewMemo;

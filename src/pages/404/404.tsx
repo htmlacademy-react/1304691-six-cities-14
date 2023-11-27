@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Header from '../../components/header/header';
+import HeaderMemo from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
 import CitiesList from '../../components/cities-list/cities-list';
 
@@ -9,7 +9,7 @@ function NotFound(): JSX.Element {
       <Helmet>
         <title>{'6 cities - Not found'}</title>
       </Helmet>
-      <Header />
+      <HeaderMemo />
 
       <main className="page__main page__main--index page__main--index-empty">
         <h1 className="visually-hidden">Cities</h1>
