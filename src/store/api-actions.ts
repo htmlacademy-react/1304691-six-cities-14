@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { APIRoute } from '../const';
 import { saveToken, dropToken } from '../services/token';
-import { AppDispatch, State, Offer, OfferPreview, Reviews, UserData, AuthData, Review, ReviewData } from '../types/types';
+import { AppDispatch, State, Offer, OfferPreview, Reviews, UserData, AuthData, Review, ReviewData, AddToFavoritesData } from '../types/types';
 import { NameSpace } from '../const';
 
 export const fetchOffersAction = createAsyncThunk<OfferPreview[], undefined, {
@@ -61,6 +61,18 @@ export const fetchOfferAction = createAsyncThunk<Offer, string, {
   'data/fetchOffer',
   async (id, { extra: api }) => {
     const { data } = await api.get<Offer>(`${APIRoute.Offers}/${id}`);
+    return data;
+  },
+);
+
+export const fetchAddToFavoriteAction = createAsyncThunk<OfferPreview, AddToFavoritesData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchAddToFavoriteAction',
+  async ({ id, status }, { extra: api }) => {
+    const { data } = await api.post<OfferPreview>(`${APIRoute.Favorite}/${id}/${status}`);
     return data;
   },
 );

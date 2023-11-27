@@ -68,6 +68,11 @@ export type AuthData = {
   password: string;
 };
 
+export type AddToFavoritesData = {
+  id: string;
+  status: number;
+};
+
 export type UserData = {
   name: string;
   avatarUrl: string;
