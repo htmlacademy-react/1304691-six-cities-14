@@ -83,30 +83,17 @@ export type ReviewData = {
 
 export type Error = string | null;
 
-export type rootState = {
-  offers: OfferPreview[];
-  aroundOffers: OfferPreview[];
-  reviews: Reviews;
-  offer: Offer | null;
-  favorites: OfferPreview[];
-  activeCity: City;
-  activeSortItem: SortItem;
-  authorizationStatus: AuthorizationStatus;
-  isOffersDataLoading: boolean;
-  error: Error;
-}
-
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
 };
 
 export type DataProcess = {
   offers: OfferPreview[];
+  isOffersDataLoading: boolean;
   aroundOffers: OfferPreview[];
   reviews: Reviews;
   offer: Offer | null;
   favorites: OfferPreview[];
-  isOffersDataLoading: boolean;
   error: Error;
 };
 
