@@ -13,9 +13,22 @@ import Loading from '../../pages/loading/loading';
 import { getErrorStatus, getIsOffersDataLoading } from '../../store/data-process/selectors';
 import { getAutorisationStatus } from '../../store/user-process/selectors';
 import Error from '../../pages/error/error';
+import { useEffect } from 'react';
+import { fetchFavoritesAction } from '../../store/api-actions';
+import { useAppDispatch } from '../../hooks';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAutorisationStatus);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(fetchFavoritesAction());
+    }
+
+  }, [dispatch, authorizationStatus]);
+
   const isOffersDataLoading = useAppSelector(getIsOffersDataLoading);
   const hasError = useAppSelector(getErrorStatus);
 
@@ -29,6 +42,7 @@ function App(): JSX.Element {
     return (
       <Error />);
   }
+
 
   return (
     <HelmetProvider>

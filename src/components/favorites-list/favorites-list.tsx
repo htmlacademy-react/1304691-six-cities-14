@@ -1,7 +1,4 @@
 import FavoritesCard from '../favorites-card/favorites-card';
-import { useAppDispatch } from '../../hooks';
-import { useEffect } from 'react';
-import { fetchFavoritesAction } from '../../store/api-actions';
 import { OfferPreview } from '../../types/types';
 
 type FavoritesListProps = {
@@ -9,12 +6,6 @@ type FavoritesListProps = {
 }
 
 function FavoritesList({ offers }: FavoritesListProps): JSX.Element {
-
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchFavoritesAction());
-  }, [dispatch]);
 
   const CitiesList = [...new Set(offers.map((offer) => offer.city.name))].sort();
 

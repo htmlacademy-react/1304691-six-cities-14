@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { DataProcess } from '../../types/types';
-import { fetchAddReviewAction, fetchAroundOffersAction, fetchOfferAction, fetchReviewsAction, fetchOffersAction, fetchFavoritesAction } from '../api-actions';
+import { fetchAddReviewAction, fetchAroundOffersAction, fetchOfferAction, fetchReviewsAction, fetchOffersAction, fetchFavoritesAction, fetchAddToFavoriteAction } from '../api-actions';
 
 const initialState: DataProcess = {
   offers: [],
@@ -50,6 +50,19 @@ export const dataProcess = createSlice({
       .addCase(fetchOffersAction.rejected, (state) => {
         state.isOffersDataLoading = false;
         state.hasError = true;
+      })
+      .addCase(fetchAddToFavoriteAction.fulfilled, (state, action) => {
+        const isFavorite = action.payload.isFavorite;
+
+        if (isFavorite) {
+          state.favorites.push(action.payload);
+        }
+
+        if (!isFavorite) {
+          state.favorites = state.favorites.filter(
+            (offer) => offer.id !== action.payload.id
+          );
+        }
       });
   }
 });
