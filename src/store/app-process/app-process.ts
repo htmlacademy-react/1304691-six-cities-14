@@ -9,8 +9,8 @@ const initialState: AppProcess = {
   activeSortItem: 'Popular',
 };
 
-export const userProcess = createSlice({
-  name: NameSpace.Data,
+export const appProcess = createSlice({
+  name: NameSpace.App,
   initialState,
   reducers: {
     setActiveSortItem: (state, action: PayloadAction<SortItem>) => {
@@ -20,5 +20,7 @@ export const userProcess = createSlice({
       state.activeCity = action.payload;
     },
   },
-  extraReducers() { }
+  extraReducers() {}
 });
+
+export const { setActiveSortItem, setActiveCity } = appProcess.actions;
