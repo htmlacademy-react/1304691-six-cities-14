@@ -1,4 +1,6 @@
-function NoCards(): JSX.Element {
+import { memo } from 'react';
+
+function NoCardsComponent(): JSX.Element {
   return (
     <div className="cities__places-container cities__places-container--empty container">
       <section className="cities__no-places">
@@ -11,5 +13,7 @@ function NoCards(): JSX.Element {
     </div>
   );
 }
+
+const NoCards = memo(NoCardsComponent);
 
 export default NoCards;

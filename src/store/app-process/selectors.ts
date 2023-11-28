@@ -9,7 +9,7 @@ export const getSortItem = (state: State) => state[NameSpace.App].activeSortItem
 
 export const sortOffers = createSelector(
   [
-    (state: State) => state[NameSpace.App].activeSortItem,
+    getSortItem,
     (_: State, offers: OfferPreview[]) => offers
   ],
   (activeSortItem, offers) => {

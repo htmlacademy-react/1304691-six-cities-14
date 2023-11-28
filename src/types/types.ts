@@ -88,6 +88,7 @@ export type ReviewData = {
 
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
+  user: UserData;
 };
 
 export type DataProcess = {

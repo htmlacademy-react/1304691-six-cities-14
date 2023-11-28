@@ -5,16 +5,14 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { City } from '../../types/types';
 import classNames from 'classnames';
 import { getActiveCity } from '../../store/app-process/selectors';
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 
-function CitiesList(): JSX.Element {
+function CitiesListComponent(): JSX.Element {
   const activeCity = useAppSelector(getActiveCity);
 
   const dispatch = useAppDispatch();
 
-  function handleCitiesItemClick(city: City) {
-    dispatch(setActiveCity(city));
-  }
+  const handleCitiesItemClick = useCallback((city: City) => dispatch(setActiveCity(city)), [dispatch]);
 
   return (
     <div className="tabs">
@@ -40,6 +38,6 @@ function CitiesList(): JSX.Element {
   );
 }
 
-const CitiesListMemo = memo(CitiesList);
+const CitiesList = memo(CitiesListComponent);
 
-export default CitiesListMemo;
+export default CitiesList;

@@ -6,7 +6,7 @@ type ReviewsListProps = {
   reviews: Reviews;
 }
 
-function ReviewsList({ reviews }: ReviewsListProps): JSX.Element {
+function ReviewsListComponent({ reviews }: ReviewsListProps): JSX.Element {
 
   const sortedReviews = reviews.slice().sort((reviewA, reviewB) => new Date(reviewB.date).getTime() - new Date(reviewA.date).getTime());
 
@@ -20,6 +20,6 @@ function ReviewsList({ reviews }: ReviewsListProps): JSX.Element {
 }
 
 
-const ReviewsListMemo = memo(ReviewsList);
+const ReviewsList = memo(ReviewsListComponent);
 
-export default ReviewsListMemo;
+export default ReviewsList;

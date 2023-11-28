@@ -1,11 +1,13 @@
 import { OfferPreview } from '../../types/types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { getRatingValue, capitalize } from '../../utils/utils';
 import classNames from 'classnames';
 import { fetchAddToFavoriteAction } from '../../store/api-actions';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useState } from 'react';
+import { getAutorisationStatus } from '../../store/user-process/selectors';
+import { checkAuthorizationStatus } from '../../utils/utils';
 
 type CardProps = {
   offer: OfferPreview;
@@ -17,10 +19,14 @@ function Card({ offer, block, onListItemHover }: CardProps): JSX.Element {
 
   const { price, title, rating, previewImage, isPremium, isFavorite, type, id } = offer;
 
-  const [isBookmarkActive, setBookmarkActive] = useState(isFavorite);
-
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
+  const authorizationStatus = useAppSelector(getAutorisationStatus);
+
+  const isLogged = checkAuthorizationStatus(authorizationStatus);
+
+  const [isBookmarkActive, setBookmarkActive] = useState(isFavorite);
 
   function handleOfferMouseEnter() {
     onListItemHover?.(id);
@@ -31,8 +37,11 @@ function Card({ offer, block, onListItemHover }: CardProps): JSX.Element {
   }
 
   function handleFavoriteButtonClick() {
-    dispatch(fetchAddToFavoriteAction({ id, status: Number(!isBookmarkActive) }));
+    if (!isLogged) {
+      navigate(AppRoute.Login);
+    }
 
+    dispatch(fetchAddToFavoriteAction({ id, status: Number(!isBookmarkActive) }));
     setBookmarkActive((prev) => !prev);
   }
 

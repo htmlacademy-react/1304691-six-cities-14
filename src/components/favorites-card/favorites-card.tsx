@@ -1,8 +1,13 @@
 
 import { OfferPreview } from '../../types/types';
-import { AppRoute, RATING_MAX } from '../../const';
+import { AppRoute } from '../../const';
 import { Link } from 'react-router-dom';
 import { capitalize } from '../../utils/utils';
+import { useAppDispatch } from '../../hooks';
+import { useState } from 'react';
+import classNames from 'classnames';
+import { fetchAddToFavoriteAction } from '../../store/api-actions';
+import { getRatingValue } from '../../utils/utils';
 
 type FavoritesCardProps = {
   offer: OfferPreview;
@@ -10,9 +15,16 @@ type FavoritesCardProps = {
 
 function FavoritesCard({ offer }: FavoritesCardProps): JSX.Element {
 
-  const { isPremium, price, title, rating, type, previewImage, id } = offer;
+  const { isPremium, price, title, rating, type, previewImage, id, isFavorite } = offer;
 
-  const ratingValue = (rating * 100) / RATING_MAX;
+  const dispatch = useAppDispatch();
+
+  const [isBookmarkActive, setBookmarkActive] = useState(isFavorite);
+
+  function handleFavoriteButtonClick() {
+    dispatch(fetchAddToFavoriteAction({ id, status: Number(!isBookmarkActive) }));
+    setBookmarkActive((prev) => !prev);
+  }
 
   return (
     <article className="favorites__card place-card">
@@ -28,7 +40,13 @@ function FavoritesCard({ offer }: FavoritesCardProps): JSX.Element {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
+          <button
+            type="button"
+            onClick={handleFavoriteButtonClick}
+            className={classNames(
+              '`place-card__bookmark-button button',
+              { 'place-card__bookmark-button--active': isBookmarkActive })}
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -37,7 +55,7 @@ function FavoritesCard({ offer }: FavoritesCardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${ratingValue}%` }}></span>
+            <span style={{ width: `${getRatingValue(rating)}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

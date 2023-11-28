@@ -9,7 +9,7 @@ type SortListProps = {
   onSortItems: (type: SortItem) => void;
 }
 
-function SortList({ onSortItems, activeSortItem }: SortListProps): JSX.Element {
+function SortListComponent({ onSortItems, activeSortItem }: SortListProps): JSX.Element {
 
   const [openSort, setOpenSort] = useState<boolean>(false);
 
@@ -61,6 +61,6 @@ function SortList({ onSortItems, activeSortItem }: SortListProps): JSX.Element {
   );
 }
 
-const SortListMemo = memo(SortList);
+const SortList = memo(SortListComponent);
 
-export default SortListMemo;
+export default SortList;

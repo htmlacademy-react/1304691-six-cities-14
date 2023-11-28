@@ -1,33 +1,47 @@
-import HeaderMemo from '../../components/header/header';
+import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
-import FormReviewMemo from '../../components/form-review/form-review';
-import ReviewsListMemo from '../../components/reviews-list/reviews-list';
+import FormReview from '../../components/form-review/form-review';
+import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
-import { useParams } from 'react-router-dom';
-import CardsListMemo from '../../components/cards-list/cards-list';
+import { useParams, useNavigate } from 'react-router-dom';
+import CardsList from '../../components/cards-list/cards-list';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { MAX_AROUND_OFFERS_COUNT, MAX_REVIEWS_COUNT } from '../../const';
-import { useEffect } from 'react';
+import { MAX_AROUND_OFFERS_COUNT, MAX_REVIEWS_COUNT, AppRoute } from '../../const';
+import { useEffect, useState } from 'react';
 import NotFound from '../404/404';
 import Loading from '../loading/loading';
-import { fetchOfferAction, fetchAroundOffersAction, fetchReviewsAction } from '../../store/api-actions';
+import { fetchOfferAction, fetchAroundOffersAction, fetchReviewsAction, fetchAddToFavoriteAction } from '../../store/api-actions';
 import { getRatingValue } from '../../utils/utils';
 import { checkAuthorizationStatus } from '../../utils/utils';
 import { getOffer, getAroundOffers, getReviews, getIsOffersDataLoading } from '../../store/data-process/selectors';
 import { getAutorisationStatus } from '../../store/user-process/selectors';
 import { dropOffer } from '../../store/data-process/data-process';
+import classNames from 'classnames';
 
 function Offer(): JSX.Element {
 
   const { id } = useParams();
-
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const offer = useAppSelector(getOffer);
+
+  const [isBookmarkActive, setBookmarkActive] = useState(offer?.isFavorite);
 
   const authorizationStatus = useAppSelector(getAutorisationStatus);
 
   const isLogged = checkAuthorizationStatus(authorizationStatus);
 
-  const offer = useAppSelector(getOffer);
+  function handleFavoriteButtonClick() {
+    if (!isLogged) {
+      navigate(AppRoute.Login);
+    }
+
+    if (id) {
+      dispatch(fetchAddToFavoriteAction({ id, status: Number(!isBookmarkActive) }));
+      setBookmarkActive((prev) => !prev);
+    }
+  }
 
   const isOffersDataLoading = useAppSelector(getIsOffersDataLoading);
 
@@ -69,7 +83,7 @@ function Offer(): JSX.Element {
       <Helmet>
         <title>{'6 cities - Offer'}</title>
       </Helmet>
-      <HeaderMemo />
+      <Header />
 
       <main className="page__main page__main--offer">
         <section className="offer">
@@ -92,7 +106,13 @@ function Offer(): JSX.Element {
                 <h1 className="offer__name">
                   {title}
                 </h1>
-                <button className="offer__bookmark-button button" type="button">
+                <button
+                  type="button"
+                  onClick={handleFavoriteButtonClick}
+                  className={classNames(
+                    'offer__bookmark-button button',
+                    { 'offer__bookmark-button--active': isBookmarkActive })}
+                >
                   <svg className="offer__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -104,7 +124,7 @@ function Offer(): JSX.Element {
                   <span style={{ width: `${getRatingValue(rating)}%` }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="offer__rating-value rating__value">{rating}</span>
+                <span className="offer__rating-value rating__value">{Math.round(rating)}</span>
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
@@ -153,8 +173,8 @@ function Offer(): JSX.Element {
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                <ReviewsListMemo reviews={reviewsRender}></ReviewsListMemo>
-                {isLogged && <FormReviewMemo></FormReviewMemo>}
+                <ReviewsList reviews={reviewsRender}></ReviewsList>
+                {isLogged && <FormReview></FormReview>}
               </section>
             </div>
           </div>
@@ -163,7 +183,7 @@ function Offer(): JSX.Element {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <CardsListMemo offers={offersAroundRender} block={'near-places'} isOtherPlaces></CardsListMemo>
+            <CardsList offers={offersAroundRender} block={'near-places'} isOtherPlaces></CardsList>
           </section>
         </div>
       </main>

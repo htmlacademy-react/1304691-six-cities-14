@@ -1,13 +1,13 @@
-import CardsListMemo from '../../components/cards-list/cards-list';
+import CardsList from '../../components/cards-list/cards-list';
 import { Helmet } from 'react-helmet-async';
-import MapMemo from '../../components/map/map';
+import Map from '../../components/map/map';
 import { Offer, SortItem } from '../../types/types';
 import { addPluralEnding } from '../../utils/utils';
 import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import CitiesList from '../../components/cities-list/cities-list';
-import HeaderMemo from '../../components/header/header';
-import SortListMemo from '../../components/sort-list/sort-list';
+import Header from '../../components/header/header';
+import SortList from '../../components/sort-list/sort-list';
 import { useAppDispatch } from '../../hooks';
 import NoCards from '../../components/no-cards/no-cards';
 import classNames from 'classnames';
@@ -43,7 +43,7 @@ function MainPage(): JSX.Element {
       <Helmet>
         <title>{'6 cities'}</title>
       </Helmet>
-      <HeaderMemo />
+      <Header />
       <main className={classNames(
         'page__main page__main--index',
         { 'page__main--index-empty': filteredOffers.length === 0 })}
@@ -56,11 +56,11 @@ function MainPage(): JSX.Element {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{filteredOffers.length} place{addPluralEnding(filteredOffers.length)} to stay in {activeCity.name}</b>
-                <SortListMemo activeSortItem={activeSortItem} onSortItems={handleSortItems} />
-                <CardsListMemo offers={currentOffers} block={'cities'} onListItemHover={handleListItemHover}></CardsListMemo>
+                <SortList activeSortItem={activeSortItem} onSortItems={handleSortItems} />
+                <CardsList offers={currentOffers} block={'cities'} onListItemHover={handleListItemHover}></CardsList>
               </section>
               <div className="cities__right-section">
-                <MapMemo block={'cities'} offers={offers} location={activeCity.location} selectedPointId={selectedPointId}></MapMemo>
+                <Map block={'cities'} offers={offers} location={activeCity.location} selectedPointId={selectedPointId}></Map>
               </div>
             </div>}
         </div>

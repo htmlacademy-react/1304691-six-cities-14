@@ -116,6 +116,14 @@ enum NameSpace {
   User = 'USER',
 }
 
+const defaultUser = {
+  name: '',
+  avatarUrl: '',
+  isPro: false,
+  email: '',
+  token: ''
+};
+
 export {
   CARD_COUNT,
   AppRoute,
@@ -131,5 +139,6 @@ export {
   MAX_COMMENT_LENGTH,
   MAX_REVIEWS_COUNT,
   MAX_AROUND_OFFERS_COUNT,
-  NameSpace
+  NameSpace,
+  defaultUser
 };

@@ -6,7 +6,7 @@ import { memo } from 'react';
 
 const RATING_TITLES = ['terribly', 'badly', 'not bad', 'good', 'perfect'];
 
-function FormReview(): JSX.Element {
+function FormReviewComponent(): JSX.Element {
 
   const initialState = {
     comment: '',
@@ -76,6 +76,6 @@ function FormReview(): JSX.Element {
   );
 }
 
-const FormReviewMemo = memo(FormReview);
+const FormReview = memo(FormReviewComponent);
 
-export default FormReviewMemo;
+export default FormReview;

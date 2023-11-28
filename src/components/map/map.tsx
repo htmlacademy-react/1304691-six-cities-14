@@ -29,7 +29,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map({ block, offers, location, offer, selectedPointId }: MapProps): JSX.Element {
+function MapComponent({ block, offers, location, offer, selectedPointId }: MapProps): JSX.Element {
 
   const mapRef = useRef(null);
 
@@ -99,6 +99,6 @@ function Map({ block, offers, location, offer, selectedPointId }: MapProps): JSX
   );
 }
 
-const MapMemo = memo(Map);
+const Map = memo(MapComponent);
 
-export default MapMemo;
+export default Map;

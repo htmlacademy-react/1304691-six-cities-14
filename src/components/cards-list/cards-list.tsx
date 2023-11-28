@@ -9,7 +9,7 @@ type CardsListProps = {
   onListItemHover?: (itemId: Offer['id'] | null) => void;
 }
 
-function CardsList({ offers, isOtherPlaces, block, onListItemHover }: CardsListProps): JSX.Element {
+function CardsListComponent({ offers, isOtherPlaces, block, onListItemHover }: CardsListProps): JSX.Element {
 
   return (
     <div className={isOtherPlaces ? 'near-places__list places__list' : 'cities__places-list places__list tabs__content'}>
@@ -25,6 +25,6 @@ function CardsList({ offers, isOtherPlaces, block, onListItemHover }: CardsListP
   );
 }
 
-const CardsListMemo = memo(CardsList);
+const CardsList = memo(CardsListComponent);
 
-export default CardsListMemo;
+export default CardsList;

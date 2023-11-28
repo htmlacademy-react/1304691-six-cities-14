@@ -3,7 +3,7 @@ import { OfferPreview } from '../types/types';
 import { AuthorizationStatus } from '../const';
 
 function getRatingValue(rating: number): number {
-  return (rating * 100) / RATING_MAX;
+  return (Math.round(rating) * 100) / RATING_MAX;
 }
 
 function addPluralEnding(count: number) {
