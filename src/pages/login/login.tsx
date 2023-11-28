@@ -1,13 +1,15 @@
 import Logo from '../../components/logo/logo';
 import { Helmet } from 'react-helmet-async';
-import { FormEvent, useState, FocusEvent, ChangeEvent, useEffect } from 'react';
+import { FormEvent, useState, FocusEvent, ChangeEvent, useEffect, MouseEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { loginAction } from '../../store/api-actions';
 import { checkAuthorizationStatus } from '../../utils/utils';
 import { getAutorisationStatus } from '../../store/user-process/selectors';
-import { AppRoute } from '../../const';
+import { AppRoute, CitiesMap } from '../../const';
 import { Navigate } from 'react-router-dom';
+import { setActiveCity } from '../../store/app-process/app-process';
+import { City } from '../../types/types';
 
 function Login(): JSX.Element {
   const [email, setEmail] = useState('');
@@ -79,6 +81,15 @@ function Login(): JSX.Element {
     navigate(AppRoute.Root);
   }
 
+  const randomCity = CitiesMap[Math.floor(Math.random() * CitiesMap.length)];
+
+  function handleRandomCityClick(evt: MouseEvent<HTMLAnchorElement>, city: City) {
+    evt.preventDefault();
+
+    dispatch(setActiveCity(city));
+    navigate(AppRoute.Root);
+  }
+
   return (
     <div className="page page--gray page--login">
       <Helmet>
@@ -142,9 +153,13 @@ function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <Link
+                className="locations__item-link"
+                to={'/'}
+                onClick={(evt) => handleRandomCityClick(evt, randomCity)}
+              >
+                <span>{randomCity.name}</span>
+              </Link>
             </div>
           </section>
         </div>
