@@ -2,14 +2,13 @@ import Logo from '../../components/logo/logo';
 import { Helmet } from 'react-helmet-async';
 import { FormEvent, useState, FocusEvent, ChangeEvent, useEffect, MouseEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, Navigate } from 'react-router-dom';
 import { loginAction } from '../../store/api-actions';
 import { checkAuthorizationStatus } from '../../utils/utils';
 import { getAutorisationStatus } from '../../store/user-process/selectors';
 import { AppRoute, CitiesMap } from '../../const';
-import { Navigate } from 'react-router-dom';
 import { setActiveCity } from '../../store/app-process/app-process';
-import { City } from '../../types/types';
+import { useMemo, useCallback } from 'react';
 
 function Login(): JSX.Element {
   const [email, setEmail] = useState('');
@@ -34,6 +33,15 @@ function Login(): JSX.Element {
       setFormValid(true);
     }
   }, [emailError, passwordError]);
+
+  const randomCity = useMemo(() => CitiesMap[Math.floor(Math.random() * CitiesMap.length)], []);
+
+  const handleRandomCityClick = useCallback((evt: MouseEvent<HTMLAnchorElement>) => {
+    evt.preventDefault();
+
+    dispatch(setActiveCity(randomCity));
+    navigate(AppRoute.Root);
+  }, [dispatch, navigate, randomCity]);
 
   if (isLogged) {
     return <Navigate to={AppRoute.Root}></Navigate>;
@@ -77,18 +85,8 @@ function Login(): JSX.Element {
       email: email,
       password: password
     }));
-
-    navigate(AppRoute.Root);
   }
 
-  const randomCity = CitiesMap[Math.floor(Math.random() * CitiesMap.length)];
-
-  function handleRandomCityClick(evt: MouseEvent<HTMLAnchorElement>, city: City) {
-    evt.preventDefault();
-
-    dispatch(setActiveCity(city));
-    navigate(AppRoute.Root);
-  }
 
   return (
     <div className="page page--gray page--login">
@@ -156,7 +154,7 @@ function Login(): JSX.Element {
               <Link
                 className="locations__item-link"
                 to={'/'}
-                onClick={(evt) => handleRandomCityClick(evt, randomCity)}
+                onClick={handleRandomCityClick}
               >
                 <span>{randomCity.name}</span>
               </Link>

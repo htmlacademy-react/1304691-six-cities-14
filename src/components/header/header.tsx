@@ -22,7 +22,9 @@ function HeaderComponent(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const handleLogoutClick = useCallback(() => dispatch(logoutAction()), [dispatch]);
+  const handleLogoutClick = useCallback(() => {
+    dispatch(logoutAction());
+  }, [dispatch]);
 
   return (
     <header className="header">
@@ -55,7 +57,7 @@ function HeaderComponent(): JSX.Element {
                   <Link
                     className="header__nav-link"
                     to={'/'}
-                    onClick={() => handleLogoutClick()}
+                    onClick={handleLogoutClick}
                   >
                     <span className="header__signout">Sign out</span>
                   </Link>
