@@ -13,7 +13,7 @@ import Loading from '../loading/loading';
 import { fetchOfferAction, fetchAroundOffersAction, fetchReviewsAction, fetchAddToFavoriteAction } from '../../store/api-actions';
 import { getRatingValue } from '../../utils/utils';
 import { checkAuthorizationStatus } from '../../utils/utils';
-import { getOffer, getAroundOffers, getReviews, getIsOffersDataLoading } from '../../store/data-process/selectors';
+import { getOffer, getAroundOffers, getReviews, getIsOffersDataLoading, getErrorOfferStatus } from '../../store/data-process/selectors';
 import { getAutorisationStatus } from '../../store/user-process/selectors';
 import { dropOffer } from '../../store/data-process/data-process';
 import classNames from 'classnames';
@@ -29,6 +29,10 @@ function Offer(): JSX.Element {
   const [isBookmarkActive, setBookmarkActive] = useState(offer?.isFavorite);
 
   const authorizationStatus = useAppSelector(getAutorisationStatus);
+  const hasErrorOffer = useAppSelector(getErrorOfferStatus);
+  const isOffersDataLoading = useAppSelector(getIsOffersDataLoading);
+  const offersAround = useAppSelector(getAroundOffers);
+  const reviews = useAppSelector(getReviews);
 
   const isLogged = checkAuthorizationStatus(authorizationStatus);
 
@@ -43,12 +47,7 @@ function Offer(): JSX.Element {
     }
   }
 
-  const isOffersDataLoading = useAppSelector(getIsOffersDataLoading);
-
-  const offersAround = useAppSelector(getAroundOffers);
   const offersAroundRender = offersAround.slice(0, MAX_AROUND_OFFERS_COUNT);
-
-  const reviews = useAppSelector(getReviews);
 
   const reviewsRender = reviews.slice(0, MAX_REVIEWS_COUNT);
 
@@ -65,6 +64,10 @@ function Offer(): JSX.Element {
       dispatch(dropOffer());
     };
   }, [dispatch, id]);
+
+  if (hasErrorOffer) {
+    return <NotFound />;
+  }
 
   if (!offer && !isOffersDataLoading) {
     return <Loading />;

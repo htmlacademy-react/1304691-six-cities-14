@@ -10,9 +10,9 @@ import { HelmetProvider } from 'react-helmet-async';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import { useAppSelector } from '../../hooks';
 import Loading from '../../pages/loading/loading';
-import { getErrorStatus, getIsOffersDataLoading } from '../../store/data-process/selectors';
+import { getErrorOffersStatus, getIsOffersDataLoading } from '../../store/data-process/selectors';
 import { getAutorisationStatus } from '../../store/user-process/selectors';
-import Error from '../../pages/error/error';
+import ErrorOffers from '../../pages/error-offers/error-offers';
 import { useEffect } from 'react';
 import { fetchFavoritesAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
@@ -30,7 +30,7 @@ function App(): JSX.Element {
   }, [dispatch, authorizationStatus]);
 
   const isOffersDataLoading = useAppSelector(getIsOffersDataLoading);
-  const hasError = useAppSelector(getErrorStatus);
+  const hasErrorOffers = useAppSelector(getErrorOffersStatus);
 
   if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
     return (
@@ -38,11 +38,10 @@ function App(): JSX.Element {
     );
   }
 
-  if (hasError) {
+  if (hasErrorOffers) {
     return (
-      <Error />);
+      <ErrorOffers />);
   }
-
 
   return (
     <HelmetProvider>

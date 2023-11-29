@@ -13,6 +13,13 @@ export const getOffers = (state: State) => state[NameSpace.Data].offers;
 
 export const getFavorites = (state: State) => state[NameSpace.Data].favorites;
 
-export const getErrorStatus = (state: State): boolean => state[NameSpace.Data].hasError;
+export const getErrorOffersStatus = (state: State): boolean => state[NameSpace.Data].hasErrorOffers;
 
+export const getErrorOfferStatus = (state: State): boolean => state[NameSpace.Data].hasErrorOffer;
+
+export const getAddReviewStatus = (state: State): boolean => state[NameSpace.Data].addReviewStatus.pending;
+
+export const getErrorAddReviewStatus = (state: State): boolean => state[NameSpace.Data].addReviewStatus.rejected;
+
+export const getAddSuccessStatus = (state: State): boolean => state[NameSpace.Data].addReviewStatus.success;
 

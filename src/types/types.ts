@@ -98,7 +98,13 @@ export type DataProcess = {
   reviews: Reviews;
   offer: Offer | null;
   favorites: OfferPreview[];
-  hasError: boolean;
+  hasErrorOffers: boolean;
+  hasErrorOffer: boolean;
+  addReviewStatus: {
+    pending: boolean;
+    rejected: boolean;
+    success: boolean;
+  };
 };
 
 export type AppProcess = {
