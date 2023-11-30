@@ -3,11 +3,8 @@ import { OfferPreview } from '../../types/types';
 import { AppRoute } from '../../const';
 import { Link } from 'react-router-dom';
 import { capitalize } from '../../utils/utils';
-import { useAppDispatch } from '../../hooks';
-import { useState } from 'react';
-import classNames from 'classnames';
-import { fetchAddToFavoriteAction } from '../../store/api-actions';
 import { getRatingValue } from '../../utils/utils';
+import FavoriteButton from '../favorite-button/favorite-button';
 
 type FavoritesCardProps = {
   offer: OfferPreview;
@@ -16,15 +13,6 @@ type FavoritesCardProps = {
 function FavoritesCard({ offer }: FavoritesCardProps): JSX.Element {
 
   const { isPremium, price, title, rating, type, previewImage, id, isFavorite } = offer;
-
-  const dispatch = useAppDispatch();
-
-  const [isBookmarkActive, setBookmarkActive] = useState(isFavorite);
-
-  function handleFavoriteButtonClick() {
-    dispatch(fetchAddToFavoriteAction({ id, status: Number(!isBookmarkActive) }));
-    setBookmarkActive((prev) => !prev);
-  }
 
   return (
     <article className="favorites__card place-card">
@@ -40,18 +28,7 @@ function FavoritesCard({ offer }: FavoritesCardProps): JSX.Element {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button
-            type="button"
-            onClick={handleFavoriteButtonClick}
-            className={classNames(
-              '`place-card__bookmark-button button',
-              { 'place-card__bookmark-button--active': isBookmarkActive })}
-          >
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">In bookmarks</span>
-          </button>
+          <FavoriteButton id={id} isFavorite={isFavorite} nameBlock={'place-card'}></FavoriteButton>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

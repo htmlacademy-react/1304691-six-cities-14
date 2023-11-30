@@ -3,49 +3,36 @@ import { Helmet } from 'react-helmet-async';
 import FormReview from '../../components/form-review/form-review';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import CardsList from '../../components/cards-list/cards-list';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { MAX_AROUND_OFFERS_COUNT, MAX_REVIEWS_COUNT, AppRoute } from '../../const';
-import { useEffect, useState } from 'react';
+import { MAX_AROUND_OFFERS_COUNT, MAX_REVIEWS_COUNT } from '../../const';
+import { useEffect } from 'react';
 import NotFound from '../404/404';
 import Loading from '../loading/loading';
-import { fetchOfferAction, fetchAroundOffersAction, fetchReviewsAction, fetchAddToFavoriteAction } from '../../store/api-actions';
+import { fetchOfferAction, fetchAroundOffersAction, fetchReviewsAction } from '../../store/api-actions';
 import { getRatingValue } from '../../utils/utils';
-import { checkAuthorizationStatus } from '../../utils/utils';
 import { getOffer, getAroundOffers, getReviews, getIsOffersDataLoading, getErrorOfferStatus } from '../../store/data-process/selectors';
-import { getAutorisationStatus } from '../../store/user-process/selectors';
 import { dropOffer } from '../../store/data-process/data-process';
-import classNames from 'classnames';
+import FavoriteButton from '../../components/favorite-button/favorite-button';
+import { getAutorisationStatus } from '../../store/user-process/selectors';
+import { checkAuthorizationStatus } from '../../utils/utils';
 
 function Offer(): JSX.Element {
 
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const offer = useAppSelector(getOffer);
 
-  const [isBookmarkActive, setBookmarkActive] = useState(offer?.isFavorite);
-
   const authorizationStatus = useAppSelector(getAutorisationStatus);
+
+  const isLogged = checkAuthorizationStatus(authorizationStatus);
+
   const hasErrorOffer = useAppSelector(getErrorOfferStatus);
   const isOffersDataLoading = useAppSelector(getIsOffersDataLoading);
   const offersAround = useAppSelector(getAroundOffers);
   const reviews = useAppSelector(getReviews);
-
-  const isLogged = checkAuthorizationStatus(authorizationStatus);
-
-  function handleFavoriteButtonClick() {
-    if (!isLogged) {
-      navigate(AppRoute.Login);
-    }
-
-    if (id) {
-      dispatch(fetchAddToFavoriteAction({ id, status: Number(!isBookmarkActive) }));
-      setBookmarkActive((prev) => !prev);
-    }
-  }
 
   const offersAroundRender = offersAround.slice(0, MAX_AROUND_OFFERS_COUNT);
 
@@ -109,18 +96,7 @@ function Offer(): JSX.Element {
                 <h1 className="offer__name">
                   {title}
                 </h1>
-                <button
-                  type="button"
-                  onClick={handleFavoriteButtonClick}
-                  className={classNames(
-                    'offer__bookmark-button button',
-                    { 'offer__bookmark-button--active': isBookmarkActive })}
-                >
-                  <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <FavoriteButton id={offer?.id} isFavorite={offer?.isFavorite} nameBlock={'offer'} size={'offer'}></FavoriteButton>
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">

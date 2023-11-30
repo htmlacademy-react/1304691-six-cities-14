@@ -1,13 +1,9 @@
 import { OfferPreview } from '../../types/types';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { getRatingValue, capitalize } from '../../utils/utils';
-import classNames from 'classnames';
-import { fetchAddToFavoriteAction } from '../../store/api-actions';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { useState } from 'react';
-import { getAutorisationStatus } from '../../store/user-process/selectors';
-import { checkAuthorizationStatus } from '../../utils/utils';
+import FavoriteButton from '../favorite-button/favorite-button';
+import { useEffect } from 'react';
 
 type CardProps = {
   offer: OfferPreview;
@@ -19,15 +15,6 @@ function Card({ offer, block, onListItemHover }: CardProps): JSX.Element {
 
   const { price, title, rating, previewImage, isPremium, isFavorite, type, id } = offer;
 
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-
-  const authorizationStatus = useAppSelector(getAutorisationStatus);
-
-  const isLogged = checkAuthorizationStatus(authorizationStatus);
-
-  const [isBookmarkActive, setBookmarkActive] = useState(isFavorite);
-
   function handleOfferMouseEnter() {
     onListItemHover?.(id);
   }
@@ -36,14 +23,8 @@ function Card({ offer, block, onListItemHover }: CardProps): JSX.Element {
     onListItemHover?.(null);
   }
 
-  function handleFavoriteButtonClick() {
-    if (!isLogged) {
-      navigate(AppRoute.Login);
-    }
-
-    dispatch(fetchAddToFavoriteAction({ id, status: Number(!isBookmarkActive) }));
-    setBookmarkActive((prev) => !prev);
-  }
+  useEffect(() => {
+  }, [isFavorite]);
 
   return (
     <article className={`${block}__card place-card`}
@@ -62,18 +43,7 @@ function Card({ offer, block, onListItemHover }: CardProps): JSX.Element {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button
-            type="button"
-            onClick={handleFavoriteButtonClick}
-            className={classNames(
-              '`place-card__bookmark-button button',
-              { 'place-card__bookmark-button--active': isBookmarkActive })}
-          >
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <FavoriteButton id={id} isFavorite={isFavorite} nameBlock={'place-card'}></FavoriteButton>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
