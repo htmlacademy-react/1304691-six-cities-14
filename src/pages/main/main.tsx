@@ -51,7 +51,7 @@ function MainPage(): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <CitiesList />
         <div className="cities">
-          {filteredOffers.length === 0 ? <NoCards /> :
+          {filteredOffers.length === 0 ? <NoCards city={activeCity} /> :
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
@@ -60,7 +60,7 @@ function MainPage(): JSX.Element {
                 <CardsList offers={currentOffers} block={'cities'} onListItemHover={handleListItemHover}></CardsList>
               </section>
               <div className="cities__right-section">
-                <Map block={'cities'} offers={offers} location={activeCity.location} selectedPointId={selectedPointId}></Map>
+                <Map block={'cities'} offers={filteredOffers} location={activeCity.location} selectedPointId={selectedPointId}></Map>
               </div>
             </div>}
         </div>

@@ -5,7 +5,8 @@ export const getOffer = (state: State) => state[NameSpace.Data].offer;
 
 export const getAroundOffers = (state: State) => state[NameSpace.Data].aroundOffers;
 
-export const getReviews = (state: State) => state[NameSpace.Data].reviews;
+export const getReviews = (state: State) => state[NameSpace.Data].reviews.slice()
+  .sort((reviewA, reviewB) => new Date(reviewB.date).getTime() - new Date(reviewA.date).getTime());
 
 export const getIsOffersDataLoading = (state: State) => state[NameSpace.Data].isOffersDataLoading;
 

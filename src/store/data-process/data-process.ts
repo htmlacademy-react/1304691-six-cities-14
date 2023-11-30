@@ -29,8 +29,10 @@ export const dataProcess = createSlice({
       state.reviews = [];
     },
     changeOfferFavoriteStatus: (state, action: PayloadAction<OfferPreview['id']>) => {
-      const index = state.offers.findIndex((offer) => offer.id === action.payload);
-      state.offers[index].isFavorite = !state.offers[index].isFavorite;
+      const offerChangeFavorite = state.offers.find((offer) => offer.id === action.payload);
+      if (offerChangeFavorite) {
+        offerChangeFavorite.isFavorite = !offerChangeFavorite.isFavorite;
+      }
     },
   },
   extraReducers(builder) {
@@ -52,7 +54,7 @@ export const dataProcess = createSlice({
         state.favorites = action.payload;
       })
       .addCase(fetchAddReviewAction.fulfilled, (state, action) => {
-        state.reviews.push(action.payload);
+        state.reviews.unshift(action.payload);
         state.addReviewStatus.rejected = false;
         state.addReviewStatus.success = true;
         state.addReviewStatus.pending = false;

@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import Logo from '../logo/logo';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
-import { logoutAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
 import { checkAuthorizationStatus } from '../../utils/utils';
 import { getAutorisationStatus, getUserInfo } from '../../store/user-process/selectors';
 import { memo, useCallback } from 'react';
 import { getFavorites } from '../../store/data-process/selectors';
+import { logoutAction } from '../../store/api-actions';
 
 function HeaderComponent(): JSX.Element {
 
@@ -56,7 +56,7 @@ function HeaderComponent(): JSX.Element {
                 <li className="header__nav-item">
                   <Link
                     className="header__nav-link"
-                    to={'/'}
+                    to={''}
                     onClick={handleLogoutClick}
                   >
                     <span className="header__signout">Sign out</span>

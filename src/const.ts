@@ -9,6 +9,8 @@ const REVIEW_DATE_FORMAT = 'MMMM YYYY';
 const MAX_AROUND_OFFERS_COUNT = 3;
 const MAX_REVIEWS_COUNT = 10;
 
+const MAX_OFFER_IMAGE_COUNT = 6;
+
 enum AppRoute {
   Root = '/',
   Login = '/login',
@@ -140,5 +142,6 @@ export {
   MAX_REVIEWS_COUNT,
   MAX_AROUND_OFFERS_COUNT,
   NameSpace,
-  defaultUser
+  defaultUser,
+  MAX_OFFER_IMAGE_COUNT
 };

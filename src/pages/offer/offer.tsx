@@ -6,7 +6,7 @@ import Map from '../../components/map/map';
 import { useParams } from 'react-router-dom';
 import CardsList from '../../components/cards-list/cards-list';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { MAX_AROUND_OFFERS_COUNT, MAX_REVIEWS_COUNT } from '../../const';
+import { MAX_AROUND_OFFERS_COUNT, MAX_REVIEWS_COUNT, MAX_OFFER_IMAGE_COUNT } from '../../const';
 import { useEffect } from 'react';
 import NotFound from '../404/404';
 import Loading from '../loading/loading';
@@ -17,6 +17,7 @@ import { dropOffer } from '../../store/data-process/data-process';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
 import { getAutorisationStatus } from '../../store/user-process/selectors';
 import { checkAuthorizationStatus } from '../../utils/utils';
+import classNames from 'classnames';
 
 function Offer(): JSX.Element {
 
@@ -68,6 +69,8 @@ function Offer(): JSX.Element {
 
   const { avatarUrl, name, isPro } = offer.host;
 
+  const imagesRender = images.slice(0, MAX_OFFER_IMAGE_COUNT);
+
   return (
     <div className="page">
       <Helmet>
@@ -79,7 +82,7 @@ function Offer(): JSX.Element {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              {images.map((image) => (
+              {imagesRender.map((image) => (
                 <div key={image} className="offer__image-wrapper">
                   <img className="offer__image" src={image} alt={title} />
                 </div>
@@ -103,7 +106,7 @@ function Offer(): JSX.Element {
                   <span style={{ width: `${getRatingValue(rating)}%` }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="offer__rating-value rating__value">{Math.round(rating)}</span>
+                <span className="offer__rating-value rating__value">{rating}</span>
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
@@ -133,7 +136,11 @@ function Offer(): JSX.Element {
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
-                  <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
+                  <div className={classNames(
+                    'offer__avatar-wrapper user__avatar-wrapper',
+                    { 'offer__avatar-wrapper--pro': isPro }
+                  )}
+                  >
                     <img className="offer__avatar user__avatar" src={avatarUrl} width="74" height="74" alt={name} />
                   </div>
                   <span className="offer__user-name">
@@ -166,7 +173,7 @@ function Offer(): JSX.Element {
           </section>
         </div>
       </main>
-    </div>
+    </div >
   );
 }
 
