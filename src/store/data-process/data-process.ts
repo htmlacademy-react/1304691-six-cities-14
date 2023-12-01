@@ -92,6 +92,10 @@ export const dataProcess = createSlice({
             (offer) => offer.id !== action.payload.id
           );
         }
+
+        if (state.offer !== null) {
+          state.offer.isFavorite = isFavorite;
+        }
       });
   }
 });
