@@ -1,12 +1,20 @@
 import { State } from '../../types/types';
 import { NameSpace } from '../../const';
+import { createSelector } from '@reduxjs/toolkit';
 
 export const getOffer = (state: State) => state[NameSpace.Data].offer;
 
 export const getAroundOffers = (state: State) => state[NameSpace.Data].aroundOffers;
 
-export const getReviews = (state: State) => state[NameSpace.Data].reviews.slice()
-  .sort((reviewA, reviewB) => new Date(reviewB.date).getTime() - new Date(reviewA.date).getTime());
+export const getReviews = (state: State) => state[NameSpace.Data].reviews;
+
+export const getSortedByDateReviews = createSelector(
+  [
+    getReviews
+  ],
+  (reviews) => reviews.slice()
+    .sort((reviewA, reviewB) => new Date(reviewB.date).getTime() - new Date(reviewA.date).getTime())
+);
 
 export const getIsOffersDataLoading = (state: State) => state[NameSpace.Data].isOffersDataLoading;
 
@@ -23,4 +31,3 @@ export const getAddReviewStatus = (state: State): boolean => state[NameSpace.Dat
 export const getErrorAddReviewStatus = (state: State): boolean => state[NameSpace.Data].addReviewStatus.rejected;
 
 export const getAddSuccessStatus = (state: State): boolean => state[NameSpace.Data].addReviewStatus.success;
-
