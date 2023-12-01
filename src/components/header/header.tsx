@@ -2,11 +2,10 @@
 import { Link } from 'react-router-dom';
 import Logo from '../logo/logo';
 import { AppRoute } from '../../const';
-import { useAppSelector } from '../../hooks';
-import { useAppDispatch } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks';
 import { checkAuthorizationStatus } from '../../utils/utils';
 import { getAutorisationStatus, getUserInfo } from '../../store/user-process/selectors';
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import { getFavorites } from '../../store/data-process/selectors';
 import { logoutAction } from '../../store/api-actions';
 
@@ -16,7 +15,7 @@ function HeaderComponent(): JSX.Element {
 
   const authorizationStatus = useAppSelector(getAutorisationStatus);
 
-  const isLogged = checkAuthorizationStatus(authorizationStatus);
+  const isLogged = useMemo(() => checkAuthorizationStatus(authorizationStatus), [authorizationStatus]);
 
   const user = useAppSelector(getUserInfo);
 

@@ -7,12 +7,12 @@ import { useParams } from 'react-router-dom';
 import CardsList from '../../components/cards-list/cards-list';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { MAX_AROUND_OFFERS_COUNT, MAX_REVIEWS_COUNT, MAX_OFFER_IMAGE_COUNT } from '../../const';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import NotFound from '../404/404';
 import Loading from '../loading/loading';
 import { fetchOfferAction, fetchAroundOffersAction, fetchReviewsAction } from '../../store/api-actions';
 import { getRatingValue } from '../../utils/utils';
-import { getOffer, getAroundOffers, getReviews, getIsOffersDataLoading, getErrorOfferStatus } from '../../store/data-process/selectors';
+import { getOffer, getAroundOffers, getSortedByDateReviews, getIsOffersDataLoading, getErrorOfferStatus } from '../../store/data-process/selectors';
 import { dropOffer } from '../../store/data-process/data-process';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
 import { getAutorisationStatus } from '../../store/user-process/selectors';
@@ -28,12 +28,12 @@ function Offer(): JSX.Element {
 
   const authorizationStatus = useAppSelector(getAutorisationStatus);
 
-  const isLogged = checkAuthorizationStatus(authorizationStatus);
+  const isLogged = useMemo(() => checkAuthorizationStatus(authorizationStatus), [authorizationStatus]);
 
   const hasErrorOffer = useAppSelector(getErrorOfferStatus);
   const isOffersDataLoading = useAppSelector(getIsOffersDataLoading);
   const offersAround = useAppSelector(getAroundOffers);
-  const reviews = useAppSelector(getReviews);
+  const reviews = useAppSelector(getSortedByDateReviews);
 
   const offersAroundRender = offersAround.slice(0, MAX_AROUND_OFFERS_COUNT);
 

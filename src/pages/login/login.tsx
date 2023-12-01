@@ -21,7 +21,7 @@ function Login(): JSX.Element {
 
   const authorizationStatus = useAppSelector(getAutorisationStatus);
 
-  const isLogged = checkAuthorizationStatus(authorizationStatus);
+  const isLogged = useMemo(() => checkAuthorizationStatus(authorizationStatus), [authorizationStatus]);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
