@@ -1,6 +1,6 @@
 import { dataProcess } from './data-process';
-import { fetchOffersAction, fetchAroundOffersAction, fetchReviewsAction, fetchOfferAction, fetchFavoritesAction } from '../api-actions';
-import { fakeOffers, fakeReview, fakeOffer } from '../../utils/mocks';
+import { fetchOffersAction, fetchAroundOffersAction, fetchReviewsAction, fetchOfferAction, fetchFavoritesAction, fetchAddToFavoriteAction } from '../api-actions';
+import { fakeOffers, fakeReviews, fakeOffer } from '../../utils/mocks';
 
 describe('DataProcess', () => {
 
@@ -170,7 +170,7 @@ describe('DataProcess', () => {
         offers: [],
         isOffersDataLoading: false,
         aroundOffers: [],
-        reviews: fakeReview,
+        reviews: fakeReviews,
         offer: null,
         favorites: [],
         hasErrorOffers: false,
@@ -185,7 +185,7 @@ describe('DataProcess', () => {
       const result = dataProcess.reducer(
         undefined,
         fetchReviewsAction.fulfilled(
-          fakeReview, '', id)
+          fakeReviews, '', id)
       );
 
       expect(result).toEqual(expectedState);
@@ -250,7 +250,7 @@ describe('DataProcess', () => {
 
   });
 
-  describe('fetchOfferAction', () => {
+  describe('fetchFavoritesOfferAction', () => {
 
     it('should set favorites to array with favorites offers with fetchFavoritesAction.fulfilled', () => {
       const expectedState = {
@@ -275,6 +275,58 @@ describe('DataProcess', () => {
           fakeOffers, '', undefined
         )
       );
+
+      expect(result).toEqual(expectedState);
+    });
+
+  });
+
+  // не работает
+
+  describe('fetchAddToFavoriteAction', () => {
+
+    it('should set favorites are updated after fetchAddToFavoriteAction.fulfilled', () => {
+      const mockOfferFirst = fakeOffers[0];
+      const mockOfferSecond = fakeOffers[1];
+
+      const initialState = {
+        offers: [],
+        isOffersDataLoading: false,
+        aroundOffers: [],
+        reviews: [],
+        offer: fakeOffer,
+        favorites: [mockOfferFirst],
+        hasErrorOffers: false,
+        hasErrorOffer: false,
+        addReviewStatus: {
+          pending: false,
+          rejected: false,
+          success: false
+        }
+      };
+
+      const expectedState = {
+        offers: [],
+        isOffersDataLoading: false,
+        aroundOffers: [],
+        reviews: [],
+        offer: fakeOffer,
+        favorites: [mockOfferFirst, mockOfferSecond],
+        hasErrorOffers: false,
+        hasErrorOffer: false,
+        addReviewStatus: {
+          pending: false,
+          rejected: false,
+          success: false
+        }
+      };
+
+      const addToFavoritesData = {
+        id: mockOfferSecond.id,
+        status: Number(mockOfferSecond.isFavorite)
+      };
+
+      const result = dataProcess.reducer(initialState, fetchAddToFavoriteAction.fulfilled(mockOfferSecond, '', addToFavoritesData));
 
       expect(result).toEqual(expectedState);
     });

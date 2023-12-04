@@ -11,6 +11,12 @@ export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>
 
 export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);
 
+export const makeFakeLocation = (): Location => ({
+  latitude: datatype.number({ min: -90, max: 90, precision: 0.000001 }),
+  longitude: datatype.number({ min: -180, max: 180, precision: 0.000001 }),
+  zoom: datatype.number({ min: 1, max: 17 }),
+} as Location);
+
 export const fakeOffers: OfferPreview[] = [
   {
     id: 'cdaa2ba9-d9f0-47f0-8b3a-213925c2b052',
@@ -19,17 +25,9 @@ export const fakeOffers: OfferPreview[] = [
     price: 120,
     city: {
       name: CityName.Amsterdam,
-      location: {
-        latitude: 52.35514938496378,
-        longitude: 4.673877537499948,
-        zoom: 8
-      }
+      location: makeFakeLocation(),
     },
-    location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
-      zoom: 8
-    },
+    location: makeFakeLocation(),
     isFavorite: false,
     isPremium: false,
     rating: 4,
@@ -42,17 +40,9 @@ export const fakeOffers: OfferPreview[] = [
     price: 120,
     city: {
       name: CityName.Amsterdam,
-      location: {
-        latitude: 52.35514938496378,
-        longitude: 4.673877537499948,
-        zoom: 8
-      }
+      location: makeFakeLocation()
     },
-    location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
-      zoom: 8
-    },
+    location: makeFakeLocation(),
     isFavorite: false,
     isPremium: false,
     rating: 4,
@@ -65,17 +55,9 @@ export const fakeOffers: OfferPreview[] = [
     price: 120,
     city: {
       name: CityName.Amsterdam,
-      location: {
-        latitude: 52.35514938496378,
-        longitude: 4.673877537499948,
-        zoom: 8
-      }
+      location: makeFakeLocation()
     },
-    location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
-      zoom: 8
-    },
+    location: makeFakeLocation(),
     isFavorite: false,
     isPremium: false,
     rating: 4,
@@ -155,12 +137,6 @@ export const fakeOffer: Offer = {
   ],
   maxAdults: 4
 };
-
-export const makeFakeLocation = (): Location => ({
-  latitude: datatype.number({ min: -90, max: 90, precision: 0.000001 }),
-  longitude: datatype.number({ min: -180, max: 180, precision: 0.000001 }),
-  zoom: datatype.number({ min: 1, max: 17 }),
-} as Location);
 
 export const makeFakeCity = (): City => ({
   name: random.arrayElement(citiesMap).name,
