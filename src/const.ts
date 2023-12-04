@@ -1,4 +1,4 @@
-import { City } from './types/types';
+import { City, UserData } from './types/types';
 
 const CARD_COUNT: number = 5;
 
@@ -118,7 +118,7 @@ enum NameSpace {
   User = 'USER',
 }
 
-const defaultUser = {
+const defaultUser: UserData = {
   name: '',
   avatarUrl: '',
   isPro: false,

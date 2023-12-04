@@ -48,7 +48,7 @@ export type OfferPreview = {
   type: string;
 }
 
-export type Offer = OfferPreview & {
+export type Offer = Omit<OfferPreview, 'previewImage'> & {
   bedrooms: number;
   description: string;
   goods: string[];
