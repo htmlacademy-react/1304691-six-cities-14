@@ -1,5 +1,5 @@
 import { dataProcess } from './data-process';
-import { fetchOffersAction, fetchAroundOffersAction, fetchReviewsAction, fetchOfferAction, fetchFavoritesAction, fetchAddToFavoriteAction } from '../api-actions';
+import { fetchOffersAction, fetchAroundOffersAction, fetchReviewsAction, fetchOfferAction, fetchFavoritesAction } from '../api-actions';
 import { fakeOffers, fakeReviews, fakeOffer } from '../../utils/mocks';
 
 describe('DataProcess', () => {
