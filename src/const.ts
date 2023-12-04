@@ -46,7 +46,7 @@ const CityMapDefault: City = {
   }
 };
 
-const CitiesMap: City[] = [
+const citiesMap: City[] = [
   {
     name: CityName.Paris,
     location: {
@@ -133,7 +133,7 @@ export {
   CityName,
   APIRoute,
   SortMap,
-  CitiesMap,
+  citiesMap,
   CityMapDefault,
   RATING_MAX,
   REVIEW_DATE_FORMAT,

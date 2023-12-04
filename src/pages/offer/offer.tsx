@@ -8,7 +8,7 @@ import CardsList from '../../components/cards-list/cards-list';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { MAX_AROUND_OFFERS_COUNT, MAX_REVIEWS_COUNT, MAX_OFFER_IMAGE_COUNT } from '../../const';
 import { useEffect, useMemo } from 'react';
-import NotFound from '../404/404';
+import NotFound from '../not-found/not-found';
 import Loading from '../loading/loading';
 import { fetchOfferAction, fetchAroundOffersAction, fetchReviewsAction } from '../../store/api-actions';
 import { getRatingValue } from '../../utils/utils';

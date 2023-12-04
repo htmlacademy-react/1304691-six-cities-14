@@ -1,8 +1,11 @@
 import { ThunkDispatch } from '@reduxjs/toolkit';
 import { createAPI } from '../services/api';
 import { Action } from 'redux';
-import { OfferPreview, State, Review, Offer } from '../types/types';
+import { OfferPreview, State, Review, Offer, UserData, Location, City } from '../types/types';
 import { CityName } from '../const';
+import { name, internet, datatype, random } from 'faker';
+import { citiesMap } from '../const';
+import { AuthorizationStatus } from '../const';
 
 export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
 
@@ -152,3 +155,50 @@ export const fakeOffer: Offer = {
   ],
   maxAdults: 4
 };
+
+export const makeFakeLocation = (): Location => ({
+  latitude: datatype.number({ min: -90, max: 90, precision: 0.000001 }),
+  longitude: datatype.number({ min: -180, max: 180, precision: 0.000001 }),
+  zoom: datatype.number({ min: 1, max: 17 }),
+} as Location);
+
+export const makeFakeCity = (): City => ({
+  name: random.arrayElement(citiesMap).name,
+  location: makeFakeLocation()
+} as City);
+
+export const makeFakeUserData = (): UserData => ({
+  avatarUrl: internet.avatar(),
+  email: internet.email(),
+  id: datatype.number({ min: 1, max: 100 }),
+  isPro: datatype.boolean(),
+  name: name.firstName(),
+  token: datatype.uuid(),
+} as UserData);
+
+export const makeFakeStore = (initialState?: Partial<State>): State => ({
+  DATA: {
+    offers: fakeOffers,
+    isOffersDataLoading: false,
+    aroundOffers: fakeOffers,
+    reviews: fakeReviews,
+    offer: null,
+    favorites: fakeOffers,
+    hasErrorOffers: false,
+    hasErrorOffer: false,
+    addReviewStatus: {
+      pending: false,
+      rejected: false,
+      success: false
+    }
+  },
+  USER: {
+    authorizationStatus: AuthorizationStatus.Unknown,
+    user: makeFakeUserData()
+  },
+  APP: {
+    activeCity: makeFakeCity(),
+    activeSortItem: 'Popular',
+  },
+  ...initialState ?? {},
+});

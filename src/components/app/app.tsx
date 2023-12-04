@@ -1,6 +1,6 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import MainPage from '../../pages/main/main';
-import NotFound from '../../pages/404/404';
+import NotFound from '../../pages/not-found/not-found';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import Favorites from '../../pages/favorites/favorites';
 import Login from '../../pages/login/login';

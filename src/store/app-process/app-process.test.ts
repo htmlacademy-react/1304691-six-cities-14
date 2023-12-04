@@ -1,6 +1,6 @@
 import { appProcess, setActiveSortItem, setActiveCity } from './app-process';
 import { SortItem, City } from '../../types/types';
-import { CitiesMap, CityMapDefault, CityName } from '../../const';
+import { citiesMap, CityMapDefault, CityName } from '../../const';
 
 describe('AppProcess Slice', () => {
 
@@ -62,13 +62,13 @@ describe('AppProcess Slice', () => {
   describe('setActiveCity', () => {
 
     it('should set setActiveCity with setActiveCity action', () => {
-      const activeCity: City = CitiesMap[2];
+      const activeCity: City = citiesMap[2];
       const initialState = {
         activeCity: CityMapDefault,
         activeSortItem: 'Popular' as SortItem,
       };
       const expectedState = {
-        activeCity: CitiesMap[2],
+        activeCity: citiesMap[2],
         activeSortItem: 'Popular' as SortItem,
       };
 

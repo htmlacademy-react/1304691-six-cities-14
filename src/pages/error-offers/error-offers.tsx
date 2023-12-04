@@ -8,7 +8,7 @@ function ErrorOffers(): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <main className="page__main page__main--index page__main--index-empty">
-        <h1 className="visually-hidden">Не удалось загрузить данные</h1>
+        <h1 className="visually-hidden">Ошибка загрузки данных</h1>
         <div className="cities">
           <div className="cities__places-container cities__places-container--empty container">
             <section className="cities__no-places">

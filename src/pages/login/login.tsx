@@ -6,7 +6,7 @@ import { useNavigate, Link, Navigate } from 'react-router-dom';
 import { loginAction } from '../../store/api-actions';
 import { checkAuthorizationStatus } from '../../utils/utils';
 import { getAutorisationStatus } from '../../store/user-process/selectors';
-import { AppRoute, CitiesMap } from '../../const';
+import { AppRoute, citiesMap } from '../../const';
 import { setActiveCity } from '../../store/app-process/app-process';
 import { useMemo, useCallback } from 'react';
 
@@ -34,7 +34,7 @@ function Login(): JSX.Element {
     }
   }, [emailError, passwordError]);
 
-  const randomCity = useMemo(() => CitiesMap[Math.floor(Math.random() * CitiesMap.length)], []);
+  const randomCity = useMemo(() => citiesMap[Math.floor(Math.random() * citiesMap.length)], []);
 
   const handleRandomCityClick = useCallback((evt: MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
@@ -124,6 +124,7 @@ function Login(): JSX.Element {
                   value={email}
                   onBlur={handleBlur}
                   onChange={handleEmailChange}
+                  data-testid="loginElement"
                 />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
@@ -138,6 +139,7 @@ function Login(): JSX.Element {
                   value={password}
                   onBlur={handleBlur}
                   onChange={handlePasswordChange}
+                  data-testid="passwordElement"
                 />
               </div>
               <button
