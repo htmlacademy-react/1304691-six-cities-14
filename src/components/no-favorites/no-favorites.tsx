@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-function NoFavorites(): JSX.Element {
+function NoFavoritesComponent(): JSX.Element {
   return (
     <section className="favorites favorites--empty">
       <h1 className="visually-hidden">Favorites (empty)</h1>
@@ -12,6 +12,6 @@ function NoFavorites(): JSX.Element {
   );
 }
 
-const NoFavoritesMemo = memo(NoFavorites);
+const NoFavorites = memo(NoFavoritesComponent);
 
-export default NoFavoritesMemo;
+export default NoFavorites;

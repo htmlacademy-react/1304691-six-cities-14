@@ -9,6 +9,7 @@ function Loading(): JSX.Element {
           <div className="cities__places-container cities__places-container--empty container">
             <section className="cities__no-places">
               <div className="spinner-wrapper">
+                <p>Loading...</p>
                 <div className="spinner"></div>
               </div>
             </section>

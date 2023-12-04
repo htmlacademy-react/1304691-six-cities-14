@@ -2,24 +2,28 @@
 import { Link } from 'react-router-dom';
 import Logo from '../logo/logo';
 import { AppRoute } from '../../const';
-import { useAppSelector } from '../../hooks';
-import { logoutAction } from '../../store/api-actions';
-import { useAppDispatch } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks';
 import { checkAuthorizationStatus } from '../../utils/utils';
-import { getAutorisationStatus } from '../../store/user-process/selectors';
-import { memo } from 'react';
+import { getAutorisationStatus, getUserInfo } from '../../store/user-process/selectors';
+import { memo, useCallback, useMemo } from 'react';
+import { getFavorites } from '../../store/data-process/selectors';
+import { logoutAction } from '../../store/api-actions';
 
-function Header(): JSX.Element {
+function HeaderComponent(): JSX.Element {
+
+  const favorites = useAppSelector(getFavorites);
 
   const authorizationStatus = useAppSelector(getAutorisationStatus);
 
-  const isLogged = checkAuthorizationStatus(authorizationStatus);
+  const isLogged = useMemo(() => checkAuthorizationStatus(authorizationStatus), [authorizationStatus]);
+
+  const user = useAppSelector(getUserInfo);
 
   const dispatch = useAppDispatch();
 
-  function handleLogoutClick() {
+  const handleLogoutClick = useCallback(() => {
     dispatch(logoutAction());
-  }
+  }, [dispatch]);
 
   return (
     <header className="header">
@@ -36,8 +40,8 @@ function Header(): JSX.Element {
                   <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile" >
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
+                    <span className="header__user-name user__name">{user.email}</span>
+                    <span className="header__favorite-count">{favorites.length}</span>
                   </Link>
                   :
                   <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Login}>
@@ -51,7 +55,7 @@ function Header(): JSX.Element {
                 <li className="header__nav-item">
                   <Link
                     className="header__nav-link"
-                    to={'/'}
+                    to={''}
                     onClick={handleLogoutClick}
                   >
                     <span className="header__signout">Sign out</span>
@@ -65,6 +69,6 @@ function Header(): JSX.Element {
   );
 }
 
-const HeaderMemo = memo(Header);
+const Header = memo(HeaderComponent);
 
-export default HeaderMemo;
+export default Header;

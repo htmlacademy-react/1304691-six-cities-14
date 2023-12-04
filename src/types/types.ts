@@ -48,7 +48,7 @@ export type OfferPreview = {
   type: string;
 }
 
-export type Offer = OfferPreview & {
+export type Offer = Omit<OfferPreview, 'previewImage'> & {
   bedrooms: number;
   description: string;
   goods: string[];
@@ -88,6 +88,7 @@ export type ReviewData = {
 
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
+  user: UserData;
 };
 
 export type DataProcess = {
@@ -97,12 +98,17 @@ export type DataProcess = {
   reviews: Reviews;
   offer: Offer | null;
   favorites: OfferPreview[];
-  hasError: boolean;
+  hasErrorOffers: boolean;
+  hasErrorOffer: boolean;
+  addReviewStatus: {
+    pending: boolean;
+    rejected: boolean;
+    success: boolean;
+  };
 };
 
 export type AppProcess = {
   activeCity: City;
   activeSortItem: SortItem;
 };
-
 

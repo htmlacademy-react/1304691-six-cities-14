@@ -1,4 +1,4 @@
-import { City } from './types/types';
+import { City, UserData } from './types/types';
 
 const CARD_COUNT: number = 5;
 
@@ -8,6 +8,8 @@ const REVIEW_DATE_FORMAT = 'MMMM YYYY';
 
 const MAX_AROUND_OFFERS_COUNT = 3;
 const MAX_REVIEWS_COUNT = 10;
+
+const MAX_OFFER_IMAGE_COUNT = 6;
 
 enum AppRoute {
   Root = '/',
@@ -44,7 +46,7 @@ const CityMapDefault: City = {
   }
 };
 
-const CitiesMap: City[] = [
+const citiesMap: City[] = [
   {
     name: CityName.Paris,
     location: {
@@ -116,6 +118,14 @@ enum NameSpace {
   User = 'USER',
 }
 
+const defaultUser: UserData = {
+  name: '',
+  avatarUrl: '',
+  isPro: false,
+  email: '',
+  token: ''
+};
+
 export {
   CARD_COUNT,
   AppRoute,
@@ -123,7 +133,7 @@ export {
   CityName,
   APIRoute,
   SortMap,
-  CitiesMap,
+  citiesMap,
   CityMapDefault,
   RATING_MAX,
   REVIEW_DATE_FORMAT,
@@ -131,5 +141,7 @@ export {
   MAX_COMMENT_LENGTH,
   MAX_REVIEWS_COUNT,
   MAX_AROUND_OFFERS_COUNT,
-  NameSpace
+  NameSpace,
+  defaultUser,
+  MAX_OFFER_IMAGE_COUNT
 };

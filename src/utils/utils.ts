@@ -3,7 +3,7 @@ import { OfferPreview } from '../types/types';
 import { AuthorizationStatus } from '../const';
 
 function getRatingValue(rating: number): number {
-  return (rating * 100) / RATING_MAX;
+  return (Math.round(rating) * 100) / RATING_MAX;
 }
 
 function addPluralEnding(count: number) {
@@ -26,6 +26,10 @@ function sortHighToLow(offerA: OfferPreview, offerB: OfferPreview) {
   return offerB.price - offerA.price;
 }
 
+function checkLengthArray(array: OfferPreview[]) {
+  return array.length === 0;
+}
+
 const sorting: Record<string, (offers: OfferPreview[]) => OfferPreview[]> = {
   Popular: (offers: OfferPreview[]) => offers.slice(),
   HighToLow: (offers: OfferPreview[]) => offers.slice().sort(sortHighToLow),
@@ -42,5 +46,6 @@ export {
   addPluralEnding,
   capitalize,
   sorting,
-  checkAuthorizationStatus
+  checkAuthorizationStatus,
+  checkLengthArray
 };

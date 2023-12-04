@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
-import { DataProcess } from '../../types/types';
+import { DataProcess, OfferPreview } from '../../types/types';
 import { fetchAddReviewAction, fetchAroundOffersAction, fetchOfferAction, fetchReviewsAction, fetchOffersAction, fetchFavoritesAction, fetchAddToFavoriteAction } from '../api-actions';
 
 const initialState: DataProcess = {
@@ -10,7 +10,13 @@ const initialState: DataProcess = {
   reviews: [],
   offer: null,
   favorites: [],
-  hasError: false
+  hasErrorOffers: false,
+  hasErrorOffer: false,
+  addReviewStatus: {
+    pending: false,
+    rejected: false,
+    success: false
+  }
 };
 
 export const dataProcess = createSlice({
@@ -21,7 +27,13 @@ export const dataProcess = createSlice({
       state.offer = null;
       state.aroundOffers = [];
       state.reviews = [];
-    }
+    },
+    changeOfferFavoriteStatus: (state, action: PayloadAction<OfferPreview['id']>) => {
+      const offerChangeFavorite = state.offers.find((offer) => offer.id === action.payload);
+      if (offerChangeFavorite) {
+        offerChangeFavorite.isFavorite = !offerChangeFavorite.isFavorite;
+      }
+    },
   },
   extraReducers(builder) {
     builder
@@ -33,12 +45,29 @@ export const dataProcess = createSlice({
       })
       .addCase(fetchOfferAction.fulfilled, (state, action) => {
         state.offer = action.payload;
+        state.hasErrorOffer = false;
+      })
+      .addCase(fetchOfferAction.rejected, (state) => {
+        state.hasErrorOffer = true;
       })
       .addCase(fetchFavoritesAction.fulfilled, (state, action) => {
         state.favorites = action.payload;
       })
       .addCase(fetchAddReviewAction.fulfilled, (state, action) => {
-        state.reviews.push(action.payload);
+        state.reviews.unshift(action.payload);
+        state.addReviewStatus.rejected = false;
+        state.addReviewStatus.success = true;
+        state.addReviewStatus.pending = false;
+      })
+      .addCase(fetchAddReviewAction.pending, (state) => {
+        state.addReviewStatus.pending = true;
+        state.addReviewStatus.success = false;
+        state.addReviewStatus.rejected = false;
+      })
+      .addCase(fetchAddReviewAction.rejected, (state) => {
+        state.addReviewStatus.pending = false;
+        state.addReviewStatus.rejected = true;
+        state.addReviewStatus.success = false;
       })
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.offers = action.payload;
@@ -49,7 +78,7 @@ export const dataProcess = createSlice({
       })
       .addCase(fetchOffersAction.rejected, (state) => {
         state.isOffersDataLoading = false;
-        state.hasError = true;
+        state.hasErrorOffers = true;
       })
       .addCase(fetchAddToFavoriteAction.fulfilled, (state, action) => {
         const isFavorite = action.payload.isFavorite;
@@ -63,8 +92,12 @@ export const dataProcess = createSlice({
             (offer) => offer.id !== action.payload.id
           );
         }
+
+        if (state.offer !== null) {
+          state.offer.isFavorite = isFavorite;
+        }
       });
   }
 });
 
-export const { dropOffer } = dataProcess.actions;
+export const { dropOffer, changeOfferFavoriteStatus } = dataProcess.actions;
