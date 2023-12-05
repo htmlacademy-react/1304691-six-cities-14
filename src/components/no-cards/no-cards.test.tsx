@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import NoCards from './no-cards';
-import { CityMapDefault } from '../../const';
+import { CITY_MAP_DEFAULT } from '../../const';
 
 describe('Component NoCards', () => {
 
   it('should render correctly', () => {
     const expectedText = /No places/i;
-    const expectedProps = CityMapDefault;
+    const expectedProps = CITY_MAP_DEFAULT;
 
     render(<NoCards city={expectedProps} />);
 

@@ -4,7 +4,7 @@ import { Action } from 'redux';
 import { OfferPreview, State, Review, Offer, UserData, Location, City } from '../types/types';
 import { CityName } from '../const';
 import { name, internet, datatype, random } from 'faker';
-import { citiesMap } from '../const';
+import { CITIES_MAP } from '../const';
 import { AuthorizationStatus } from '../const';
 
 export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
@@ -140,7 +140,7 @@ export const fakeOffer: Offer = {
 };
 
 export const makeFakeCity = (): City => ({
-  name: random.arrayElement(citiesMap).name,
+  name: random.arrayElement(CITIES_MAP).name,
   location: makeFakeLocation()
 } as City);
 

@@ -6,7 +6,7 @@ import { useNavigate, Link, Navigate } from 'react-router-dom';
 import { loginAction } from '../../store/api-actions';
 import { checkAuthorizationStatus } from '../../utils/utils';
 import { getAutorisationStatus } from '../../store/user-process/selectors';
-import { AppRoute, citiesMap } from '../../const';
+import { AppRoute, CITIES_MAP } from '../../const';
 import { setActiveCity } from '../../store/app-process/app-process';
 import { useMemo, useCallback } from 'react';
 
@@ -34,7 +34,7 @@ function Login(): JSX.Element {
     }
   }, [emailError, passwordError]);
 
-  const randomCity = useMemo(() => citiesMap[Math.floor(Math.random() * citiesMap.length)], []);
+  const randomCity = useMemo(() => CITIES_MAP[Math.floor(Math.random() * CITIES_MAP.length)], []);
 
   const handleRandomCityClick = useCallback((evt: MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();

@@ -1,6 +1,6 @@
 import { appProcess, setActiveSortItem, setActiveCity } from './app-process';
 import { SortItem, City } from '../../types/types';
-import { citiesMap, CityMapDefault, CityName } from '../../const';
+import { CITIES_MAP, CITY_MAP_DEFAULT, CityName } from '../../const';
 
 describe('AppProcess Slice', () => {
 
@@ -28,7 +28,7 @@ describe('AppProcess Slice', () => {
     it('should return default initial state with empty action and undefined', () => {
       const emptyAction = { type: '' };
       const expectedState = {
-        activeCity: CityMapDefault,
+        activeCity: CITY_MAP_DEFAULT,
         activeSortItem: 'Popular' as SortItem,
       };
 
@@ -44,11 +44,11 @@ describe('AppProcess Slice', () => {
     it('should set activeSortItem with setActiveSortItem action', () => {
       const activeSortItem: SortItem = 'LowToHigh';
       const initialState = {
-        activeCity: CityMapDefault,
+        activeCity: CITY_MAP_DEFAULT,
         activeSortItem: 'Popular' as SortItem,
       };
       const expectedState = {
-        activeCity: CityMapDefault,
+        activeCity: CITY_MAP_DEFAULT,
         activeSortItem: 'LowToHigh' as SortItem,
       };
 
@@ -62,13 +62,13 @@ describe('AppProcess Slice', () => {
   describe('setActiveCity', () => {
 
     it('should set setActiveCity with setActiveCity action', () => {
-      const activeCity: City = citiesMap[2];
+      const activeCity: City = CITIES_MAP[2];
       const initialState = {
-        activeCity: CityMapDefault,
+        activeCity: CITY_MAP_DEFAULT,
         activeSortItem: 'Popular' as SortItem,
       };
       const expectedState = {
-        activeCity: citiesMap[2],
+        activeCity: CITIES_MAP[2],
         activeSortItem: 'Popular' as SortItem,
       };
 

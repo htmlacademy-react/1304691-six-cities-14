@@ -1,4 +1,4 @@
-import { citiesMap } from '../../const';
+import { CITIES_MAP } from '../../const';
 import { Link } from 'react-router-dom';
 import { setActiveCity } from '../../store/app-process/app-process';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -18,7 +18,7 @@ function CitiesListComponent(): JSX.Element {
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list" data-testid="citiesList">
-          {citiesMap.map((city) => (
+          {CITIES_MAP.map((city) => (
             <li key={city.name} className="locations__item">
               <Link
                 className={classNames(
