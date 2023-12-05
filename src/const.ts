@@ -37,7 +37,7 @@ enum CityName {
   Dusseldorf = 'Dusseldorf'
 }
 
-const CityMapDefault: City = {
+const CITY_MAP_DEFAULT: City = {
   name: CityName.Paris,
   location: {
     latitude: 48.85661,
@@ -46,7 +46,7 @@ const CityMapDefault: City = {
   }
 };
 
-const citiesMap: City[] = [
+const CITIES_MAP: City[] = [
   {
     name: CityName.Paris,
     location: {
@@ -133,8 +133,8 @@ export {
   CityName,
   APIRoute,
   SortMap,
-  citiesMap,
-  CityMapDefault,
+  CITIES_MAP,
+  CITY_MAP_DEFAULT,
   RATING_MAX,
   REVIEW_DATE_FORMAT,
   MIN_COMMENT_LENGTH,

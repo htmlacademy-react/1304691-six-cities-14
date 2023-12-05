@@ -4,7 +4,7 @@ import { Action } from 'redux';
 import { OfferPreview, State, Review, Offer, UserData, Location, City } from '../types/types';
 import { CityName } from '../const';
 import { name, internet, datatype, random } from 'faker';
-import { citiesMap } from '../const';
+import { CITIES_MAP } from '../const';
 import { AuthorizationStatus } from '../const';
 
 export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
@@ -119,9 +119,10 @@ export const fakeOffer: Offer = {
     longitude: 4.673877537499948,
     zoom: 8
   },
-  isFavorite: false,
+  isFavorite: true,
   isPremium: false,
   rating: 4,
+  previewImage: 'https://url-to-image/image.png',
   description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
   bedrooms: 3,
   goods: [
@@ -139,7 +140,7 @@ export const fakeOffer: Offer = {
 };
 
 export const makeFakeCity = (): City => ({
-  name: random.arrayElement(citiesMap).name,
+  name: random.arrayElement(CITIES_MAP).name,
   location: makeFakeLocation()
 } as City);
 
