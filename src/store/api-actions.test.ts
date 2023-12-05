@@ -1,15 +1,15 @@
 
-import { fetchOffersAction, fetchFavoritesAction, fetchAroundOffersAction, fetchReviewsAction, fetchOfferAction, checkAuthAction, loginAction, logoutAction } from './api-actions';
+import { fetchOffersAction, fetchFavoritesAction, fetchAroundOffersAction, fetchReviewsAction, fetchOfferAction, checkAuthAction, loginAction, logoutAction, fetchAddToFavoriteAction, fetchAddReviewAction } from './api-actions';
 import { createAPI } from '../services/api';
 import MockAdapter from 'axios-mock-adapter';
 import thunk from 'redux-thunk';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { Action } from 'redux';
-import { State } from '../types/types';
+import { State, AuthData, Offer } from '../types/types';
 import { AppThunkDispatch, extractActionsTypes, fakeOffers, fakeReviews, fakeOffer } from '../utils/mocks';
 import { APIRoute } from '../const';
-import { AuthData } from '../types/types';
 import * as tokenStorage from '../services/token';
+import { NameSpace } from '../const';
 
 describe('UserProcess', () => {
 
@@ -21,7 +21,7 @@ describe('UserProcess', () => {
   let store: ReturnType<typeof mockStoreCreator>;
 
   beforeEach(() => {
-    store = mockStoreCreator({ DATA: { offers: [] } });
+    store = mockStoreCreator({ DATA: { offers: [], offer: fakeOffer }, APP: {}, USER: {}});
   });
 
   describe('checkAuthAction', () => {
@@ -286,6 +286,92 @@ describe('UserProcess', () => {
         fetchOfferAction.rejected.type,
       ]);
 
+    });
+
+  });
+
+  describe('fetchAddToFavoriteAction', () => {
+
+    it('should dispatch fetchAddToFavoriteAction.fulfilled when server response 200', async () => {
+      const mockOfferId = fakeOffer.id;
+      const mockOfferStatus = Number(fakeOffer.isFavorite);
+
+      const fakeOfferUpdated = Object.assign(fakeOffer) as Offer;
+      fakeOfferUpdated.isFavorite = !fakeOfferUpdated.isFavorite;
+
+      mockAxiosAdapter.onPost(`${APIRoute.Favorite}/${mockOfferId}/${mockOfferStatus}`).reply(200, fakeOffer);
+
+      const addToFavoritesData = {
+        id: mockOfferId,
+        status: mockOfferStatus
+      };
+
+      await store.dispatch((fetchAddToFavoriteAction(addToFavoritesData)));
+
+      const emittedActions = store.getActions();
+      const extractedActionsTypes = extractActionsTypes(emittedActions);
+      const fetchAddToFavoriteActionFulfilled = emittedActions.at(1) as ReturnType<typeof fetchAddToFavoriteAction.fulfilled>;
+
+      expect(extractedActionsTypes).toEqual([
+        fetchAddToFavoriteAction.pending.type,
+        fetchAddToFavoriteAction.fulfilled.type,
+      ]);
+
+      expect(fetchAddToFavoriteActionFulfilled.payload)
+        .toEqual(fakeOfferUpdated);
+    });
+
+  });
+
+  describe('fetchAddReviewAction', () => {
+
+    it('should dispatch fetchAddReviewAction.fulfilled when server response 201', async () => {
+      const mockReview = fakeReviews[0];
+
+      const state = store.getState();
+
+      mockAxiosAdapter.onPost(`${APIRoute.Comments}/${state[NameSpace.Data]?.offer?.id}`).reply(201, mockReview);
+
+      const ReviewData = {
+        comment: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+        rating: 3
+      };
+
+      await store.dispatch((fetchAddReviewAction(ReviewData)));
+
+      const emittedActions = store.getActions();
+      const extractedActionsTypes = extractActionsTypes(emittedActions);
+      const fetchAddReviewActionFulfilled = emittedActions.at(1) as ReturnType<typeof fetchAddReviewAction.fulfilled>;
+
+      expect(extractedActionsTypes).toEqual([
+        fetchAddReviewAction.pending.type,
+        fetchAddReviewAction.fulfilled.type,
+      ]);
+
+      expect(fetchAddReviewActionFulfilled.payload)
+        .toEqual(mockReview);
+    });
+
+    it('should dispatch fetchAddReviewAction.rejected when server response 400', async () => {
+      const mockReview = fakeReviews[0];
+
+      const state = store.getState();
+
+      mockAxiosAdapter.onPost(`${APIRoute.Comments}/${state[NameSpace.Data]?.offer?.id}`).reply(400, mockReview);
+
+      const ReviewData = {
+        comment: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+        rating: 3
+      };
+
+      await store.dispatch((fetchAddReviewAction(ReviewData)));
+
+      const extractedActionsTypes = extractActionsTypes(store.getActions());
+
+      expect(extractedActionsTypes).toEqual([
+        fetchAddReviewAction.pending.type,
+        fetchAddReviewAction.rejected.type,
+      ]);
     });
 
   });

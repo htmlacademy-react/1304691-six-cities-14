@@ -9,7 +9,7 @@ type ReviewsListProps = {
 function ReviewsListComponent({ reviews }: ReviewsListProps): JSX.Element {
 
   return (
-    <ul className="reviews__list">
+    <ul className="reviews__list" data-testId="reviewsContainer">
       {reviews.map((review) => (
         <ReviewsItem key={review.id} review={review} />
       ))}

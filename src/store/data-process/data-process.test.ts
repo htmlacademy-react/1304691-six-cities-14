@@ -1,5 +1,5 @@
-import { dataProcess } from './data-process';
-import { fetchOffersAction, fetchAroundOffersAction, fetchReviewsAction, fetchOfferAction, fetchFavoritesAction } from '../api-actions';
+import { dataProcess, dropOffer, changeOfferFavoriteStatus } from './data-process';
+import { fetchOffersAction, fetchAroundOffersAction, fetchReviewsAction, fetchOfferAction, fetchFavoritesAction, fetchAddToFavoriteAction, fetchAddReviewAction } from '../api-actions';
 import { fakeOffers, fakeReviews, fakeOffer } from '../../utils/mocks';
 
 describe('DataProcess', () => {
@@ -281,56 +281,223 @@ describe('DataProcess', () => {
 
   });
 
-  // не работает
+  describe('fetchAddToFavoriteAction', () => {
 
-  // describe('fetchAddToFavoriteAction', () => {
+    it('should set favorites are updated after fetchAddToFavoriteAction.fulfilled', () => {
+      const mockOffer = fakeOffer;
 
-  //   it('should set favorites are updated after fetchAddToFavoriteAction.fulfilled', () => {
-  //     const mockOfferFirst = fakeOffers[0];
-  //     const mockOfferSecond = fakeOffers[1];
+      const expectedState = {
+        offers: [],
+        isOffersDataLoading: false,
+        aroundOffers: [],
+        reviews: [],
+        offer: null,
+        favorites: [mockOffer],
+        hasErrorOffers: false,
+        hasErrorOffer: false,
+        addReviewStatus: {
+          pending: false,
+          rejected: false,
+          success: false
+        }
+      };
 
-  //     const initialState = {
-  //       offers: [],
-  //       isOffersDataLoading: false,
-  //       aroundOffers: [],
-  //       reviews: [],
-  //       offer: fakeOffer,
-  //       favorites: [mockOfferFirst],
-  //       hasErrorOffers: false,
-  //       hasErrorOffer: false,
-  //       addReviewStatus: {
-  //         pending: false,
-  //         rejected: false,
-  //         success: false
-  //       }
-  //     };
+      const addToFavoritesData = {
+        id: fakeOffer.id,
+        status: 1
+      };
 
-  //     const expectedState = {
-  //       offers: [],
-  //       isOffersDataLoading: false,
-  //       aroundOffers: [],
-  //       reviews: [],
-  //       offer: fakeOffer,
-  //       favorites: [mockOfferFirst, mockOfferSecond],
-  //       hasErrorOffers: false,
-  //       hasErrorOffer: false,
-  //       addReviewStatus: {
-  //         pending: false,
-  //         rejected: false,
-  //         success: false
-  //       }
-  //     };
+      const result = dataProcess.reducer(undefined, fetchAddToFavoriteAction.fulfilled(fakeOffer, '', addToFavoritesData));
 
-  //     const addToFavoritesData = {
-  //       id: mockOfferSecond.id,
-  //       status: Number(mockOfferSecond.isFavorite)
-  //     };
+      expect(result).toEqual(expectedState);
+    });
 
-  //     const result = dataProcess.reducer(initialState, fetchAddToFavoriteAction.fulfilled(mockOfferSecond, '', addToFavoritesData));
+  });
 
-  //     expect(result).toEqual(expectedState);
-  //   });
+  describe('fetchAddReviewAction', () => {
 
-  // });
+    it('should set reviews are updated and addReviewStatus.success true after fetchAddReviewAction.fulfilled', () => {
+      const mockReview = fakeReviews[0];
+
+      const initialState = {
+        offers: [],
+        isOffersDataLoading: false,
+        aroundOffers: [],
+        reviews: [],
+        offer: null,
+        favorites: [],
+        hasErrorOffers: false,
+        hasErrorOffer: false,
+        addReviewStatus: {
+          pending: false,
+          rejected: false,
+          success: true
+        }
+      };
+
+      const expectedState = {
+        offers: [],
+        isOffersDataLoading: false,
+        aroundOffers: [],
+        reviews: [mockReview],
+        offer: null,
+        favorites: [],
+        hasErrorOffers: false,
+        hasErrorOffer: false,
+        addReviewStatus: {
+          pending: false,
+          rejected: false,
+          success: true
+        }
+      };
+
+      const ReviewData = {
+        comment: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+        rating: 5
+      };
+
+      const result = dataProcess.reducer(initialState, fetchAddReviewAction.fulfilled(mockReview, '', ReviewData));
+
+      expect(result).toEqual(expectedState);
+    });
+
+    it('should return addReviewStatus.rejected true after fetchAddReviewAction.rejected', () => {
+      const expectedState = {
+        offers: [],
+        isOffersDataLoading: false,
+        aroundOffers: [],
+        reviews: [],
+        offer: null,
+        favorites: [],
+        hasErrorOffers: false,
+        hasErrorOffer: false,
+        addReviewStatus: {
+          pending: false,
+          rejected: true,
+          success: false
+        }
+      };
+
+      const result = dataProcess.reducer(undefined, fetchAddReviewAction.rejected);
+
+      expect(result).toEqual(expectedState);
+    });
+
+    it('should return addReviewStatus.pending true during fetchAddReviewAction.pending', () => {
+      const expectedState = {
+        offers: [],
+        isOffersDataLoading: false,
+        aroundOffers: [],
+        reviews: [],
+        offer: null,
+        favorites: [],
+        hasErrorOffers: false,
+        hasErrorOffer: false,
+        addReviewStatus: {
+          pending: true,
+          rejected: false,
+          success: false
+        }
+      };
+
+      const result = dataProcess.reducer(undefined, fetchAddReviewAction.pending);
+
+      expect(result).toEqual(expectedState);
+    });
+
+  });
+
+  describe('dropOffer', () => {
+
+    it('should drop offer after dropOffer action', () => {
+      const mockReview = fakeReviews[0];
+
+      const initialState = {
+        offers: [],
+        isOffersDataLoading: false,
+        aroundOffers: fakeOffers,
+        reviews: [mockReview],
+        offer: fakeOffer,
+        favorites: [],
+        hasErrorOffers: false,
+        hasErrorOffer: false,
+        addReviewStatus: {
+          pending: false,
+          rejected: false,
+          success: true
+        }
+      };
+
+      const expectedState = {
+        offers: [],
+        isOffersDataLoading: false,
+        aroundOffers: [],
+        reviews: [],
+        offer: null,
+        favorites: [],
+        hasErrorOffers: false,
+        hasErrorOffer: false,
+        addReviewStatus: {
+          pending: false,
+          rejected: false,
+          success: true
+        }
+      };
+
+      const result = dataProcess.reducer(initialState, dropOffer());
+
+      expect(result).toEqual(expectedState);
+    });
+
+  });
+
+  describe('changeOfferFavoriteStatus', () => {
+
+    it('should change favorite status offer after changeOfferFavoriteStatus action', () => {
+
+      const mockOffer = fakeOffers[0];
+
+      const fakeOffersUpdated = structuredClone(fakeOffers);
+
+      fakeOffersUpdated[0].isFavorite = !fakeOffersUpdated[0].isFavorite;
+
+      const initialState = {
+        offers: fakeOffers,
+        isOffersDataLoading: false,
+        aroundOffers: [],
+        reviews: [],
+        offer: null,
+        favorites: [],
+        hasErrorOffers: false,
+        hasErrorOffer: false,
+        addReviewStatus: {
+          pending: false,
+          rejected: false,
+          success: false
+        }
+      };
+
+      const expectedState = {
+        offers: fakeOffersUpdated,
+        isOffersDataLoading: false,
+        aroundOffers: [],
+        reviews: [],
+        offer: null,
+        favorites: [],
+        hasErrorOffers: false,
+        hasErrorOffer: false,
+        addReviewStatus: {
+          pending: false,
+          rejected: false,
+          success: false
+        }
+      };
+
+      const result = dataProcess.reducer(initialState, changeOfferFavoriteStatus(mockOffer.id));
+
+      expect(result).toEqual(expectedState);
+    });
+
+  });
 
 });

@@ -15,7 +15,7 @@ function FavoritesCard({ offer }: FavoritesCardProps): JSX.Element {
   const { isPremium, price, title, rating, type, previewImage, id, isFavorite } = offer;
 
   return (
-    <article className="favorites__card place-card">
+    <article className="favorites__card place-card" data-testId="favoritesItem">
       {isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ''}
       <div className="favorites__image-wrapper place-card__image-wrapper">
         <Link to={`${AppRoute.Offer}${id}`}>

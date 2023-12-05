@@ -119,9 +119,10 @@ export const fakeOffer: Offer = {
     longitude: 4.673877537499948,
     zoom: 8
   },
-  isFavorite: false,
+  isFavorite: true,
   isPremium: false,
   rating: 4,
+  previewImage: 'https://url-to-image/image.png',
   description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
   bedrooms: 3,
   goods: [
