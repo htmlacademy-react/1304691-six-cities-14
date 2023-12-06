@@ -14,7 +14,7 @@ function ReviewsItem({ review }: ReviewsItemProps):JSX.Element {
   const dateValue = dayjs(date).format(REVIEW_DATE_FORMAT);
 
   return (
-    <li className="reviews__item" data-testId="reviewsItem">
+    <li className="reviews__item" data-testid="reviewsItem">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img className="reviews__avatar user__avatar" src={user.avatarUrl} width="54" height="54" alt={user.name} />

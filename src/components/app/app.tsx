@@ -18,9 +18,9 @@ import { fetchFavoritesAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
 
 function App(): JSX.Element {
-  const authorizationStatus = useAppSelector(getAutorisationStatus);
-
   const dispatch = useAppDispatch();
+
+  const authorizationStatus = useAppSelector(getAutorisationStatus);
 
   useEffect(() => {
     if (authorizationStatus === AuthorizationStatus.Auth) {

@@ -1,6 +1,7 @@
 import { random } from 'faker';
 import { render, screen } from '@testing-library/react';
-import { withHistory, withStore } from '../../utils/mock-component';
+import { withHistory } from '../../utils/with-history';
+import { withStore } from '../../utils/with-store';
 import { makeFakeStore } from '../../utils/mocks';
 import { CITIES_MAP } from '../../const';
 import CitiesList from './cities-list';

@@ -1,9 +1,8 @@
 import { OfferPreview } from '../../types/types';
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, NameBlockForFavoriteButton } from '../../const';
 import { getRatingValue, capitalize } from '../../utils/utils';
 import FavoriteButton from '../favorite-button/favorite-button';
-import { useEffect } from 'react';
 
 type CardProps = {
   offer: OfferPreview;
@@ -23,9 +22,6 @@ function Card({ offer, block, onListItemHover }: CardProps): JSX.Element {
     onListItemHover?.(null);
   }
 
-  useEffect(() => {
-  }, [isFavorite]);
-
   return (
     <article className={`${block}__card place-card`}
       onMouseEnter={handleOfferMouseEnter}
@@ -43,7 +39,7 @@ function Card({ offer, block, onListItemHover }: CardProps): JSX.Element {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <FavoriteButton id={id} isFavorite={isFavorite} nameBlock={'place-card'}></FavoriteButton>
+          <FavoriteButton id={id} isFavorite={isFavorite} nameBlock={NameBlockForFavoriteButton.PlaceCard}></FavoriteButton>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
