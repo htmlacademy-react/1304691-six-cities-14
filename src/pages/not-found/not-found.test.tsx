@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import NotFound from './not-found';
-import { withHistory, withStore } from '../../utils/mock-component';
+import { withHistory } from '../../utils/with-history';
+import { withStore } from '../../utils/with-store';
 import { makeFakeStore } from '../../utils/mocks';
 
 describe('Component NotFound', () => {

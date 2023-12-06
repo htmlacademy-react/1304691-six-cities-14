@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { withHistory, withStore } from '../../utils/mock-component';
+import { withHistory } from '../../utils/with-history';
+import { withStore } from '../../utils/with-store';
 import ErrorOffers from './error-offers';
 import { fetchOffersAction } from '../../store/api-actions';
 import { APIRoute } from '../../const';

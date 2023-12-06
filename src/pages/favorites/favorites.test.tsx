@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import Favorites from './favorites';
 import { makeFakeStore } from '../../utils/mocks';
-import { withStore, withHistory } from '../../utils/mock-component';
+import { withHistory } from '../../utils/with-history';
+import { withStore } from '../../utils/with-store';
 
 describe('Component Favorites', () => {
 

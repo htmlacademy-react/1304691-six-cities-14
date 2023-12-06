@@ -2,8 +2,9 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Login from './login';
-import { withHistory, withStore } from '../../utils/mock-component';
 import { makeFakeStore } from '../../utils/mocks';
+import { withHistory } from '../../utils/with-history';
+import { withStore } from '../../utils/with-store';
 
 describe('Component Login', () => {
 
