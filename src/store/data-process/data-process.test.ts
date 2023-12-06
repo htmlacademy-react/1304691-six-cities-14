@@ -1,6 +1,7 @@
 import { dataProcess, dropOffer, changeOfferFavoriteStatus } from './data-process';
 import { fetchOffersAction, fetchAroundOffersAction, fetchReviewsAction, fetchOfferAction, fetchFavoritesAction, fetchAddToFavoriteAction, fetchAddReviewAction } from '../api-actions';
 import { fakeOffers, fakeReviews, fakeOffer } from '../../utils/mocks';
+import { NameBlockForFavoriteButton } from '../../const';
 
 describe('DataProcess', () => {
 
@@ -453,20 +454,22 @@ describe('DataProcess', () => {
 
   describe('changeOfferFavoriteStatus', () => {
 
-    it('should change favorite status offer after changeOfferFavoriteStatus action', () => {
+    it('should change favorite status in offer after changeOfferFavoriteStatus action', () => {
 
       const mockOffer = fakeOffers[0];
 
       const fakeOffersUpdated = structuredClone(fakeOffers);
-
       fakeOffersUpdated[0].isFavorite = !fakeOffersUpdated[0].isFavorite;
+
+      const fakeOfferUpdated = structuredClone(fakeOffer);
+      fakeOfferUpdated.isFavorite = !fakeOfferUpdated.isFavorite;
 
       const initialState = {
         offers: fakeOffers,
         isOffersDataLoading: false,
-        aroundOffers: [],
+        aroundOffers: fakeOffers,
         reviews: [],
-        offer: null,
+        offer: fakeOffer,
         favorites: [],
         hasErrorOffers: false,
         hasErrorOffer: false,
@@ -480,9 +483,9 @@ describe('DataProcess', () => {
       const expectedState = {
         offers: fakeOffersUpdated,
         isOffersDataLoading: false,
-        aroundOffers: [],
+        aroundOffers: fakeOffersUpdated,
         reviews: [],
-        offer: null,
+        offer: fakeOfferUpdated,
         favorites: [],
         hasErrorOffers: false,
         hasErrorOffer: false,
@@ -493,7 +496,7 @@ describe('DataProcess', () => {
         }
       };
 
-      const result = dataProcess.reducer(initialState, changeOfferFavoriteStatus(mockOffer.id));
+      const result = dataProcess.reducer(initialState, changeOfferFavoriteStatus({ id: mockOffer.id, nameBlock: NameBlockForFavoriteButton.Offer }));
 
       expect(result).toEqual(expectedState);
     });
