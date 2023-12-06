@@ -6,7 +6,7 @@ import Map from '../../components/map/map';
 import { useParams } from 'react-router-dom';
 import CardsList from '../../components/cards-list/cards-list';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { MAX_AROUND_OFFERS_COUNT, MAX_REVIEWS_COUNT, MAX_OFFER_IMAGE_COUNT } from '../../const';
+import { MAX_AROUND_OFFERS_COUNT, MAX_REVIEWS_COUNT, MAX_OFFER_IMAGE_COUNT, NameBlockForFavoriteButton } from '../../const';
 import { useEffect, useMemo } from 'react';
 import NotFound from '../not-found/not-found';
 import Loading from '../loading/loading';
@@ -99,7 +99,7 @@ function Offer(): JSX.Element {
                 <h1 className="offer__name">
                   {title}
                 </h1>
-                <FavoriteButton id={offer?.id} isFavorite={offer?.isFavorite} nameBlock={'offer'} size={'offer'}></FavoriteButton>
+                <FavoriteButton id={offer?.id} isFavorite={offer?.isFavorite} nameBlock={NameBlockForFavoriteButton.Offer} size={'offer'}></FavoriteButton>
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">

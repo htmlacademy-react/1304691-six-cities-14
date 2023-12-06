@@ -3,20 +3,21 @@ import { fetchAddToFavoriteAction } from '../../store/api-actions';
 import { useNavigate } from 'react-router-dom';
 import { checkAuthorizationStatus } from '../../utils/utils';
 import { getAutorisationStatus } from '../../store/user-process/selectors';
-import { AppRoute } from '../../const';
+import { AppRoute, NameBlockForFavoriteButton } from '../../const';
 import { changeOfferFavoriteStatus } from '../../store/data-process/data-process';
 import { useMemo } from 'react';
+import { OfferPreview } from '../../types/types';
 
 type FavoriteButtonBlock = 'default' | 'offer';
 
 type FavoriteButtonProps = {
- id: string;
- isFavorite: boolean;
- nameBlock: string;
- size?: FavoriteButtonBlock;
+  id: OfferPreview['id'];
+  isFavorite: boolean;
+  nameBlock: NameBlockForFavoriteButton;
+  size?: FavoriteButtonBlock;
 }
 
-const buttonSize: Record<FavoriteButtonBlock, {width: string; height: string}> = {
+const buttonSize: Record<FavoriteButtonBlock, { width: string; height: string }> = {
   default: { width: '18', height: '19' },
   offer: { width: '31', height: '33' },
 };
@@ -35,7 +36,7 @@ function FavoriteButton({ id, isFavorite, nameBlock, size = 'default' }: Favorit
       navigate(AppRoute.Login);
     }
 
-    dispatch(changeOfferFavoriteStatus(id));
+    dispatch(changeOfferFavoriteStatus({ id, nameBlock }));
     dispatch(fetchAddToFavoriteAction({ id, status: Number(!isFavorite) }));
   }
 

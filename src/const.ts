@@ -46,6 +46,11 @@ const CITY_MAP_DEFAULT: City = {
   }
 };
 
+enum NameBlockForFavoriteButton {
+  Offer = 'offer',
+  PlaceCard = 'place-card'
+}
+
 const CITIES_MAP: City[] = [
   {
     name: CityName.Paris,
@@ -143,5 +148,6 @@ export {
   MAX_AROUND_OFFERS_COUNT,
   NameSpace,
   defaultUser,
-  MAX_OFFER_IMAGE_COUNT
+  MAX_OFFER_IMAGE_COUNT,
+  NameBlockForFavoriteButton
 };
