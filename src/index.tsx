@@ -3,11 +3,20 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { fetchOffersAction, checkAuthAction } from './store/api-actions';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getToken } from './services/token';
+import { changeAuthorizationStatus } from './store/user-process/user-process';
+import { checkAuthAction, fetchOffersAction } from './store/api-actions';
 
-store.dispatch(checkAuthAction());
+const token = getToken();
+
+if (token !== '') {
+  store.dispatch(checkAuthAction());
+} else {
+  store.dispatch(changeAuthorizationStatus());
+}
+
 store.dispatch(fetchOffersAction());
 
 const root = ReactDOM.createRoot(

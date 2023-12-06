@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { AppRoute, NameBlockForFavoriteButton } from '../../const';
 import { getRatingValue, capitalize } from '../../utils/utils';
 import FavoriteButton from '../favorite-button/favorite-button';
-import { useEffect } from 'react';
 
 type CardProps = {
   offer: OfferPreview;
@@ -22,9 +21,6 @@ function Card({ offer, block, onListItemHover }: CardProps): JSX.Element {
   function handleOfferMouseLeave() {
     onListItemHover?.(null);
   }
-
-  useEffect(() => {
-  }, [isFavorite]);
 
   return (
     <article className={`${block}__card place-card`}
