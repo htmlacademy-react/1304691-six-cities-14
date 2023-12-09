@@ -65,7 +65,7 @@ function FormReviewComponent(): JSX.Element {
           .reverse()
           .map((item) => (
             <Fragment key={`${item}-stars`}>
-              <input className="form__rating-input visually-hidden" name="rating" value={item} id={`${item}-stars`} type="radio" onChange={handleRatingChange} checked={formData.rating === item} disabled={isAddingReview} />
+              <input className="form__rating-input visually-hidden" name="rating" value={item} id={`${item}-stars`} type="radio" onChange={handleRatingChange} disabled={isAddingReview} data-testid={`ratingElement${item}`} checked={formData.rating === item} />
               <label htmlFor={`${item}-stars`} className="reviews__rating-label form__rating-label" title={RATING_TITLES[item - 1]}>
                 <svg className="form__star-image" width="37" height="33">
                   <use xlinkHref="#icon-star"></use>
@@ -74,7 +74,7 @@ function FormReviewComponent(): JSX.Element {
             </Fragment>
           ))}
       </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={handleTextChange} value={formData.comment} disabled={isAddingReview}></textarea>
+      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={handleTextChange} value={formData.comment} disabled={isAddingReview} data-testid="reviewElement"></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{MIN_COMMENT_LENGTH} characters</b>.

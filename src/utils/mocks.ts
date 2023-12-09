@@ -159,7 +159,7 @@ export const makeFakeStore = (initialState?: Partial<State>): State => ({
     isOffersDataLoading: false,
     aroundOffers: fakeOffers,
     reviews: fakeReviews,
-    offer: null,
+    offer: fakeOffer,
     favorites: fakeOffers,
     hasErrorOffers: false,
     hasErrorOffer: false,

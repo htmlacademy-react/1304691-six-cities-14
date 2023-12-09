@@ -285,15 +285,13 @@ describe('DataProcess', () => {
   describe('fetchAddToFavoriteAction', () => {
 
     it('should set favorites are updated after fetchAddToFavoriteAction.fulfilled', () => {
-      const mockOffer = fakeOffer;
-
       const expectedState = {
         offers: [],
         isOffersDataLoading: false,
         aroundOffers: [],
         reviews: [],
         offer: null,
-        favorites: [mockOffer],
+        favorites: [fakeOffer],
         hasErrorOffers: false,
         hasErrorOffer: false,
         addReviewStatus: {

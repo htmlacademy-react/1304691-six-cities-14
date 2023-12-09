@@ -17,7 +17,7 @@ function CitiesListComponent(): JSX.Element {
   return (
     <div className="tabs">
       <section className="locations container">
-        <ul className="locations__list tabs__list" data-testid="citiesList">
+        <ul className="locations__list tabs__list" data-testid="citiesList" role="navigation" aria-label="Cities navigation">
           {CITIES_MAP.map((city) => (
             <li key={city.name} className="locations__item">
               <Link

@@ -26,6 +26,7 @@ function Card({ offer, block, onListItemHover }: CardProps): JSX.Element {
     <article className={`${block}__card place-card`}
       onMouseEnter={handleOfferMouseEnter}
       onMouseLeave={handleOfferMouseLeave}
+      data-testid="offersCard"
     >
       {isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ''}
       <div className={`${block}__image-wrapper place-card__image-wrapper`}>

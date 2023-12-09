@@ -12,7 +12,7 @@ type CardsListProps = {
 function CardsListComponent({ offers, isOtherPlaces, block, onListItemHover }: CardsListProps): JSX.Element {
 
   return (
-    <div className={isOtherPlaces ? 'near-places__list places__list' : 'cities__places-list places__list tabs__content'}>
+    <div className={isOtherPlaces ? 'near-places__list places__list' : 'cities__places-list places__list tabs__content'} data-testid="cardsContainer">
       {offers.map((offer) => (
         <Card
           key={offer.id}

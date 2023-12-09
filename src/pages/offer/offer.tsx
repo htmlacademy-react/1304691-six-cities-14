@@ -18,6 +18,7 @@ import FavoriteButton from '../../components/favorite-button/favorite-button';
 import { getAutorisationStatus } from '../../store/user-process/selectors';
 import { checkAuthorizationStatus } from '../../utils/utils';
 import classNames from 'classnames';
+import { capitalize } from '../../utils/utils';
 
 function Offer(): JSX.Element {
 
@@ -79,7 +80,7 @@ function Offer(): JSX.Element {
       <Header />
 
       <main className="page__main page__main--offer">
-        <section className="offer">
+        <section className="offer" data-testid="offerContainer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
               {imagesRender.map((image) => (
@@ -110,7 +111,7 @@ function Offer(): JSX.Element {
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  {type}
+                  {capitalize(type)}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
                   {bedrooms} Bedrooms

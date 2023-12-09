@@ -46,17 +46,6 @@ function MapComponent({ block, offers, location, offer, selectedPointId }: MapPr
   useEffect(() => {
     if (map) {
 
-      if (selectedPoint) {
-        const mapLating = {
-          lat: selectedPoint.location.latitude,
-          lng: selectedPoint.location.longitude
-        };
-
-        const mapZoom = selectedPoint.location.zoom;
-
-        map.setView(mapLating, mapZoom);
-      }
-
       const markerLayer = layerGroup().addTo(map);
       offers.forEach((item) => {
         const marker = new Marker({
@@ -94,6 +83,7 @@ function MapComponent({ block, offers, location, offer, selectedPointId }: MapPr
   return (
     <section className={`${block}__map map`}
       ref={mapRef}
+      data-testid="mapContainer"
     >
     </section>
   );
