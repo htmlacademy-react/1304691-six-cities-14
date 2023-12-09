@@ -30,9 +30,9 @@ function SortListComponent({ onSortItems, activeSortItem }: SortListProps): JSX.
   }
 
   return (
-    <form className="places__sorting" action="#" method="get" onKeyDown={handleKeydown}>
+    <form className="places__sorting" action="#" method="get" onKeyDown={handleKeydown} data-testid="sortingContainer" role="form" aria-label="Sorting form">
       <span className="places__sorting-caption">Sort by</span>
-      <span className="places__sorting-type" tabIndex={0} onClick={handleSortFormClick}>
+      <span className="places__sorting-type" tabIndex={0} onClick={handleSortFormClick} data-testid="sortingButton">
         {SortMap[activeSortItem]}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
@@ -42,6 +42,7 @@ function SortListComponent({ onSortItems, activeSortItem }: SortListProps): JSX.
         'places__options places__options--custom',
         { 'places__options--opened': openSort }
       )}
+      data-testid="sortingList"
       >
         {Object.entries(SortMap).map(([type, label]) => (
           <li

@@ -1,6 +1,3 @@
-import { MemoryHistory, createMemoryHistory } from 'history';
-import HistoryRouter from '../components/history-router/history-router';
-import { HelmetProvider } from 'react-helmet-async';
 import { MockStore, configureMockStore } from '@jedmao/redux-mock-store';
 import MockAdapter from 'axios-mock-adapter';
 import { createAPI } from '../services/api';
@@ -9,18 +6,6 @@ import { Action } from 'redux';
 import { AppThunkDispatch } from './mocks';
 import { Provider } from 'react-redux';
 import { State } from '../types/types';
-
-export function withHistory(component: JSX.Element, history?: MemoryHistory) {
-  const memoryHistory = history ?? createMemoryHistory();
-
-  return (
-    <HistoryRouter history={memoryHistory}>
-      <HelmetProvider>
-        {component}
-      </HelmetProvider>
-    </HistoryRouter>
-  );
-}
 
 type ComponentWithMockStore = {
   withStoreComponent: JSX.Element;
@@ -36,7 +21,7 @@ export function withStore(
   const mockAxiosAdapter = new MockAdapter(axios);
   const middleware = [thunk.withExtraArgument(axios)];
   const mockStoreCreator = configureMockStore<State, Action<string>, AppThunkDispatch>(middleware);
-  const mockStore = mockStoreCreator(initialState);
+  const mockStore: ReturnType<typeof mockStoreCreator> = mockStoreCreator(initialState);
 
   return ({
     withStoreComponent: <Provider store={mockStore}>{component}</Provider>,

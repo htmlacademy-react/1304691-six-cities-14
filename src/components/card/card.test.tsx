@@ -1,23 +1,30 @@
+
 import { render, screen } from '@testing-library/react';
 import { withHistory } from '../../utils/with-history';
 import { withStore } from '../../utils/with-store';
 import { makeFakeStore } from '../../utils/mocks';
-import FavoritesCard from './favorites-card';
+import Card from './card';
 import { fakeOffers } from '../../utils/mocks';
 
-describe('Component FavoritesCard', () => {
+describe('Component Card', () => {
 
   it('should render correctly', () => {
-    const favoritesItemTestId = 'favoritesItem';
+    const offersItemTestId = 'offersCard';
     const fakeStore = makeFakeStore();
 
-    const { withStoreComponent } = withStore(<FavoritesCard offer={fakeOffers[0]} />, fakeStore);
+    const block = 'cities';
+
+    const handleListItemHover = () => {
+      throw true;
+    };
+
+    const { withStoreComponent } = withStore(<Card offer={fakeOffers[0]} block={block} onListItemHover={handleListItemHover} />, fakeStore);
     const preparedComponent = withHistory(withStoreComponent);
 
     render(preparedComponent);
 
-    const favoritesItem = screen.getByTestId(favoritesItemTestId);
-    expect(favoritesItem).toBeInTheDocument();
+    const cardItem = screen.getByTestId(offersItemTestId);
+    expect(cardItem).toBeInTheDocument();
   });
 
 });

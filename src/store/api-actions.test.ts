@@ -1,4 +1,3 @@
-
 import { fetchOffersAction, fetchFavoritesAction, fetchAroundOffersAction, fetchReviewsAction, fetchOfferAction, checkAuthAction, loginAction, logoutAction, fetchAddToFavoriteAction, fetchAddReviewAction } from './api-actions';
 import { createAPI } from '../services/api';
 import MockAdapter from 'axios-mock-adapter';

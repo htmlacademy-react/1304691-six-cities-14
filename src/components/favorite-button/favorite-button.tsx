@@ -43,7 +43,9 @@ function FavoriteButton({ id, isFavorite, nameBlock, size = 'default' }: Favorit
   return (
     <button
       type="button"
+      role="button"
       onClick={handleFavoriteButtonClick}
+      aria-label="Favorites button"
       className={`${nameBlock}__bookmark-button button ${isFavorite && `${nameBlock}__bookmark-button--active`}`}
     >
       <svg

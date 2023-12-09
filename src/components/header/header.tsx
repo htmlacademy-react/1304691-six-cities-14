@@ -32,19 +32,19 @@ function HeaderComponent(): JSX.Element {
           <div className="header__left">
             <Logo />
           </div>
-          <nav className="header__nav">
+          <nav className="header__nav" data-testid="headerNav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
                 {isLogged
                   ?
-                  <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile" >
+                  <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile" role="link" aria-label="Favorites">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">{user.email}</span>
                     <span className="header__favorite-count">{favorites.length}</span>
                   </Link>
                   :
-                  <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Login}>
+                  <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Login} role="link" aria-label="Sign in">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__login">Sign in</span>

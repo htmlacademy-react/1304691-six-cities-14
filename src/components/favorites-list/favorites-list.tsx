@@ -10,7 +10,7 @@ function FavoritesList({ offers }: FavoritesListProps): JSX.Element {
   const CitiesList = [...new Set(offers.map((offer) => offer.city.name))].sort();
 
   return (
-    <ul className="favorites__list">
+    <ul className="favorites__list" data-testid="favoritesList">
       {CitiesList.map((city) => (
         <li className="favorites__locations-items" key={city}>
           <div className="favorites__locations locations locations--current">

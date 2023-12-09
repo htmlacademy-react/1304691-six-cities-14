@@ -1,23 +1,24 @@
+
 import { render, screen } from '@testing-library/react';
 import { withHistory } from '../../utils/with-history';
 import { withStore } from '../../utils/with-store';
 import { makeFakeStore } from '../../utils/mocks';
-import FavoritesCard from './favorites-card';
+import FavoritesList from './favorites-list';
 import { fakeOffers } from '../../utils/mocks';
 
-describe('Component FavoritesCard', () => {
+describe('Component FavoritesList', () => {
 
   it('should render correctly', () => {
-    const favoritesItemTestId = 'favoritesItem';
+    const favoritesListTestId = 'favoritesList';
     const fakeStore = makeFakeStore();
 
-    const { withStoreComponent } = withStore(<FavoritesCard offer={fakeOffers[0]} />, fakeStore);
+    const { withStoreComponent } = withStore(<FavoritesList offers={fakeOffers} />, fakeStore);
     const preparedComponent = withHistory(withStoreComponent);
 
     render(preparedComponent);
 
-    const favoritesItem = screen.getByTestId(favoritesItemTestId);
-    expect(favoritesItem).toBeInTheDocument();
+    const favoritesList = screen.getByTestId(favoritesListTestId);
+    expect(favoritesList).toBeInTheDocument();
   });
 
 });

@@ -33,7 +33,6 @@ describe('Component ErrorOffers', () => {
       fetchOffersAction.pending.type,
       fetchOffersAction.fulfilled.type,
     ]);
-
   });
 
 });
